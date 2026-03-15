@@ -8,7 +8,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
+<script>
+(async () => {
+  const _sb = supabase.createClient(
+    "https://igrljwxyuwqagtnbhnmw.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8"
+  );
+  const { data: { session } } = await _sb.auth.getSession();
+  if (!session) window.location.href = 'auth.html';
+  else {
+    const user = session.user;
+    document.addEventListener('DOMContentLoaded', () => {
+      const bar = document.querySelector('.topbar-actions');
+      if (bar) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline';
+        btn.innerHTML = '🚪 Çıkış';
+        btn.onclick = async () => { await _sb.auth.signOut(); window.location.href = 'auth.html'; };
+        bar.appendChild(btn);
+      }
+    });
+  }
+})();
+</script>
+  <style>
   :root {
     --navy: #1a2744;
     --gold: #b8860b;
