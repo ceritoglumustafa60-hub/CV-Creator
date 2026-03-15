@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademiCV – Giriş / Kayıt</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --navy: #1a2744;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --cream: #faf8f3;
+    --border: #d1c9b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: linear-gradient(135deg, #1a2744 0%, #2d3f6b 50%, #1a2744 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .auth-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    overflow: hidden;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .auth-header {
+    background: var(--navy);
+    padding: 32px;
+    text-align: center;
+  }
+  .auth-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+  .auth-header h1 span { color: var(--gold-light); }
+  .auth-header p { color: #8899bb; font-size: .88rem; }
+
+  .gold-bar { height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent); }
+
+  .auth-body { padding: 32px; }
+
+  .tab-row {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 24px;
+  }
+  .tab-btn {
+    flex: 1; padding: 9px; border: none; background: transparent;
+    border-radius: 6px; cursor: pointer; font-family: inherit;
+    font-size: .9rem; font-weight: 600; color: #888; transition: all .2s;
+  }
+  .tab-btn.active { background: #fff; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: .75rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 5px;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .form-group input {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: .92rem; color: #333;
+    background: var(--cream); transition: border .2s;
+  }
+  .form-group input:focus { outline: none; border-color: var(--gold); background: #fff; }
+
+  .submit-btn {
+    width: 100%; padding: 13px;
+    background: var(--gold); color: var(--navy);
+    border: none; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 1rem; font-weight: 700;
+    transition: all .2s; margin-top: 4px;
+  }
+  .submit-btn:hover { background: var(--gold-light); }
+  .submit-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+  .divider {
+    text-align: center; color: #aaa; font-size: .8rem;
+    margin: 18px 0; position: relative;
+  }
+  .divider::before, .divider::after {
+    content: ''; position: absolute; top: 50%;
+    width: 42%; height: 1px; background: #e5e7eb;
+  }
+  .divider::before { left: 0; }
+  .divider::after { right: 0; }
+
+  .msg {
+    padding: 10px 14px; border-radius: 8px;
+    font-size: .85rem; margin-bottom: 16px;
+    display: none;
+  }
+  .msg.error { background: #fee2e2; color: #dc2626; display: block; }
+  .msg.success { background: #d1fae5; color: #065f46; display: block; }
+  .msg.info { background: #dbeafe; color: #1e40af; display: block; }
+
+  .forgot-link {
+    display: block; text-align: right; font-size: .8rem;
+    color: var(--gold); text-decoration: none; margin-top: -8px; margin-bottom: 16px;
+    cursor: pointer;
+  }
+  .forgot-link:hover { text-decoration: underline; }
+
+  .footer-note {
+    text-align: center; font-size: .78rem; color: #999;
+    margin-top: 20px; line-height: 1.6;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block; width: 16px; height: 16px;
+    border: 2px solid rgba(26,39,68,.3);
+    border-top-color: var(--navy);
+    border-radius: 50%; animation: spin .7s linear infinite;
+    margin-right: 6px; vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-header">
+    <h1>Academi<span>CV</span></h1>
+    <p>Akademisyenler için profesyonel CV platformu</p>
+  </div>
+  <div class="gold-bar"></div>
+
+  <div class="auth-body">
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab('login')">Giriş Yap</button>
+      <button class="tab-btn" onclick="switchTab('register')">Kayıt Ol</button>
+    </div>
+
+    <div id="msg" class="msg"></div>
+
+    <!-- GİRİŞ FORMU -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label>E-posta</label>
+        <input type="email" id="loginEmail" placeholder="ornek@universite.edu.tr" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Şifre</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <a class="forgot-link" onclick="forgotPassword()">Şifremi unuttum</a>
+      <button class="submit-btn" onclick="login()" id="loginBtn">Giriş Yap</button>
+    </div>
+
+    <!-- KAYIT FORMU -->
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label>Ad Soyad</label>
+        <input type="text" id="regName" placeholder="Dr. Ad Soyad">
+      </div>
+      <div class="form-group">
+        <label>Üniversite / Kurum</label>
+        <input type="text" id="regUni" placeholder="Üniversite adı">
+      </div>
+      <div class="form-group">
+        <label>E-posta</label>
+        <input type="email" id="regEmail" placeholder="ornek@universite.edu.tr" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Şifre</label>
+        <input type="password" id="regPassword" placeholder="En az 6 karakter" autocomplete="new-password">
+      </div>
+      <button class="submit-btn" onclick="register()" id="registerBtn">Hesap Oluştur</button>
+    </div>
+
+    <div class="footer-note">
+      AcademiCV'ye kayıt olarak <a href="#" style="color:var(--gold)">Kullanım Koşulları</a>'nı<br>kabul etmiş olursunuz.
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://igrljwxyuwqagtnbhnmw.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Zaten giriş yapmışsa direkt CV'ye yönlendir
+window.onload = async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) window.location.href = 'index.html';
+};
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register'));
+  });
+  document.getElementById('loginForm').style.display = tab==='login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = tab==='register' ? 'block' : 'none';
+  showMsg('', '');
+}
+
+function showMsg(text, type) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className = 'msg' + (type ? ' '+type : '');
+}
+
+function setLoading(btnId, loading) {
+  const btn = document.getElementById(btnId);
+  if (loading) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>İşleniyor...';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = btnId==='loginBtn' ? 'Giriş Yap' : 'Hesap Oluştur';
+  }
+}
+
+async function login() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!email || !password) { showMsg('Lütfen tüm alanları doldurun.', 'error'); return; }
+  setLoading('loginBtn', true);
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) {
+    showMsg(error.message.includes('Invalid') ? '❌ E-posta veya şifre hatalı.' : '❌ '+error.message, 'error');
+    setLoading('loginBtn', false);
+  } else {
+    showMsg('✅ Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+  }
+}
+
+async function register() {
+  const name = document.getElementById('regName').value.trim();
+  const uni = document.getElementById('regUni').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  if (!name || !email || !password) { showMsg('Lütfen zorunlu alanları doldurun.', 'error'); return; }
+  if (password.length < 6) { showMsg('Şifre en az 6 karakter olmalı.', 'error'); return; }
+  setLoading('registerBtn', true);
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { data: { full_name: name, university: uni } }
+  });
+  if (error) {
+    showMsg('❌ '+error.message, 'error');
+    setLoading('registerBtn', false);
+  } else {
+    showMsg('✅ Kayıt başarılı! E-postanızı doğrulayın, ardından giriş yapabilirsiniz.', 'success');
+    setLoading('registerBtn', false);
+    setTimeout(() => switchTab('login'), 3000);
+  }
+}
+
+async function forgotPassword() {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email) { showMsg('Şifre sıfırlamak için e-posta adresinizi girin.', 'info'); return; }
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://cv-creator-ten-chi.vercel.app/index.html'
+  });
+  if (error) showMsg('❌ '+error.message, 'error');
+  else showMsg('✅ Şifre sıfırlama bağlantısı e-postanıza gönderildi.', 'success');
+}
+
+// Enter tuşu ile giriş
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (document.getElementById('loginForm').style.display !== 'none') login();
+    else register();
+  }
+});
+</script>
+</body>
+</html>
