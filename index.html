@@ -28,7 +28,6 @@
     min-height: 100vh;
   }
 
-  /* ── TOP BAR ── */
   .topbar {
     background: var(--navy);
     color: #fff;
@@ -72,7 +71,6 @@
   .btn-green { background:#2d7a4f; color:#fff; }
   .btn-green:hover { background:#369960; }
 
-  /* ── LAYOUT ── */
   .workspace {
     display: grid;
     grid-template-columns: 360px 1fr;
@@ -80,7 +78,6 @@
     min-height: calc(100vh - 54px);
   }
 
-  /* ── EDITOR PANEL ── */
   .editor-panel {
     background: var(--white);
     border-right: 1px solid var(--border);
@@ -189,7 +186,6 @@
   .skill-row input { flex:1; }
   .skill-row select { width:110px; }
 
-  /* ── PREVIEW PANEL ── */
   .preview-panel {
     background: #dbd5c8;
     overflow-y: auto;
@@ -200,7 +196,6 @@
     align-items: center;
   }
 
-  /* ── CV DOCUMENT ── */
   #cvDocument {
     width: 210mm;
     min-height: 297mm;
@@ -222,7 +217,6 @@
     gap: 20px;
     align-items: center;
   }
-  .cv-header-left {}
   .cv-name {
     font-family: 'Playfair Display', serif;
     font-size: 22pt;
@@ -266,16 +260,11 @@
     background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
   }
 
-  .cv-body {
-    display: block;
-  }
   .cv-sidebar {
     background: #f7f4ef;
     padding: 22px 18px 22px 18px;
     border-bottom: 2px solid var(--gold);
   }
-
-
 
   .cv-main {
     padding: 22px 24px;
@@ -297,39 +286,16 @@
   .cv-section-title:first-child { margin-top: 0; }
 
   .cv-edu-item { margin-bottom: 12px; }
-  .cv-edu-degree {
-    font-weight: 600;
-    font-size: 9pt;
-    color: var(--navy);
-  }
-  .cv-edu-school {
-    font-size: 8.5pt;
-    color: #444;
-    margin: 1px 0;
-  }
-  .cv-edu-year {
-    font-size: 8pt;
-    color: var(--gold);
-    font-weight: 600;
-  }
+  .cv-edu-degree { font-weight: 600; font-size: 9pt; color: var(--navy); }
+  .cv-edu-school { font-size: 8.5pt; color: #444; margin: 1px 0; }
+  .cv-edu-year { font-size: 8pt; color: var(--gold); font-weight: 600; }
 
-  .cv-skill-item {
-    margin-bottom: 8px;
-  }
+  .cv-skill-item { margin-bottom: 8px; }
   .cv-skill-name {
-    font-size: 8.5pt;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 3px;
-    display: flex;
-    justify-content: space-between;
+    font-size: 8.5pt; font-weight: 600; color: #333;
+    margin-bottom: 3px; display: flex; justify-content: space-between;
   }
-  .cv-skill-bar {
-    height: 4px;
-    background: #ddd;
-    border-radius: 2px;
-    overflow: hidden;
-  }
+  .cv-skill-bar { height: 4px; background: #ddd; border-radius: 2px; overflow: hidden; }
   .cv-skill-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--navy), var(--gold));
@@ -339,49 +305,25 @@
   .cv-exp-item { margin-bottom: 14px; }
   .cv-exp-top { display:flex; justify-content:space-between; align-items:flex-start; }
   .cv-exp-title { font-weight:700; font-size:9.5pt; color:var(--navy); }
-  .cv-exp-date {
-    font-size:8pt; color:var(--gold);
-    font-weight:600; white-space:nowrap; margin-left:8px;
-  }
+  .cv-exp-date { font-size:8pt; color:var(--gold); font-weight:600; white-space:nowrap; margin-left:8px; }
   .cv-exp-company { font-size:8.5pt; color:#555; margin:2px 0 4px; }
   .cv-exp-desc { font-size:8.5pt; color:#444; line-height:1.5; }
 
-  .cv-info-item {
-    font-size: 8.5pt;
-    color: #444;
-    margin-bottom: 6px;
-    display: flex;
-    gap: 6px;
-  }
+  .cv-info-item { font-size: 8.5pt; color: #444; margin-bottom: 6px; display: flex; gap: 6px; }
   .cv-info-label { font-weight:600; color:var(--navy); min-width:60px; }
 
   .cv-summary {
-    font-size: 9pt;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 16px;
-    padding: 10px 12px;
-    background: #f0ede6;
-    border-left: 3px solid var(--gold);
-    border-radius: 0 6px 6px 0;
+    font-size: 9pt; color: #444; line-height: 1.6; margin-bottom: 16px;
+    padding: 10px 12px; background: #f0ede6;
+    border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0;
   }
 
   .cv-pub-item {
-    font-size: 8.5pt;
-    color: #444;
-    line-height: 1.5;
-    margin-bottom: 6px;
-    padding-left: 12px;
-    position: relative;
+    font-size: 8.5pt; color: #444; line-height: 1.5;
+    margin-bottom: 6px; padding-left: 12px; position: relative;
   }
-  .cv-pub-item::before {
-    content: '•';
-    position:absolute; left:0;
-    color: var(--gold);
-    font-weight:700;
-  }
+  .cv-pub-item::before { content: '•'; position:absolute; left:0; color: var(--gold); font-weight:700; }
 
-  /* ── RESPONSIVE ── */
   @media (max-width:900px) {
     .workspace { grid-template-columns:1fr; }
     .editor-panel { max-height:none; }
@@ -389,16 +331,10 @@
     #cvDocument { width:100%; min-height:auto; }
   }
 
-  /* ── PRINT / PDF ── */
   @media print {
     body { background:#fff; }
     .topbar, .editor-panel, .preview-panel > *:not(#cvDocument) { display:none!important; }
     #cvDocument { box-shadow:none; width:210mm; }
-  }
-
-  .word-note {
-    font-size:.75rem; color:#888; text-align:center; margin-top:16px;
-    position: relative; z-index: 0;
   }
 </style>
 </head>
@@ -413,7 +349,7 @@
       📂 CV Yükle
       <input type="file" id="docxImport" accept=".docx" style="display:none" onchange="importDocx(event)">
     </label>
-    <button class="btn btn-outline" onclick="fetchScholarDirect()" id="scholarBtn" title="Google Scholar'dan atıf güncelle">🎓 Scholar</button>
+    <button class="btn btn-outline" onclick="openScholarModal()" id="scholarBtn" title="Google Scholar atıf güncelle">🎓 Scholar</button>
     <button class="btn btn-green" onclick="openAIModal()" title="AI ile yayın ekle">🤖 AI Ekle</button>
     <div class="lang-toggle">
       <button class="active" onclick="setLang('tr')">TR</button>
@@ -426,10 +362,9 @@
 
 <div class="workspace">
 
-  <!-- ═══ EDITOR PANEL ═══ -->
+  <!-- EDITOR PANEL -->
   <div class="editor-panel">
 
-    <!-- Fotoğraf -->
     <div class="section-header" onclick="toggleSection(this)">
       📷 Fotoğraf <span class="toggle-icon">▾</span>
     </div>
@@ -441,7 +376,6 @@
       <input type="file" id="photoInput" accept="image/*" onchange="handlePhoto(event)">
     </div>
 
-    <!-- Kişisel Bilgiler -->
     <div class="section-header" onclick="toggleSection(this)">
       👤 Kişisel Bilgiler <span class="toggle-icon">▾</span>
     </div>
@@ -462,18 +396,15 @@
         <input type="text" id="web" value="" placeholder="orcid.org/xxxx" oninput="update()"></div>
     </div>
 
-    <!-- Özet -->
     <div class="section-header" onclick="toggleSection(this)">
       📝 Kısa Özet <span class="toggle-icon">▾</span>
     </div>
     <div class="section-body">
       <div class="form-group">
-        <textarea id="summary" rows="4" oninput="update()"
-          placeholder="Kendinizi kısaca tanıtın...">Tarla Bitkileri alanında lisans, yüksek lisans ve doktora eğitimi tamamlamış akademisyen. Siirt Üniversitesi Ziraat Fakültesi'nde araştırma görevlisi olarak başladığı akademik kariyerini Dr. Öğretim Üyesi olarak sürdürmektedir.</textarea>
+        <textarea id="summary" rows="4" oninput="update()">Tarla Bitkileri alanında lisans, yüksek lisans ve doktora eğitimi tamamlamış akademisyen. Siirt Üniversitesi Ziraat Fakültesi'nde araştırma görevlisi olarak başladığı akademik kariyerini Dr. Öğretim Üyesi olarak sürdürmektedir.</textarea>
       </div>
     </div>
 
-    <!-- Eğitim -->
     <div class="section-header" onclick="toggleSection(this)">
       🎓 Eğitim <span class="toggle-icon">▾</span>
     </div>
@@ -482,7 +413,6 @@
       <button class="add-item-btn" onclick="addEdu()">+ Eğitim Ekle</button>
     </div>
 
-    <!-- Deneyim -->
     <div class="section-header" onclick="toggleSection(this)">
       💼 İş Deneyimi <span class="toggle-icon">▾</span>
     </div>
@@ -491,7 +421,6 @@
       <button class="add-item-btn" onclick="addExp()">+ Deneyim Ekle</button>
     </div>
 
-    <!-- Beceriler -->
     <div class="section-header" onclick="toggleSection(this)">
       🛠 Beceriler <span class="toggle-icon">▾</span>
     </div>
@@ -500,7 +429,6 @@
       <button class="add-item-btn" onclick="addSkill()">+ Beceri Ekle</button>
     </div>
 
-    <!-- Yayınlar -->
     <div class="section-header" onclick="toggleSection(this)">
       📚 Yayınlar / Projeler <span class="toggle-icon">▾</span>
     </div>
@@ -509,13 +437,12 @@
       <button class="add-item-btn" onclick="addPub()">+ Yayın Ekle</button>
     </div>
 
-  </div><!-- /editor-panel -->
+  </div>
 
-  <!-- ═══ PREVIEW PANEL ═══ -->
+  <!-- PREVIEW PANEL -->
   <div class="preview-panel">
     <div id="cvDocument">
 
-      <!-- CV Header -->
       <div class="cv-header">
         <div class="cv-header-left">
           <div class="cv-name" id="cv-name">Mustafa Ceritoğlu</div>
@@ -523,7 +450,7 @@
           <div class="cv-contact-row">
             <div class="cv-contact-item">📍 <span id="cv-city">Tokat / Siirt</span></div>
             <div class="cv-contact-item">📞 <span id="cv-phone">+90 532 789 33 14</span></div>
-            <div class="cv-contact-item">✉ <span id="cv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae9eff8e3fee5ede6ffcaf9e3e3f8fea4efeeffa4fef8">[email&#160;protected]</a></span></div>
+            <div class="cv-contact-item">✉ <span id="cv-email">ceritoglu@siirt.edu.tr</span></div>
             <div class="cv-contact-item" id="cv-web-wrap" style="display:none">🌐 <span id="cv-web"></span></div>
           </div>
         </div>
@@ -531,76 +458,48 @@
       </div>
       <div class="cv-gold-bar"></div>
 
-      <!-- CV Body -->
       <div class="cv-body">
-
-        <!-- Sidebar -->
         <div class="cv-sidebar">
-
-          <!-- Kişisel -->
           <div class="cv-section-title" id="lbl-personal">KİŞİSEL BİLGİLER</div>
           <div>
             <div class="cv-info-item"><span class="cv-info-label" id="lbl-birth">Doğum</span><span id="cv-birthdate">20.09.1988</span></div>
             <div class="cv-info-item"><span class="cv-info-label" id="lbl-city2">Şehir</span><span id="cv-city2">Tokat / Siirt</span></div>
           </div>
-
-          <!-- Eğitim -->
           <div class="cv-section-title" id="lbl-edu">EĞİTİM</div>
           <div id="cv-edu-list"></div>
-
-          <!-- Beceriler -->
           <div class="cv-section-title" id="lbl-skills">BECERİLER</div>
           <div id="cv-skills-list"></div>
+        </div>
 
-        </div><!-- /sidebar -->
-
-        <!-- Main -->
         <div class="cv-main">
-
-          <!-- Özet -->
           <div class="cv-section-title" id="lbl-summary">HAKKIMDA</div>
           <div class="cv-summary" id="cv-summary">
             Tarla Bitkileri alanında lisans, yüksek lisans ve doktora eğitimi tamamlamış akademisyen. Siirt Üniversitesi Ziraat Fakültesi'nde araştırma görevlisi olarak başladığı akademik kariyerini Dr. Öğretim Üyesi olarak sürdürmektedir.
           </div>
-
-          <!-- Deneyim -->
           <div class="cv-section-title" id="lbl-exp">İŞ DENEYİMİ</div>
           <div id="cv-exp-list"></div>
-
-          <!-- Atıf -->
           <div class="cv-section-title">ATİF / CITATIONS</div>
-          <div style="background:#f0ede6;border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:12px">
-            <div style="font-size:9pt;color:#333">Toplam Atıf: <strong style="color:var(--navy)">475</strong> &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)">13</strong></div>
-            <div style="font-size:8pt;color:#777;margin-top:2px">Google Akademik · Şubat 2026</div>
+          <div id="citationBox" style="background:#f0ede6;border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:12px">
+            <div style="font-size:9pt;color:#333">Toplam Atıf: <strong style="color:var(--navy)" id="citCount">475</strong> &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)" id="hIndex">13</strong></div>
+            <div style="font-size:8pt;color:#777;margin-top:2px" id="citDate">Google Akademik · Şubat 2026</div>
           </div>
-          <!-- Yayınlar -->
           <div class="cv-section-title" id="lbl-pub">YAYINLAR / PUBLICATIONS</div>
           <div id="cv-pub-list"></div>
+        </div>
+      </div>
 
-        </div><!-- /main -->
-      </div><!-- /cv-body -->
+    </div>
+  </div>
 
-    </div><!-- /cvDocument -->
+</div>
 
-  </div><!-- /preview-panel -->
-
-</div><!-- /workspace -->
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ─── DATA ───────────────────────────────────────────────
 let lang = 'tr';
 
 const labels = {
-  tr: {
-    personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir',
-    edu:'EĞİTİM', skills:'BECERİLER', summary:'HAKKIMDA',
-    exp:'İŞ DENEYİMİ', pub:'YAYINLAR'
-  },
-  en: {
-    personal:'PERSONAL INFO', birth:'Born', city:'City',
-    edu:'EDUCATION', skills:'SKILLS', summary:'ABOUT ME',
-    exp:'WORK EXPERIENCE', pub:'PUBLICATIONS'
-  }
+  tr: { personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir', edu:'EĞİTİM', skills:'BECERİLER', summary:'HAKKIMDA', exp:'İŞ DENEYİMİ', pub:'YAYINLAR' },
+  en: { personal:'PERSONAL INFO', birth:'Born', city:'City', edu:'EDUCATION', skills:'SKILLS', summary:'ABOUT ME', exp:'WORK EXPERIENCE', pub:'PUBLICATIONS' }
 };
 
 let edus = [
@@ -621,7 +520,6 @@ let skills = [
   { name:'Akademik Yazarlık', level:75 }
 ];
 
-// Publication categories
 const pubCategories = [
   'SCI / SCI-Expanded Makaleler',
   'Uluslararası Diğer İndeksli Makaleler',
@@ -632,7 +530,6 @@ const pubCategories = [
 ];
 
 let pubs = [
-  // ── SCI / SCI-Expanded ──
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Ceritoglu, M., Ceritoglu, F., Erman, M., Bektas, H., 2020. Root system variation of pulse crops at early vegetative stage. Notulae Botanicae Horti Agrobotanici Cluj-Napoca, 48(4): 2182-2197.' },
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Ceritoglu, M., Erman, M., Ceritoglu, F., Bektas, H., 2021. The response of grain legumes to vermicompost at germination and seedling stages. Legume Research, 44(8): 936-941.' },
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Bice Ataklı, S., Şahin, S., Ceritoglu, M., Çağatay, H.F., 2022. Vermicompost enhances the effectiveness of arbuscular mycorrhizal fungi, cowpea development and nutrient uptake. Legume Research, 45(11): 1406-1413.' },
@@ -646,7 +543,6 @@ let pubs = [
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Çığ, F., Ceritoğlu, M., Uçar, Ö., Soysal, S., Sabancılar, İ., Erman, M., 2026. Bio-priming with Brevibacterium frigoritolerans and foliar phytohormones boost plant growth, photosynthesis, and antioxidant mechanisms in barley under drought stress. Polish Journal of Environmental Studies, https://doi.org/10.15244/pjoes/214683.' },
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Çığ, F., Sönmez, F., Ceritoğlu, F., Ceritoğlu, M., 2026. Unveiling role of poultry litter-derived biochar and boron on chickpea growth, soil chemistry, nutrient availability and heavy metal accumulation. Journal of Soil Science and Plant Nutrition, https://doi.org/10.1007/s42729-026-03113-y.' },
   { cat: 'SCI / SCI-Expanded Makaleler', text: 'Erol, T., Çığ, F., Sabancılar, İ., Kara, K., Özek, R., Ceritoğlu, M., 2026. Enhancing salinity tolerance in Triticale via synergistic effect of plant growth promoting bacteria and arbuscular mycorrhizal fungi. Legume Research, https://doi.org/10.18805/LRF-911.' },
-  // ── Uluslararası Diğer İndeksli ──
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Ceritoglu, M., Şahin, S., Erman, M., 2018. Effects of Vermicompost on Plant Growth and Soil Structure. Journal of Food Agriculture and Environment, 32(3): 607-615.' },
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Ceritoglu, M., Şahin, S., Erman, M., 2019. Vermikompost Üretim Tekniği ve Üretimde Kullanılan Materyaller. Türkiye Tarımsal Araştırmalar Dergisi 6(2): 230-236.' },
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Şahin, S., Ceritoğlu, M., Kartal, H., 2019. The effects of vermicompost and phosphorus on the development of soybean plant. Asian Journal of Advances in Agricultural Research, 11(4): 1-5.' },
@@ -666,7 +562,6 @@ let pubs = [
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Erman, M., Çığ, F., Ceritoglu, M., 2025. Optimizing fenugreek (Trigonella foenum-graecum l.) cultivation: Role of Rhizobium inoculation and phosphorus fertilization on growth, nodulation, and yield attributes. Türkiye Teknoloji ve Uygulamalı Bilimler Dergisi, 6(1), 43-53.' },
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Erman, M., Çığ, F., Ceritoglu, M., 2025. Effect of sewage sludge treatment and rhizobium inoculation on growth, nodulation yield attributes in lentil (Lens culinaris Medik.) under field conditions. Türkiye Tarımsal Araştırmalar Dergisi 12(2): 132-143.' },
   { cat: 'Uluslararası Diğer İndeksli Makaleler', text: 'Çığ, F., Soysal, S., Uçar, Ö., Ceritoglu, M., Erden, Z., Toprak, Ç.C., Efe, M. 2025. Synergistic effects of phosphorus and foliar copper treatments on growth and yield attributes in lentils. International Journal of Agriculture, Environment and Food Sciences, 9(Özel sayı): 19-24.' },
-  // ── Uluslararası Bildiriler ──
   { cat: 'Uluslararası Bildiriler', text: 'Ceritoglu, M., Şahin, S., Erman, M., 2018. Effect of vermicompost applications on growth and phosphorus uptake of corn (Zea mays L.). 1. International Agricultural Science Congress, 9-12 Mayıs, Van. (Poster)' },
   { cat: 'Uluslararası Bildiriler', text: 'Ceritoglu, M., Şahin, S., 2018. Soya bitkisinin gelişimi üzerine vermikompotun etkileri. 1. Uluslararası Mühendislik ve Teknoloji Kongresi, 24-25 Aralık, İstanbul, pp. 348-354.' },
   { cat: 'Uluslararası Bildiriler', text: 'Ceritoğlu, M., Erman, M., 2019. Tane baklagillerin ekim nöbetinde kullanılmasının önemi. 6. International Congress on Mathematic, Engineering and Natural Science, 8-10 Mart, Adana, 396-404.' },
@@ -691,7 +586,6 @@ let pubs = [
   { cat: 'Uluslararası Bildiriler', text: 'Çığ, F., Ceritoğlu, M., Uçar, Ö., Soysal, S., Özek, R., 2024. Effects of bacterial applications on wheat cultivars under cadmium (Cd) stress. Çukurova 12th International Scientific Researches Conference, 9-12 March, Adana, pp. 1382-1390.' },
   { cat: 'Uluslararası Bildiriler', text: 'Özben, M., Ceritoğlu, M., 2024. Mercimekte simbiyotik bakteri aşılamanın kök mimarisi ve fide gelişimi üzerine etkisi. III. International (XV. National) Field Crops Congress, 19-21 September, Tokat, pp. 196-206.' },
   { cat: 'Uluslararası Bildiriler', text: 'Ceritoğlu, F., Ceritoğlu, M., 2025. Genotip seçiminde modern bitki ıslahında MTSI ve MGIDI indekslerinin önemi. Troia 2nd International Conference on Applied Sciences, 25-27 July, Çanakkale. (Özet sunum)' },
-  // ── Kitap / Kitap Bölümü ──
   { cat: 'Kitap / Kitap Bölümü', text: 'EL Sabagh, A., Hossain, A., ..., Erman, M., Ceritoğlu, M., ..., 2020. Consequences and mitigation strategies of heat stress for sustainability of soybean production under the changing climate. In: A. Hossain (Ed.) Plant Stress Physiology. IntechOpen. DOI: 10.5772/intechopen.92098.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Şahin, S., Ceritoğlu, M., 2020. A critical step towards vermicompost production: Choosing appropriate earthworm species. In: Theory and Research in Agriculture, Forestry and Aquaculture. Gece Publishing, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Şahin, S., Ceritoğlu, M., 2020. Sustainability of soil organic matter. In: New Approaches and Applications in Agriculture. İksad Publication, Ankara.' },
@@ -699,7 +593,7 @@ let pubs = [
   { cat: 'Kitap / Kitap Bölümü', text: 'Erman, M., Ceritoglu, M., 2021. Role of seed priming in abiotic stress tolerance in grain legumes. In: Grain Legumes Under Abiotic Stress. Iksad Publication, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Erman, M., Ceritoglu, M., Soysal, S., 2021. A sustainable and effective strategy in salinity stress management: PGPB-priming. In: F. Çığ (ed) Bacterial Practices in Agriculture. Iksad Publication, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Soysal, S., Erman, M., Çığ, F., Ceritoglu, M., 2021. Microorganisms infecting lentil (Lens culinaris Medik.) for atmospheric nitrogen fixation. In: F. Çığ (ed) Bacterial Practices in Agriculture. Iksad Publication, Ankara.' },
-  { cat: 'Kitap / Kitap Bölümü', text: 'Ahmad, Z., ..., Soysal, S., Erman, M., Çığ, F., Ceritoglu, M., ..., EL Sabagh, A., 2022. Biological nitrogen fixation: An analysis of intoxicating tribulations from pesticides for sustainable legume production. In: Managing Plant Production Under Changing Environment, Springer, Singapore. https://doi.org/10.1007/978-981-16-5059-8.' },
+  { cat: 'Kitap / Kitap Bölümü', text: 'Ahmad, Z., ..., Soysal, S., Erman, M., Çığ, F., Ceritoglu, M., ..., EL Sabagh, A., 2022. Biological nitrogen fixation: An analysis of intoxicating tribulations from pesticides for sustainable legume production. In: Managing Plant Production Under Changing Environment, Springer, Singapore.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Erman, M., Ceritoglu, M., 2022. Alleviation of phosphorus in organic agriculture by phosphorus solubilizing bacteria. In: Current Research in Agriculture, Forestry and Aquaculture. Gece Publishing, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Ceritoğlu, M., Erman, M., 2022. Enrichment of vermicompost by plant growth promoting bacteria. In: T. Akar (ed.) Research & Reviews in Agriculture, Forestry and Aquaculture. Gece Publishing, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Soysal, S., Ceritoğlu, M., Erman, M., 2022. An overview of organic fertilizers consumption. In: F. Çığ (Eds.) Agriculture: Current Challenges and Solution Suggests. Iksad Publishing House, Ankara.' },
@@ -709,7 +603,6 @@ let pubs = [
   { cat: 'Kitap / Kitap Bölümü', text: 'Ceritoğlu, M., Erman, M., 2023. Sürdürülebilir tarımda vermikompost kullanımının rolü. In: F. Çığ (Eds.) Tarla Bitkilerinde Yetiştiricilik, Islah ve Yenilikçi Uygulamalar. Iksad Publishing House, Ankara.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Çığ, F., Özek, R., Erman, M., ..., Ceritoğlu, M., ..., 2025. Nano-Priming as seed priming technology for sustainable agriculture. In: A. Kumar, A. Elsabagh (Eds.) Nanotechnology for Agriculture: A Potential Tool for Abiotic Stress Tolerance. Apple Academic Press.' },
   { cat: 'Kitap / Kitap Bölümü', text: 'Ceritoğlu, M., Erman, M., Çığ, F., 2025. Akıllı tarımın ekonomik ve çevresel etkileri. In: C. Keskin, Y.K. Haspolat (Eds) Akıllı Tarım Uygulamaları: Gelecek Perspektifi. Orient Yayınları, Ankara.' },
-  // ── Projeler ──
   { cat: 'Projeler', text: 'EL Sabagh, A., Erman, M., Çığ, F., Ceritoglu, M. vd., 2021. Buğdayda Cd, Pb ve Ni kaynaklı Ağır Metal Stresinin PGPB ile İyileştirilmesi. Siirt Üniversitesi BAP, 2021-SİÜZİR-047, 2021-2023, ₺19.992,20. (Araştırmacı)' },
   { cat: 'Projeler', text: 'Erman, M., Çığ, F., EL Sabagh, A., Ceritoglu, M. vd., 2022. Biyo-Priming tekniğinin mercimekte kuraklık stresinin azaltılması üzerine etkilerinin araştırılması. Siirt Üniversitesi BAP, 2022-SİÜZİR-012, 2021-2023, ₺19.980,67. (Araştırmacı)' },
   { cat: 'Projeler', text: 'Çığ, F., Erman, M., Ceritoglu, M., 2022. Tohuma priming uygulamalarının mercimekte bitki gelişimi, tane verimi ve kalitesi üzerine etkilerinin incelenmesi. Siirt Üniversitesi BAP, 2022-SİÜFEB-026, 2021-2023, ₺14.983,64. (Araştırmacı)' },
@@ -727,14 +620,27 @@ let pubs = [
   { cat: 'Projeler', text: 'Çığ, F., Ceritoglu, M., Uçar, Ö., Soysal, S., Atlı, H.S., Erden, Z., Toprak, Ç.C., 2025. Siirt fıstığı atıklarından biyokömür eldesi ve kullanımı. GAP, EKK-EKV-2025/001, 2025-devam ediyor, ₺1.150.000,00. (Araştırmacı)' },
   { cat: 'Projeler', text: 'Ceritoglu, M., Erman, M., Çığ, F., Soysal, S., Uçar, Ö., Sabancılar, İ., El Sabagh, A., 2025. Salisilik ve giberellik asit uygulamalarının kuraklık stresi altındaki arpada bitki gelişimi ve antioksidan değişimler üzerine etkisi. Siirt Üniversitesi BAP, 2025-SİÜZİR-014, Şubat 2025-Kasım 2025, ₺49.986,00. (Yürütücü)' },
   { cat: 'Projeler', text: 'El Sabagh, A., Ceritoglu, M., Sabancılar, İ., 2025. Nohutta biyo-priming uygulamasının tuzluluk stresi, bitki gelişimi ve fotosentetik pigment kompozisyonu üzerine etkisi. Siirt Üniversitesi BAP, 2025-SİÜZİR-015, 2025-devam ediyor, ₺49.980,00. (Araştırmacı)' },
-  // ── Tezler ──
   { cat: 'Tezler', text: 'Ceritoğlu, M., 2019. Farklı ekim zamanlarında uygulanan vermikompostun mercimek (Lens culinaris Medik.)\'te verim ve verim ögeleri üzerine etkisi. Yüksek Lisans Tezi, Siirt Üniversitesi, Fen Bilimleri Enstitüsü, Siirt.' },
   { cat: 'Tezler', text: 'Ceritoğlu, M., 2024. Tohuma priming uygulamalarının farklı fosfor seviyelerine bağlı olarak mercimekte (Lens culinaris L.) bitki gelişimi, tane verimi ve kalitesi üzerine etkilerinin incelenmesi. Doktora Tezi, Siirt Üniversitesi, Fen Bilimleri Enstitüsü, Siirt.' },
 ];
-let photoData = null;
 
-// ─── INIT ─────────────────────────────────────────────
-// onload handled by Supabase section below
+let photoData = null;
+let activePubCat = pubCategories[0];
+
+// ─── SUPABASE ────────────────────────────────────────
+const SUPABASE_URL = "https://igrljwxyuwqagtnbhnmw.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8";
+const CV_ID = 'mustafa_ceritoglu';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let cloudSyncTimer = null;
+let isSyncing = false;
+
+function showSyncBadge(msg, color) {
+  const badge = document.getElementById('saveBadge');
+  badge.style.display = 'inline';
+  badge.textContent = msg;
+  badge.style.color = color;
+}
 
 // ─── LANG ─────────────────────────────────────────────
 function setLang(l) {
@@ -753,11 +659,9 @@ function setLang(l) {
   document.getElementById('lbl-pub').textContent = lb.pub;
 }
 
-// ─── TOGGLE SECTION ───────────────────────────────────
 function toggleSection(header) {
   header.classList.toggle('collapsed');
-  const body = header.nextElementSibling;
-  body.classList.toggle('hidden');
+  header.nextElementSibling.classList.toggle('hidden');
 }
 
 // ─── PHOTO ────────────────────────────────────────────
@@ -773,7 +677,7 @@ function handlePhoto(e) {
     const cvPhoto = document.getElementById('cvPhoto');
     cvPhoto.src = photoData;
     cvPhoto.classList.add('visible');
-    saveToStorage();
+    triggerCloudSave();
   };
   reader.readAsDataURL(file);
 }
@@ -793,10 +697,7 @@ function update() {
   const ww = document.getElementById('cv-web-wrap');
   if (web) { ww.style.display='flex'; setText('cv-web', web); }
   else ww.style.display='none';
-  renderEduCV();
-  renderExpCV();
-  renderSkillsCV();
-  renderPubCV();
+  renderEduCV(); renderExpCV(); renderSkillsCV(); renderPubCV();
 }
 
 function setText(id, val) {
@@ -806,23 +707,16 @@ function setText(id, val) {
 
 // ─── EDU ──────────────────────────────────────────────
 function renderEduEditor() {
-  const el = document.getElementById('eduList');
-  el.innerHTML = edus.map((e,i) => `
+  document.getElementById('eduList').innerHTML = edus.map((e,i) => `
     <div class="item-card">
       <button class="remove-btn" onclick="removeEdu(${i})">✕</button>
-      <div class="form-group"><label>Derece</label>
-        <input value="${e.degree}" oninput="edus[${i}].degree=this.value;renderEduCV()"></div>
-      <div class="form-group"><label>Okul / Bölüm</label>
-        <input value="${e.school}" oninput="edus[${i}].school=this.value;renderEduCV()"></div>
-      <div class="form-group"><label>Yıl</label>
-        <input value="${e.year}" oninput="edus[${i}].year=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>Derece</label><input value="${e.degree}" oninput="edus[${i}].degree=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>Okul / Bölüm</label><input value="${e.school}" oninput="edus[${i}].school=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>Yıl</label><input value="${e.year}" oninput="edus[${i}].year=this.value;renderEduCV()"></div>
     </div>`).join('');
 }
-function addEdu() {
-  edus.push({degree:'',school:'',year:''});
-  renderEduEditor(); renderEduCV(); saveToStorage();
-}
-function removeEdu(i) { edus.splice(i,1); renderEduEditor(); renderEduCV(); saveToStorage(); }
+function addEdu() { edus.push({degree:'',school:'',year:''}); renderEduEditor(); renderEduCV(); triggerCloudSave(); }
+function removeEdu(i) { edus.splice(i,1); renderEduEditor(); renderEduCV(); triggerCloudSave(); }
 function renderEduCV() {
   document.getElementById('cv-edu-list').innerHTML = edus.map(e=>`
     <div class="cv-edu-item">
@@ -834,29 +728,21 @@ function renderEduCV() {
 
 // ─── EXP ──────────────────────────────────────────────
 function renderExpEditor() {
-  const el = document.getElementById('expList');
-  el.innerHTML = exps.map((e,i)=>`
+  document.getElementById('expList').innerHTML = exps.map((e,i)=>`
     <div class="item-card">
       <button class="remove-btn" onclick="removeExp(${i})">✕</button>
-      <div class="form-group"><label>Pozisyon</label>
-        <input value="${e.title}" oninput="exps[${i}].title=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Kurum</label>
-        <input value="${e.company}" oninput="exps[${i}].company=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Tarih</label>
-        <input value="${e.date}" oninput="exps[${i}].date=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Açıklama</label>
-        <textarea rows="2" oninput="exps[${i}].desc=this.value;renderExpCV()">${e.desc}</textarea></div>
+      <div class="form-group"><label>Pozisyon</label><input value="${e.title}" oninput="exps[${i}].title=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>Kurum</label><input value="${e.company}" oninput="exps[${i}].company=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>Tarih</label><input value="${e.date}" oninput="exps[${i}].date=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>Açıklama</label><textarea rows="2" oninput="exps[${i}].desc=this.value;renderExpCV()">${e.desc}</textarea></div>
     </div>`).join('');
 }
-function addExp() { exps.push({title:'',company:'',date:'',desc:''}); renderExpEditor(); renderExpCV(); saveToStorage(); }
-function removeExp(i) { exps.splice(i,1); renderExpEditor(); renderExpCV(); saveToStorage(); }
+function addExp() { exps.push({title:'',company:'',date:'',desc:''}); renderExpEditor(); renderExpCV(); triggerCloudSave(); }
+function removeExp(i) { exps.splice(i,1); renderExpEditor(); renderExpCV(); triggerCloudSave(); }
 function renderExpCV() {
   document.getElementById('cv-exp-list').innerHTML = exps.map(e=>`
     <div class="cv-exp-item">
-      <div class="cv-exp-top">
-        <div class="cv-exp-title">${e.title}</div>
-        <div class="cv-exp-date">${e.date}</div>
-      </div>
+      <div class="cv-exp-top"><div class="cv-exp-title">${e.title}</div><div class="cv-exp-date">${e.date}</div></div>
       <div class="cv-exp-company">${e.company}</div>
       <div class="cv-exp-desc">${e.desc}</div>
     </div>`).join('');
@@ -864,13 +750,12 @@ function renderExpCV() {
 
 // ─── SKILLS ───────────────────────────────────────────
 function renderSkillEditor() {
-  const el = document.getElementById('skillList');
-  el.innerHTML = skills.map((s,i)=>`
+  document.getElementById('skillList').innerHTML = skills.map((s,i)=>`
     <div class="item-card">
       <button class="remove-btn" onclick="removeSkill(${i})">✕</button>
       <div class="skill-row">
         <input value="${s.name}" placeholder="Beceri adı" oninput="skills[${i}].name=this.value;renderSkillsCV()">
-        <select onchange="skills[${i}].level=parseInt(this.value);renderSkillsCV();saveToStorage()">
+        <select onchange="skills[${i}].level=parseInt(this.value);renderSkillsCV();triggerCloudSave()">
           <option value="30" ${s.level==30?'selected':''}>Başlangıç</option>
           <option value="50" ${s.level==50?'selected':''}>Orta</option>
           <option value="65" ${s.level==65?'selected':''}>İyi</option>
@@ -880,8 +765,8 @@ function renderSkillEditor() {
       </div>
     </div>`).join('');
 }
-function addSkill() { skills.push({name:'',level:65}); renderSkillEditor(); renderSkillsCV(); saveToStorage(); }
-function removeSkill(i) { skills.splice(i,1); renderSkillEditor(); renderSkillsCV(); saveToStorage(); }
+function addSkill() { skills.push({name:'',level:65}); renderSkillEditor(); renderSkillsCV(); triggerCloudSave(); }
+function removeSkill(i) { skills.splice(i,1); renderSkillEditor(); renderSkillsCV(); triggerCloudSave(); }
 function renderSkillsCV() {
   const lvlLabel = l => l<=30?'Başlangıç':l<=50?'Orta':l<=65?'İyi':l<=80?'İleri':'Uzman';
   document.getElementById('cv-skills-list').innerHTML = skills.map(s=>`
@@ -892,8 +777,6 @@ function renderSkillsCV() {
 }
 
 // ─── PUBS ─────────────────────────────────────────────
-let activePubCat = pubCategories[0];
-
 function renderPubEditor() {
   const el = document.getElementById('pubList');
   const tabs = pubCategories.map(c=>`
@@ -903,25 +786,17 @@ function renderPubEditor() {
       color:${activePubCat===c?'var(--navy)':'var(--gold)'};
       cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit;white-space:nowrap">${c} (${pubs.filter(p=>p.cat===c).length})</button>
   `).join('');
-
   const catPubs = pubs.map((p,i)=>({...p,i})).filter(p=>p.cat===activePubCat);
-
   el.innerHTML = `<div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:2px">${tabs}</div>` +
-    (catPubs.length===0
-      ? '<p style="font-size:.8rem;color:#999;margin-bottom:8px">Bu kategoride yayın yok.</p>'
-      : catPubs.map(p=>`
-        <div class="item-card">
-          <button class="remove-btn" onclick="removePub(${p.i})">✕</button>
-          <div class="form-group">
-            <textarea rows="3" style="font-size:.8rem" oninput="pubs[${p.i}].text=this.value;renderPubCV()">${p.text}</textarea>
-          </div>
-        </div>`).join(''));
+    (catPubs.length===0 ? '<p style="font-size:.8rem;color:#999;margin-bottom:8px">Bu kategoride yayın yok.</p>'
+    : catPubs.map(p=>`
+      <div class="item-card">
+        <button class="remove-btn" onclick="removePub(${p.i})">✕</button>
+        <div class="form-group"><textarea rows="3" style="font-size:.8rem" oninput="pubs[${p.i}].text=this.value;renderPubCV()">${p.text}</textarea></div>
+      </div>`).join(''));
 }
-function addPub() {
-  pubs.push({cat: activePubCat, text:''});
-  renderPubEditor(); renderPubCV(); saveToStorage();
-}
-function removePub(i) { pubs.splice(i,1); renderPubEditor(); renderPubCV(); saveToStorage(); }
+function addPub() { pubs.push({cat:activePubCat,text:''}); renderPubEditor(); renderPubCV(); triggerCloudSave(); }
+function removePub(i) { pubs.splice(i,1); renderPubEditor(); renderPubCV(); triggerCloudSave(); }
 function renderPubCV() {
   const lbl = document.getElementById('lbl-pub');
   const list = document.getElementById('cv-pub-list');
@@ -930,11 +805,20 @@ function renderPubCV() {
   let html = '';
   pubCategories.forEach(cat=>{
     const catPubs = pubs.filter(p=>p.cat===cat);
-    if(catPubs.length===0) return;
+    if(!catPubs.length) return;
     html += `<div style="font-size:8pt;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;margin:10px 0 5px;padding-bottom:2px;border-bottom:1px solid var(--gold)">${cat}</div>`;
     catPubs.forEach(p=>{ html += `<div class="cv-pub-item">${p.text}</div>`; });
   });
   list.innerHTML = html;
+}
+
+// ─── SIMILARITY ────────────────────────────────────────
+function similarity(a, b) {
+  const wa = new Set(a.toLowerCase().split(/\s+/));
+  const wb = new Set(b.toLowerCase().split(/\s+/));
+  const inter = [...wa].filter(w => wb.has(w)).length;
+  const union = new Set([...wa, ...wb]).size;
+  return inter / union;
 }
 
 // ─── PDF ──────────────────────────────────────────────
@@ -945,863 +829,290 @@ function downloadPDF() {
   btn.textContent = '⏳ Hazırlanıyor...';
   btn.disabled = true;
   html2pdf().set({
-    margin: [8, 8, 8, 8],
+    margin: [8,8,8,8],
     filename: name.replace(/\s+/g,'_') + '_CV.pdf',
     image: { type:'jpeg', quality:0.95 },
     html2canvas: { scale:2, useCORS:true, logging:false, scrollY:0 },
     jsPDF: { unit:'mm', format:'a4', orientation:'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  }).from(el).save().then(()=>{
-    btn.textContent = '⬇ PDF';
-    btn.disabled = false;
-  }).catch(err=>{
-    alert('PDF hatası: ' + err.message);
-    btn.textContent = '⬇ PDF';
-    btn.disabled = false;
-  });
+    pagebreak: { mode: ['avoid-all','css','legacy'] }
+  }).from(el).save().then(()=>{ btn.textContent='⬇ PDF'; btn.disabled=false; })
+  .catch(err=>{ alert('PDF hatası: '+err.message); btn.textContent='⬇ PDF'; btn.disabled=false; });
 }
 
 // ─── WORD ─────────────────────────────────────────────
 function downloadWord() {
-  const name = document.getElementById('name')?.value || 'CV';
-  const title = document.getElementById('title')?.value || '';
-  const phone = document.getElementById('phone')?.value || '';
-  const email = document.getElementById('email')?.value || '';
-  const city  = document.getElementById('city')?.value || '';
-  const birth = document.getElementById('birthdate')?.value || '';
-  const summary = document.getElementById('summary')?.value || '';
-
-  let html = `
-  <html xmlns:o='urn:schemas-microsoft-com:office:office'
-        xmlns:w='urn:schemas-microsoft-com:office:word'
-        xmlns='http://www.w3.org/TR/REC-html40'>
-  <head><meta charset='utf-8'>
-  <style>
-    body { font-family: Calibri, sans-serif; font-size:11pt; margin:2cm; }
-    h1 { font-size:20pt; color:#1a2744; margin-bottom:2pt; }
-    h2 { font-size:13pt; color:#b8860b; border-bottom:1pt solid #b8860b; padding-bottom:3pt; margin-top:14pt; }
-    .subtitle { color:#888; font-size:10pt; }
-    .contact { color:#444; font-size:10pt; margin:4pt 0 14pt; }
-    .summary-box { background:#f7f4ef; border-left:3pt solid #b8860b; padding:8pt; margin-bottom:12pt; }
-    table { width:100%; border-collapse:collapse; }
-    td { padding:4pt 6pt; vertical-align:top; }
-    .year { color:#b8860b; font-weight:bold; width:70pt; }
-    .bold { font-weight:bold; }
-  </style>
-  </head><body>
-  <h1>${name}</h1>
-  <p class='subtitle'>${title}</p>
+  const v = id => document.getElementById(id)?.value || '';
+  const name=v('name'), title=v('title'), phone=v('phone'), email=v('email'), city=v('city'), birth=v('birthdate'), summary=v('summary');
+  let html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+  <head><meta charset='utf-8'><style>
+    body{font-family:Calibri,sans-serif;font-size:11pt;margin:2cm}
+    h1{font-size:20pt;color:#1a2744;margin-bottom:2pt}
+    h2{font-size:13pt;color:#b8860b;border-bottom:1pt solid #b8860b;padding-bottom:3pt;margin-top:14pt}
+    .subtitle{color:#888;font-size:10pt}.contact{color:#444;font-size:10pt;margin:4pt 0 14pt}
+    .summary-box{background:#f7f4ef;border-left:3pt solid #b8860b;padding:8pt;margin-bottom:12pt}
+    table{width:100%;border-collapse:collapse}td{padding:4pt 6pt;vertical-align:top}
+    .year{color:#b8860b;font-weight:bold;width:70pt}.bold{font-weight:bold}
+  </style></head><body>
+  <h1>${name}</h1><p class='subtitle'>${title}</p>
   <p class='contact'>📍 ${city} &nbsp;|&nbsp; 📞 ${phone} &nbsp;|&nbsp; ✉ ${email} &nbsp;|&nbsp; 🎂 ${birth}</p>
   <div class='summary-box'>${summary}</div>
-  <h2>EĞİTİM / EDUCATION</h2>
-  <table>`;
-  edus.forEach(e=>{
-    html += `<tr><td class='year'>${e.year}</td><td><span class='bold'>${e.degree}</span><br>${e.school}</td></tr>`;
-  });
-  html += `</table><h2>İŞ DENEYİMİ / WORK EXPERIENCE</h2><table>`;
-  exps.forEach(e=>{
-    html += `<tr><td class='year'>${e.date}</td><td><span class='bold'>${e.title}</span><br>${e.company}<br><span style='color:#555;font-size:10pt'>${e.desc}</span></td></tr>`;
-  });
-  html += `</table><h2>BECERİLER / SKILLS</h2><ul>`;
-  skills.forEach(s=>{
-    const lvl = s.level<=30?'Başlangıç':s.level<=50?'Orta':s.level<=65?'İyi':s.level<=80?'İleri':'Uzman';
-    html += `<li>${s.name} – ${lvl}</li>`;
-  });
-  html += `</ul>`;
-  if (pubs.length>0) {
-    html += `<h2>YAYINLAR / PUBLICATIONS</h2>`;
-    // Atif
-    html += `<p><strong>Toplam Atıf: 475 &nbsp;|&nbsp; h-index: 13</strong> (Google Akademik, Şubat 2026)</p>`;
-    pubCategories.forEach(cat => {
-      const catPubs = pubs.filter(p=>p.cat===cat);
-      if(catPubs.length===0) return;
-      html += `<h3 style='font-size:11pt;color:#1a2744;margin:10pt 0 4pt;border-bottom:1pt solid #d4a017'>${cat} (${catPubs.length})</h3><ol>`;
-      catPubs.forEach(p=>{ html+=`<li style='margin-bottom:4pt'>${p.text}</li>`; });
-      html += `</ol>`;
+  <h2>EĞİTİM / EDUCATION</h2><table>`;
+  edus.forEach(e=>{ html+=`<tr><td class='year'>${e.year}</td><td><span class='bold'>${e.degree}</span><br>${e.school}</td></tr>`; });
+  html+=`</table><h2>İŞ DENEYİMİ / WORK EXPERIENCE</h2><table>`;
+  exps.forEach(e=>{ html+=`<tr><td class='year'>${e.date}</td><td><span class='bold'>${e.title}</span><br>${e.company}<br><span style='color:#555;font-size:10pt'>${e.desc}</span></td></tr>`; });
+  html+=`</table><h2>BECERİLER / SKILLS</h2><ul>`;
+  skills.forEach(s=>{ const lvl=s.level<=30?'Başlangıç':s.level<=50?'Orta':s.level<=65?'İyi':s.level<=80?'İleri':'Uzman'; html+=`<li>${s.name} – ${lvl}</li>`; });
+  html+=`</ul>`;
+  if(pubs.length>0){
+    html+=`<h2>YAYINLAR / PUBLICATIONS</h2><p><strong>Toplam Atıf: ${document.getElementById('citCount').textContent} &nbsp;|&nbsp; h-index: ${document.getElementById('hIndex').textContent}</strong> (Google Akademik)</p>`;
+    pubCategories.forEach(cat=>{
+      const cp=pubs.filter(p=>p.cat===cat); if(!cp.length) return;
+      html+=`<h3 style='font-size:11pt;color:#1a2744;margin:10pt 0 4pt;border-bottom:1pt solid #d4a017'>${cat} (${cp.length})</h3><ol>`;
+      cp.forEach(p=>{ html+=`<li style='margin-bottom:4pt'>${p.text}</li>`; });
+      html+=`</ol>`;
     });
   }
-  html += `</body></html>`;
-
-  const blob = new Blob(['\ufeff'+html], {type:'application/msword'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = name.replace(/\s+/g,'_') + '_CV.doc';
-  a.click();
+  html+=`</body></html>`;
+  const blob=new Blob(['\ufeff'+html],{type:'application/msword'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=name.replace(/\s+/g,'_')+'_CV.doc'; a.click();
   URL.revokeObjectURL(url);
 }
-
-// ─── AUTOSAVE (localStorage) ──────────────────────────
-function saveToStorage() {
-  try {
-    const data = {
-      name: document.getElementById('name')?.value,
-      title: document.getElementById('title')?.value,
-      birthdate: document.getElementById('birthdate')?.value,
-      city: document.getElementById('city')?.value,
-      phone: document.getElementById('phone')?.value,
-      email: document.getElementById('email')?.value,
-      web: document.getElementById('web')?.value,
-      summary: document.getElementById('summary')?.value,
-      edus, exps, skills, pubs, photoData
-    };
-    localStorage.setItem('cv_data', JSON.stringify(data));
-    const badge = document.getElementById('saveBadge');
-    badge.style.display = 'inline';
-    badge.textContent = '💾 Kaydedildi';
-    badge.style.color = '#6ee7b7';
-    setTimeout(() => { badge.style.color = '#aaa'; }, 2000);
-  } catch(e) { console.warn('Kayıt hatası:', e); }
-}
-
-function loadFromStorage() {
-  try {
-    const raw = localStorage.getItem('cv_data');
-    if (!raw) return false;
-    const d = JSON.parse(raw);
-    const fields = ['name','title','birthdate','city','phone','email','web','summary'];
-    fields.forEach(f => { if (document.getElementById(f) && d[f] !== undefined) document.getElementById(f).value = d[f]; });
-    if (d.edus && d.edus.length) edus = d.edus;
-    if (d.exps && d.exps.length) exps = d.exps;
-    if (d.skills && d.skills.length) skills = d.skills;
-    if (d.pubs && d.pubs.length) pubs = d.pubs;
-    if (d.photoData) {
-      photoData = d.photoData;
-      document.getElementById('photoPreviewEditor').src = photoData;
-      document.getElementById('photoPreviewEditor').style.display = 'block';
-      document.getElementById('photoHint').style.display = 'none';
-      document.getElementById('cvPhoto').src = photoData;
-      document.getElementById('cvPhoto').classList.add('visible');
-    }
-    return true;
-  } catch(e) { return false; }
-}
-
-// Auto-save on any input change (debounced)
-let saveTimer = null;
-document.addEventListener('input', () => {
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveToStorage, 800);
-});
 
 // ─── DOCX IMPORT ─────────────────────────────────────
 function importDocx(event) {
   const file = event.target.files[0];
   if (!file) return;
-  const badge = document.getElementById('saveBadge');
-  badge.style.display = 'inline';
-  badge.textContent = '⏳ Okunuyor...';
-  badge.style.color = '#fcd34d';
-
+  showSyncBadge('⏳ Okunuyor...', '#fcd34d');
   const reader = new FileReader();
   reader.onload = async function(e) {
     try {
       const result = await mammoth.extractRawText({ arrayBuffer: e.target.result });
-      const text = result.value;
-      parseAndMergeDocx(text);
-      renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor();
-      update();
-      saveToStorage();
-      badge.textContent = '✅ Senkronize edildi';
-      badge.style.color = '#6ee7b7';
-      setTimeout(() => { badge.style.color = '#aaa'; badge.textContent = '💾 Kaydedildi'; }, 3000);
-    } catch(err) {
-      badge.textContent = '❌ Hata: ' + err.message;
-      badge.style.color = '#fca5a5';
-    }
+      parseAndMergeDocx(result.value);
+      renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update(); triggerCloudSave();
+      showSyncBadge('✅ Senkronize edildi', '#6ee7b7');
+      setTimeout(() => showSyncBadge('☁️ Senkronize', '#6b7280'), 3000);
+    } catch(err) { showSyncBadge('❌ Hata: '+err.message, '#fca5a5'); }
   };
   reader.readAsArrayBuffer(file);
   event.target.value = '';
 }
 
 function parseAndMergeDocx(text) {
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
   const newPubs = [];
-
-  // SCI makaleler
-  let inSCI = false, inOther = false, inBildiri = false, inKitap = false, inProje = false, inTez = false;
-  let buffer = '';
-
+  let buffer = '', currentCat = null;
   const flushBuffer = (cat) => {
     const b = buffer.trim();
     if (b.length > 20) {
-      const clean = b.replace(/^\d+\.\s*/, '').trim();
-      // Check if already exists
-      const exists = pubs.some(p => p.cat === cat && similarity(p.text, clean) > 0.85);
-      if (!exists) newPubs.push({ cat, text: clean });
+      const clean = b.replace(/^\d+\.\s*/,'').trim();
+      const exists = pubs.some(p=>p.cat===cat && similarity(p.text,clean)>0.85);
+      if (!exists) newPubs.push({cat,text:clean});
     }
     buffer = '';
   };
-
-  let currentCat = null;
-  for (let i = 0; i < lines.length; i++) {
+  for (let i=0; i<lines.length; i++) {
     const line = lines[i];
-    // Detect section headers
-    if (/SCI.*Expanded.*kapsam/i.test(line) || /SCI.*makaleler/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'SCI / SCI-Expanded Makaleler'; continue;
-    }
-    if (/uluslararas.*indeks.*derg/i.test(line) || /SCI.*d.*yer alan/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'Uluslararası Diğer İndeksli Makaleler'; continue;
-    }
-    if (/uluslararas.*bilimsel.*toplant/i.test(line) || /uluslararas.*bildir/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'Uluslararası Bildiriler'; continue;
-    }
-    if (/kitap.*bölüm|bölüm.*yazar|yayınevi.*basıl/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'Kitap / Kitap Bölümü'; continue;
-    }
-    if (/^PROJELER$/i.test(line) || line === 'PROJELER') {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'Projeler'; continue;
-    }
-    if (/^TEZLER$/i.test(line) || /tezler/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = 'Tezler'; continue;
-    }
-    // Skip section titles and short headers
-    if (!currentCat || line.length < 15) continue;
-    if (/^(EĞİTİM|AKADEMİK|DİĞER|YURTDIŞI|ATİF|ARAŞTIRMA)/i.test(line)) {
-      if (buffer && currentCat) flushBuffer(currentCat);
-      currentCat = null; continue;
-    }
-
-    // Accumulate lines — new entry starts with number+dot or author name
-    const isNewEntry = /^\d+\./.test(line) ||
-      (/^[A-ZÇĞİÖŞÜa-zçğışöşü]/.test(line) && buffer.length > 50 && /\d{4}/.test(buffer));
-
-    if (isNewEntry && buffer.length > 0) {
-      flushBuffer(currentCat);
-    }
-    buffer += (buffer ? ' ' : '') + line;
+    if (/SCI.*Expanded.*kapsam/i.test(line)||/SCI.*makaleler/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='SCI / SCI-Expanded Makaleler'; continue; }
+    if (/uluslararas.*indeks.*derg/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='Uluslararası Diğer İndeksli Makaleler'; continue; }
+    if (/uluslararas.*bildir/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='Uluslararası Bildiriler'; continue; }
+    if (/kitap.*bölüm|bölüm.*yazar/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='Kitap / Kitap Bölümü'; continue; }
+    if (/^PROJELER$/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='Projeler'; continue; }
+    if (/^TEZLER$/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat='Tezler'; continue; }
+    if (!currentCat||line.length<15) continue;
+    if (/^(EĞİTİM|AKADEMİK|DİĞER|YURTDIŞI|ATİF|ARAŞTIRMA)/i.test(line)) { if(buffer&&currentCat)flushBuffer(currentCat); currentCat=null; continue; }
+    const isNewEntry = /^\d+\./.test(line)||(/^[A-ZÇĞİÖŞÜa-zçğışöşü]/.test(line)&&buffer.length>50&&/\d{4}/.test(buffer));
+    if (isNewEntry&&buffer.length>0) flushBuffer(currentCat);
+    buffer += (buffer?' ':'')+line;
   }
-  if (buffer && currentCat) flushBuffer(currentCat);
-
-  // Merge new pubs into existing list
+  if (buffer&&currentCat) flushBuffer(currentCat);
   pubs = [...pubs, ...newPubs];
-
-  if (newPubs.length > 0) {
-    setTimeout(() => alert(`✅ ${newPubs.length} yeni yayın/proje eklendi!`), 100);
-  } else {
-    setTimeout(() => alert('ℹ️ Yeni yayın bulunamadı — mevcut tüm kayıtlar zaten güncel.'), 100);
-  }
+  if (newPubs.length>0) setTimeout(()=>alert(`✅ ${newPubs.length} yeni yayın/proje eklendi!`),100);
+  else setTimeout(()=>alert('ℹ️ Yeni yayın bulunamadı — mevcut tüm kayıtlar zaten güncel.'),100);
 }
 
-// Simple text similarity (Jaccard on words)
-function similarity(a, b) {
-  const wa = new Set(a.toLowerCase().split(/\s+/));
-  const wb = new Set(b.toLowerCase().split(/\s+/));
-  const inter = [...wa].filter(w => wb.has(w)).length;
-  const union = new Set([...wa, ...wb]).size;
-  return inter / union;
+// ─── CLOUD SAVE / LOAD ────────────────────────────────
+function getFormData() {
+  return {
+    name: document.getElementById('name')?.value||'',
+    title: document.getElementById('title')?.value||'',
+    birthdate: document.getElementById('birthdate')?.value||'',
+    city: document.getElementById('city')?.value||'',
+    phone: document.getElementById('phone')?.value||'',
+    email: document.getElementById('email')?.value||'',
+    web: document.getElementById('web')?.value||'',
+    summary: document.getElementById('summary')?.value||'',
+    edus, exps, skills, pubs, photoData
+  };
 }
 
-// ─── SUPABASE CLOUD SYNC ──────────────────────────────
-const SUPABASE_URL = "https://igrljwxyuwqagtnbhnmw.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8";
-const CV_ID = 'mustafa_ceritoglu';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+function saveToLocalStorage() {
+  try { localStorage.setItem('cv_data', JSON.stringify(getFormData())); } catch(e) {}
+}
 
-let cloudSyncTimer = null;
-let isSyncing = false;
-
-function showSyncBadge(msg, color) {
-  const badge = document.getElementById('saveBadge');
-  badge.style.display = 'inline';
-  badge.textContent = msg;
-  badge.style.color = color;
+function triggerCloudSave() {
+  saveToLocalStorage();
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(saveToCloud, 1500);
 }
 
 async function saveToCloud() {
   if (isSyncing) return;
-  // Skip cloud sync only if running inside Claude preview
-  const isPreviewCtx = window.location.href === 'about:srcdoc' || 
-                       window.location.href === 'about:blank' ||
-                       document.location.protocol === 'about:';
-  if (isPreviewCtx) {
-    _origSaveToStorage();
-    return;
-  }
   isSyncing = true;
   showSyncBadge('☁️ Kaydediliyor...', '#fcd34d');
   try {
-    const data = {
-      name: document.getElementById('name')?.value || '',
-      title: document.getElementById('title')?.value || '',
-      birthdate: document.getElementById('birthdate')?.value || '',
-      city: document.getElementById('city')?.value || '',
-      phone: document.getElementById('phone')?.value || '',
-      email: document.getElementById('email')?.value || '',
-      web: document.getElementById('web')?.value || '',
-      summary: document.getElementById('summary')?.value || '',
-      edus, exps, skills, pubs, photoData
-    };
-    // Save to localStorage as backup
-    localStorage.setItem('cv_data', JSON.stringify(data));
-    // Save to Supabase
-    const { error } = await sb.from('cv_data')
-      .upsert({ id: CV_ID, data, updated_at: new Date().toISOString() });
+    const data = getFormData();
+    saveToLocalStorage();
+    const { error } = await sb.from('cv_data').upsert({ id: CV_ID, data, updated_at: new Date().toISOString() });
     if (error) throw error;
     showSyncBadge('☁️ Buluta kaydedildi', '#6ee7b7');
-    setTimeout(() => showSyncBadge('☁️ Senkronize', '#6b7280'), 2500);
+    setTimeout(()=>showSyncBadge('☁️ Senkronize','#6b7280'), 2500);
   } catch(e) {
     showSyncBadge('⚠️ Bulut hatası (yerel kaydedildi)', '#fca5a5');
-    console.error('Cloud sync error:', JSON.stringify(e), e.message, e.code);
-  } finally {
-    isSyncing = false;
+  } finally { isSyncing = false; }
+}
+
+function applyData(d) {
+  ['name','title','birthdate','city','phone','email','web','summary'].forEach(f=>{
+    if(document.getElementById(f)&&d[f]!==undefined) document.getElementById(f).value=d[f];
+  });
+  if(d.edus&&d.edus.length) edus=d.edus;
+  if(d.exps&&d.exps.length) exps=d.exps;
+  if(d.skills&&d.skills.length) skills=d.skills;
+  if(d.pubs&&d.pubs.length) pubs=d.pubs;
+  if(d.photoData){
+    photoData=d.photoData;
+    document.getElementById('photoPreviewEditor').src=photoData;
+    document.getElementById('photoPreviewEditor').style.display='block';
+    document.getElementById('photoHint').style.display='none';
+    document.getElementById('cvPhoto').src=photoData;
+    document.getElementById('cvPhoto').classList.add('visible');
   }
 }
 
 async function loadFromCloud() {
-  // Skip cloud sync only if running inside Claude preview (srcdoc)
-  const isPreview = window.location.href === 'about:srcdoc' || 
-                    window.location.href === 'about:blank' ||
-                    document.location.protocol === 'about:';
-  if (isPreview) {
-    const restored = loadFromStorage();
-    showSyncBadge(restored ? '💾 Önizleme: yerel veri' : '💾 Önizleme modu', '#aaa');
-    return;
-  }
   showSyncBadge('☁️ Yükleniyor...', '#fcd34d');
   try {
-    const { data: row, error } = await sb.from('cv_data')
-      .select('data, updated_at')
-      .eq('id', CV_ID)
-      .single();
+    const { data: row, error } = await sb.from('cv_data').select('data,updated_at').eq('id',CV_ID).single();
     if (error) throw error;
-    if (!row || !row.data || Object.keys(row.data).length === 0) {
-      // Cloud empty, try localStorage
-      const restored = loadFromStorage();
-      if (restored) {
-        showSyncBadge('💾 Yerel veri yüklendi', '#6ee7b7');
-        await saveToCloud(); // push local to cloud
-      } else {
-        showSyncBadge('☁️ Senkronize', '#6b7280');
-      }
+    if (!row||!row.data||Object.keys(row.data).length===0) {
+      const raw = localStorage.getItem('cv_data');
+      if (raw) { applyData(JSON.parse(raw)); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); await saveToCloud(); }
+      else showSyncBadge('☁️ Senkronize','#6b7280');
       return;
     }
-    const d = row.data;
-    const fields = ['name','title','birthdate','city','phone','email','web','summary'];
-    fields.forEach(f => { if (document.getElementById(f) && d[f] !== undefined) document.getElementById(f).value = d[f]; });
-    if (d.edus && d.edus.length) edus = d.edus;
-    if (d.exps && d.exps.length) exps = d.exps;
-    if (d.skills && d.skills.length) skills = d.skills;
-    if (d.pubs && d.pubs.length) pubs = d.pubs;
-    if (d.photoData) {
-      photoData = d.photoData;
-      document.getElementById('photoPreviewEditor').src = photoData;
-      document.getElementById('photoPreviewEditor').style.display = 'block';
-      document.getElementById('photoHint').style.display = 'none';
-      document.getElementById('cvPhoto').src = photoData;
-      document.getElementById('cvPhoto').classList.add('visible');
-    }
+    applyData(row.data);
+    localStorage.setItem('cv_data', JSON.stringify(row.data));
     renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update();
-    localStorage.setItem('cv_data', JSON.stringify(d));
     const updated = new Date(row.updated_at).toLocaleString('tr-TR');
     showSyncBadge(`☁️ Senkronize · ${updated}`, '#6ee7b7');
-    setTimeout(() => showSyncBadge('☁️ Senkronize', '#6b7280'), 4000);
-    console.log('Cloud data loaded successfully, pubs:', d.pubs ? d.pubs.length : 0);
+    setTimeout(()=>showSyncBadge('☁️ Senkronize','#6b7280'), 4000);
   } catch(e) {
-    console.error('Cloud load error:', JSON.stringify(e), e.message, e.code, e.details, e.hint);
-    const restored = loadFromStorage();
-    showSyncBadge(restored ? '💾 Yerel veri yüklendi (bulut hatası)' : '⚠️ Bağlantı hatası', '#fca5a5');
+    try {
+      const raw = localStorage.getItem('cv_data');
+      if (raw) { applyData(JSON.parse(raw)); renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update(); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); }
+      else showSyncBadge('⚠️ Bağlantı hatası','#fca5a5');
+    } catch(e2) { showSyncBadge('⚠️ Bağlantı hatası','#fca5a5'); }
   }
 }
 
-// saveToStorage now also triggers cloud sync
-const _origSaveToStorage = saveToStorage;
-function saveToStorage() {
-  _origSaveToStorage();
-  clearTimeout(cloudSyncTimer);
-  cloudSyncTimer = setTimeout(saveToCloud, 1500);
-}
+// Auto-save on input
+document.addEventListener('input', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
+document.addEventListener('change', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
 
-// Also trigger cloud sync on ANY input change
-document.addEventListener('change', () => {
-  clearTimeout(cloudSyncTimer);
-  cloudSyncTimer = setTimeout(saveToCloud, 1500);
-});
-
-// Override loadFromStorage — cloud takes priority
-window.onload = async () => {
-  // Always load from cloud first — localStorage only as fallback if cloud fails
-  await loadFromCloud();
-};
+window.onload = async () => { await loadFromCloud(); };
 </script>
-<!-- AI Pub Adder Modal -->
-<div id="aiModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:12px;padding:28px;max-width:580px;width:90%;
-    box-shadow:0 8px 40px rgba(0,0,0,.3)">
-    <h3 style="font-family:'Playfair Display',serif;color:#1a2744;margin-bottom:8px">
-      🤖 AI ile Yayın Ekle
-    </h3>
+
+<!-- AI Modal -->
+<div id="aiModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:12px;padding:28px;max-width:580px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3)">
+    <h3 style="font-family:'Playfair Display',serif;color:#1a2744;margin-bottom:8px">🤖 AI ile Yayın Ekle</h3>
     <p style="font-size:.85rem;color:#666;margin-bottom:12px;line-height:1.6">
-      Yayın bilgisini yazın <strong>veya</strong> PDF/Word dosyası yükleyin. AI otomatik olarak kategoriyi belirler ve CV'ye ekler.
+      Yayın bilgisini yazın ve AI otomatik olarak kategoriyi belirleyip ekleyecek.<br>
+      <small style="color:#f59e0b">⚠️ AI özelliği şu an sadece Netlify üzerinde aktiftir. Yayını manuel olarak da ekleyebilirsiniz.</small>
     </p>
-
-    <!-- Dosya yükleme alanı -->
-    <div id="aiDropArea" onclick="document.getElementById('aiFileInput').click()"
-      style="border:2px dashed #d1c9b8;border-radius:8px;padding:14px;text-align:center;
-      cursor:pointer;background:#faf8f3;margin-bottom:10px;transition:all .2s"
-      ondragover="event.preventDefault();this.style.borderColor='#b8860b'"
-      ondragleave="this.style.borderColor='#d1c9b8'"
-      ondrop="handleAIFileDrop(event)">
-      <input type="file" id="aiFileInput" accept=".pdf,.docx,.txt" style="display:none" onchange="handleAIFile(event)">
-      <span id="aiFileLabel" style="font-size:.85rem;color:#888">
-        📎 PDF, Word veya TXT dosyası sürükle bırak ya da tıkla
-      </span>
+    <textarea id="aiInput" rows="4"
+      placeholder="Yayın bilgisini buraya yazın...&#10;Örnek: Ceritoglu M., Erman M., 2025. Effect of bio-priming on lentil growth. Journal of Plant Science, 45(2): 123-135."
+      style="width:100%;padding:10px;border:1.5px solid #d1c9b8;border-radius:6px;font-size:.85rem;resize:vertical;font-family:inherit;background:#faf8f3"></textarea>
+    <div style="margin-top:10px">
+      <label style="font-size:.8rem;font-weight:600;color:#1a2744">Kategori seç:</label>
+      <select id="aiCatSelect" style="width:100%;margin-top:4px;padding:7px;border:1.5px solid #d1c9b8;border-radius:6px;font-family:inherit;background:#faf8f3">
+        <option>SCI / SCI-Expanded Makaleler</option>
+        <option>Uluslararası Diğer İndeksli Makaleler</option>
+        <option>Uluslararası Bildiriler</option>
+        <option>Kitap / Kitap Bölümü</option>
+        <option>Projeler</option>
+        <option>Tezler</option>
+      </select>
     </div>
-
-    <div style="text-align:center;font-size:.8rem;color:#aaa;margin-bottom:8px">— veya —</div>
-
-    <textarea id="aiInput" rows="4" 
-      placeholder="Yayın bilgisini buraya yazın veya yapıştırın...&#10;Örnek: Ceritoglu M., Erman M., 2025. Effect of bio-priming on lentil growth. Journal of Plant Science, 45(2): 123-135."
-      style="width:100%;padding:10px;border:1.5px solid #d1c9b8;border-radius:6px;
-      font-size:.85rem;resize:vertical;font-family:inherit;background:#faf8f3"></textarea>
     <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      <button onclick="closeAIModal()"
-        style="padding:8px 18px;border:1.5px solid #ccc;border-radius:6px;
-        background:#fff;cursor:pointer;font-family:inherit">İptal</button>
-      <button id="aiAddBtn" onclick="aiAddPub()"
-        style="padding:8px 20px;background:#2d7a4f;color:#fff;border:none;
-        border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">
-        ✅ Ekle
-      </button>
+      <button onclick="closeAIModal()" style="padding:8px 18px;border:1.5px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit">İptal</button>
+      <button onclick="manualAddPub()" style="padding:8px 20px;background:#2d7a4f;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">✅ Manuel Ekle</button>
     </div>
-    <div id="aiResult" style="margin-top:14px;font-size:.85rem;line-height:1.6;display:none"></div>
   </div>
 </div>
 
 <!-- Scholar Modal -->
-<div id="scholarModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:12px;padding:28px;max-width:560px;width:90%;
-    box-shadow:0 8px 40px rgba(0,0,0,.3)">
-    <h3 style="font-family:'Playfair Display',serif;color:#1a2744;margin-bottom:8px">
-      🎓 Google Scholar Güncelle
-    </h3>
+<div id="scholarModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:12px;padding:28px;max-width:560px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3)">
+    <h3 style="font-family:'Playfair Display',serif;color:#1a2744;margin-bottom:8px">🎓 Google Scholar Güncelle</h3>
     <p style="font-size:.85rem;color:#666;margin-bottom:16px;line-height:1.6">
       <strong>Nasıl yapılır:</strong><br>
-      1. <a href="https://scholar.google.com/citations?user=4owbEXYAAAAJ&hl=tr" target="_blank" 
-         style="color:#b8860b">Google Scholar profilinizi</a> açın<br>
+      1. <a href="https://scholar.google.com/citations?user=4owbEXYAAAAJ&hl=tr" target="_blank" style="color:#b8860b">Google Scholar profilinizi</a> açın<br>
       2. Sayfada sağ tıklayın → <strong>"Sayfa kaynağını görüntüle"</strong><br>
-      3. Açılan sayfadaki tüm metni seçin (Ctrl+A) → kopyalayın (Ctrl+C)<br>
+      3. Tüm metni seçin (Ctrl+A) → kopyalayın (Ctrl+C)<br>
       4. Aşağıya yapıştırın ve <strong>"Güncelle"</strong> butonuna basın
     </p>
     <textarea id="scholarHTML" rows="6" placeholder="Scholar sayfa kaynağını buraya yapıştırın..."
-      style="width:100%;padding:10px;border:1.5px solid #d1c9b8;border-radius:6px;
-      font-size:.8rem;resize:vertical;font-family:monospace;background:#faf8f3"></textarea>
+      style="width:100%;padding:10px;border:1.5px solid #d1c9b8;border-radius:6px;font-size:.8rem;resize:vertical;font-family:monospace;background:#faf8f3"></textarea>
     <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      <button onclick="closeScholarModal()" 
-        style="padding:8px 18px;border:1.5px solid #ccc;border-radius:6px;
-        background:#fff;cursor:pointer;font-family:inherit">İptal</button>
-      <button onclick="parseScholarHTML()"
-        style="padding:8px 18px;background:#1a2744;color:#fff;border:none;
-        border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">
-        🔄 Güncelle
-      </button>
+      <button onclick="closeScholarModal()" style="padding:8px 18px;border:1.5px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit">İptal</button>
+      <button onclick="parseScholarHTML()" style="padding:8px 18px;background:#1a2744;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Güncelle</button>
     </div>
     <div id="scholarResult" style="margin-top:12px;font-size:.85rem;display:none"></div>
   </div>
 </div>
 
 <script>
-function openScholarModal() {
-  document.getElementById('scholarModal').style.display = 'flex';
-  document.getElementById('scholarHTML').value = '';
-  document.getElementById('scholarResult').style.display = 'none';
+function openAIModal() { document.getElementById('aiModal').style.display='flex'; document.getElementById('aiInput').value=''; }
+function closeAIModal() { document.getElementById('aiModal').style.display='none'; }
+
+function manualAddPub() {
+  const input = document.getElementById('aiInput').value.trim();
+  const cat = document.getElementById('aiCatSelect').value;
+  if (!input || input.length < 10) { alert('Lütfen yayın bilgisini girin.'); return; }
+  const exists = pubs.some(p => similarity(p.text, input) > 0.85);
+  if (exists) { alert('⚠️ Bu yayın zaten listede mevcut.'); return; }
+  pubs.push({ cat, text: input });
+  activePubCat = cat;
+  renderPubEditor(); renderPubCV(); triggerCloudSave();
+  closeAIModal();
 }
 
-function closeScholarModal() {
-  document.getElementById('scholarModal').style.display = 'none';
-}
+function openScholarModal() { document.getElementById('scholarModal').style.display='flex'; document.getElementById('scholarHTML').value=''; document.getElementById('scholarResult').style.display='none'; }
+function closeScholarModal() { document.getElementById('scholarModal').style.display='none'; }
 
 function parseScholarHTML() {
   const html = document.getElementById('scholarHTML').value;
   const result = document.getElementById('scholarResult');
-  
-  if (!html || html.length < 100) {
-    result.style.display = 'block';
-    result.style.color = '#dc2626';
-    result.textContent = '❌ Lütfen Scholar sayfa kaynağını yapıştırın.';
-    return;
-  }
-
-  // Parse citation count
-  let citations = null;
-  let hindex = null;
-
-  // Try multiple patterns for citation count
-  const citPatterns = [
-    /itasyon[^<]*<\/td>\s*<td[^>]*>(\d+)/i,
-    /"gs_ai_gim"[^>]*>(\d+)/i,
-    /Tüm.*?<\/td>\s*<td[^>]*class="gsc_rsb_std">(\d+)/i,
-    /gsc_rsb_std[^>]*>(\d+)/,
-    /Citations.*?(\d{2,})/i,
-    /Atıf.*?(\d{2,})/i,
-  ];
-  
-  for (const pat of citPatterns) {
-    const m = html.match(pat);
-    if (m) { citations = parseInt(m[1]); break; }
-  }
-
-  // Try multiple patterns for h-index  
-  const hindexPatterns = [
-    /h-index[^<]*<\/td>\s*<td[^>]*>(\d+)/i,
-    /gsc_rsb_std[^>]*>\d+<\/td>\s*<td[^>]*class="gsc_rsb_std">(\d+)/,
-    /h-index.*?(\d+)/i,
-  ];
-  
-  for (const pat of hindexPatterns) {
-    const m = html.match(pat);
-    if (m) { hindex = parseInt(m[1]); break; }
-  }
-
-  // Also try to extract all gsc_rsb_std numbers
-  if (!citations || !hindex) {
-    const nums = [...html.matchAll(/gsc_rsb_std[^>]*>(\d+)/g)].map(m => parseInt(m[1]));
-    if (nums.length >= 2) {
-      citations = citations || nums[0];
-      hindex = hindex || nums[2]; // h-index is usually 3rd number
-    }
-  }
-
-  if (!citations && !hindex) {
-    result.style.display = 'block';
-    result.style.color = '#dc2626';
-    result.innerHTML = '❌ Atıf bilgisi bulunamadı.<br><small>Sayfayı doğru kopyaladığınızdan emin olun.</small>';
-    return;
-  }
-
-  // Update the CV citation section
-  const citDiv = document.querySelector('#cvDocument [style*="Toplam Atıf"]');
-  if (citDiv) {
-    const today = new Date().toLocaleDateString('tr-TR', {month:'long', year:'numeric'});
-    citDiv.innerHTML = `
-      <div style="font-size:9pt;color:#333">
-        Toplam Atıf: <strong style="color:var(--navy)">${citations || '?'}</strong> 
-        &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)">${hindex || '?'}</strong>
-      </div>
-      <div style="font-size:8pt;color:#777;margin-top:2px">Google Akademik · ${today}</div>`;
-  }
-
-  // Save to cloud
-  saveToCloud();
-  
-  result.style.display = 'block';
-  result.style.color = '#059669';
-  result.innerHTML = `✅ Güncellendi! Atıf: <strong>${citations || '?'}</strong> · h-index: <strong>${hindex || '?'}</strong>`;
-  
-  setTimeout(closeScholarModal, 2000);
+  if (!html||html.length<100) { result.style.display='block'; result.style.color='#dc2626'; result.textContent='❌ Lütfen Scholar sayfa kaynağını yapıştırın.'; return; }
+  let citations=null, hindex=null;
+  const citPatterns=[/gsc_rsb_std[^>]*>(\d+)/g];
+  const nums=[...html.matchAll(/gsc_rsb_std[^>]*>(\d+)/g)].map(m=>parseInt(m[1]));
+  if(nums.length>=2){ citations=nums[0]; hindex=nums[2]; }
+  if(!citations&&!hindex){ result.style.display='block'; result.style.color='#dc2626'; result.innerHTML='❌ Atıf bilgisi bulunamadı.<br><small>Sayfayı doğru kopyaladığınızdan emin olun.</small>'; return; }
+  if(citations) document.getElementById('citCount').textContent=citations;
+  if(hindex) document.getElementById('hIndex').textContent=hindex;
+  const today=new Date().toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
+  document.getElementById('citDate').textContent='Google Akademik · '+today;
+  triggerCloudSave();
+  result.style.display='block'; result.style.color='#059669';
+  result.innerHTML=`✅ Güncellendi! Atıf: <strong>${citations||'?'}</strong> · h-index: <strong>${hindex||'?'}</strong>`;
+  setTimeout(closeScholarModal,2000);
 }
 
-// Close modal on background click
-document.getElementById('scholarModal').addEventListener('click', function(e) {
-  if (e.target === this) closeScholarModal();
-});
-document.getElementById('aiModal').addEventListener('click', function(e) {
-  if (e.target === this) closeAIModal();
-});
-
-// ─── AI FILE HANDLERS ────────────────────────────────
-function handleAIFileDrop(event) {
-  event.preventDefault();
-  document.getElementById('aiDropArea').style.borderColor = '#d1c9b8';
-  const file = event.dataTransfer.files[0];
-  if (file) processAIFile(file);
-}
-
-function handleAIFile(event) {
-  const file = event.target.files[0];
-  if (file) processAIFile(file);
-}
-
-async function processAIFile(file) {
-  const label = document.getElementById('aiFileLabel');
-  label.textContent = '⏳ Dosya okunuyor...';
-
-  try {
-    let text = '';
-
-    if (file.name.endsWith('.txt')) {
-      text = await file.text();
-    } else if (file.name.endsWith('.docx')) {
-      const arrayBuffer = await file.arrayBuffer();
-      const result = await mammoth.extractRawText({ arrayBuffer });
-      text = result.value;
-    } else if (file.name.endsWith('.pdf')) {
-      // For PDF, read as base64 and send to Claude
-      const base64 = await fileToBase64(file);
-      label.textContent = `✅ ${file.name} yüklendi`;
-      document.getElementById('aiInput').value = '[PDF dosyası yüklendi - AI analiz edecek]';
-      document.getElementById('aiInput').dataset.pdfBase64 = base64;
-      document.getElementById('aiInput').dataset.pdfName = file.name;
-      return;
-    }
-
-    // Put extracted text into textarea
-    document.getElementById('aiInput').value = text.substring(0, 3000);
-    label.textContent = `✅ ${file.name} okundu`;
-
-  } catch(err) {
-    label.textContent = '❌ Dosya okunamadı: ' + err.message;
-  }
-}
-
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-// Unified aiAddPub with PDF + text support
-async function aiAddPub() {
-  const inputEl = document.getElementById('aiInput');
-  const pdfBase64 = inputEl.dataset.pdfBase64;
-  
-  if (pdfBase64) {
-    // PDF mode - send to Claude with base64
-    const btn = document.getElementById('aiAddBtn');
-    const result = document.getElementById('aiResult');
-    btn.textContent = '⏳ PDF analiz ediliyor...';
-    btn.disabled = true;
-    result.style.display = 'none';
-
-    const systemPrompt = `Sen bir akademik CV asistanısın. Bu PDF'den yayın bilgilerini çıkar ve şu kategorilerden birine ata:
-- SCI / SCI-Expanded Makaleler
-- Uluslararası Diğer İndeksli Makaleler  
-- Uluslararası Bildiriler
-- Kitap / Kitap Bölümü
-- Projeler
-- Tezler
-
-SADECE şu JSON formatında yanıt ver:
-{"category": "kategori adı", "formatted": "tam atıf metni"}`;
-
-    try {
-      const response = await fetch('/.netlify/functions/claude-proxy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: systemPrompt,
-          messages: [{
-            role: 'user',
-            content: [{
-              type: 'document',
-              source: { type: 'base64', media_type: 'application/pdf', data: pdfBase64 }
-            }, {
-              type: 'text',
-              text: 'Bu PDF dosyasindaki yayin bilgilerini cikar ve kategorize et.'
-            }]
-          }]
-        })
-      });
-
-      const data = await response.json();
-      const text = data.content?.[0]?.text || '';
-      const clean = text.replace(/```json|```/g, '').trim();
-      const parsed = JSON.parse(clean);
-
-      const validCats = ['SCI / SCI-Expanded Makaleler', 'Uluslararası Diğer İndeksli Makaleler',
-        'Uluslararası Bildiriler', 'Kitap / Kitap Bölümü', 'Projeler', 'Tezler'];
-      const cat = validCats.find(c => c === parsed.category) || 'Uluslararası Diğer İndeksli Makaleler';
-
-      const exists = pubs.some(p => similarity(p.text, parsed.formatted) > 0.85);
-      if (exists) {
-        result.style.display = 'block';
-        result.style.color = '#f59e0b';
-        result.textContent = '⚠️ Bu yayın zaten listede mevcut.';
-        btn.textContent = '✅ Ekle'; btn.disabled = false;
-        return;
-      }
-
-      pubs.push({ cat, text: parsed.formatted });
-      activePubCat = cat;
-      renderPubEditor(); renderPubCV();
-      await saveToCloud();
-      delete inputEl.dataset.pdfBase64;
-
-      result.style.display = 'block';
-      result.style.color = '#059669';
-      result.innerHTML = `✅ Eklendi!<br><strong>Kategori:</strong> ${cat}<br><small>${parsed.formatted}</small>`;
-      setTimeout(closeAIModal, 3000);
-
-    } catch(err) {
-      result.style.display = 'block';
-      result.style.color = '#dc2626';
-      result.textContent = '❌ Hata: ' + err.message;
-    } finally {
-      btn.textContent = '✅ Ekle'; btn.disabled = false;
-    }
-    return;
-  }
-
-  // Text mode - fall through to text handler below
-  await aiAddPubText();
-}
-
-// ─── AI PUB ADDER ────────────────────────────────────
-function openAIModal() {
-  document.getElementById('aiModal').style.display = 'flex';
-  document.getElementById('aiInput').value = '';
-  document.getElementById('aiResult').style.display = 'none';
-  document.getElementById('aiResult').innerHTML = '';
-}
-function closeAIModal() {
-  document.getElementById('aiModal').style.display = 'none';
-}
-
-async function aiAddPubText() {
-  const input = document.getElementById('aiInput').value.trim();
-  const result = document.getElementById('aiResult');
-  const btn = document.getElementById('aiAddBtn');
-
-  if (!input || input.length < 20) {
-    result.style.display = 'block';
-    result.style.color = '#dc2626';
-    result.textContent = '❌ Lütfen yayın bilgisini girin.';
-    return;
-  }
-
-  btn.textContent = '⏳ Analiz ediliyor...';
-  btn.disabled = true;
-  result.style.display = 'none';
-
-  const systemPrompt = `Sen bir akademik CV asistanısın. Kullanıcı sana bir yayın bilgisi verecek.
-Sen bu yayını analiz edip şu kategorilerden birine atamalısın:
-- SCI / SCI-Expanded Makaleler
-- Uluslararası Diğer İndeksli Makaleler
-- Uluslararası Bildiriler
-- Kitap / Kitap Bölümü
-- Projeler
-- Tezler
-
-Yanıtını SADECE şu JSON formatında ver, başka hiçbir şey yazma:
-{"category": "kategori adı", "formatted": "düzgün formatlanmış atıf metni"}
-
-Atıf metnini akademik formatta düzenle: Yazar(lar), Yıl. Başlık. Dergi/Kitap, Cilt(Sayı): Sayfalar.`;
-
-  try {
-    const response = await fetch('/.netlify/functions/claude-proxy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: input }]
-      })
-    });
-
-    const data = await response.json();
-    const text = data.content?.[0]?.text || '';
-    
-    let parsed;
-    try {
-      const clean = text.replace(/```json|```/g, '').trim();
-      parsed = JSON.parse(clean);
-    } catch(e) {
-      throw new Error('AI yanıtı ayrıştırılamadı: ' + text);
-    }
-
-    const { category, formatted } = parsed;
-
-    // Validate category
-    const validCats = ['SCI / SCI-Expanded Makaleler', 'Uluslararası Diğer İndeksli Makaleler',
-      'Uluslararası Bildiriler', 'Kitap / Kitap Bölümü', 'Projeler', 'Tezler'];
-    const cat = validCats.find(c => c === category) || 'Uluslararası Diğer İndeksli Makaleler';
-
-    // Check duplicate
-    const exists = pubs.some(p => similarity(p.text, formatted) > 0.85);
-    if (exists) {
-      result.style.display = 'block';
-      result.style.color = '#f59e0b';
-      result.textContent = '⚠️ Bu yayın zaten listede mevcut.';
-      btn.textContent = '✅ Ekle';
-      btn.disabled = false;
-      return;
-    }
-
-    // Add to pubs
-    pubs.push({ cat, text: formatted });
-    activePubCat = cat;
-    renderPubEditor();
-    renderPubCV();
-    await saveToCloud();
-
-    result.style.display = 'block';
-    result.style.color = '#059669';
-    result.innerHTML = `✅ Eklendi!<br>
-      <strong>Kategori:</strong> ${cat}<br>
-      <strong>Atıf:</strong> <small>${formatted}</small>`;
-
-    setTimeout(() => {
-      closeAIModal();
-      // Scroll to pub section
-      document.getElementById('pubList').scrollIntoView({behavior:'smooth'});
-    }, 3000);
-
-  } catch(err) {
-    result.style.display = 'block';
-    result.style.color = '#dc2626';
-    result.innerHTML = '❌ Hata: ' + err.message;
-  } finally {
-    btn.textContent = '✅ Ekle';
-    btn.disabled = false;
-  }
-}
-
-// ─── ONE-CLICK SCHOLAR FETCH ─────────────────────────
-async function fetchScholarDirect() {
-  const btn = document.getElementById('scholarBtn');
-  btn.textContent = '⏳ Yükleniyor...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('/.netlify/functions/scholar');
-    const data = await res.json();
-
-    if (data.error) {
-      // Fallback to manual modal
-      btn.textContent = '🎓 Scholar';
-      btn.disabled = false;
-      openScholarModal();
-      return;
-    }
-
-    // Update citation section in CV
-    const citDiv = document.querySelector('#cvDocument [style*="Toplam Atıf"]');
-    if (citDiv) {
-      const today = new Date().toLocaleDateString('tr-TR', {month:'long', year:'numeric'});
-      citDiv.innerHTML = `
-        <div style="font-size:9pt;color:#333">
-          Toplam Atıf: <strong style="color:var(--navy)">${data.citations}</strong> 
-          &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)">${data.hindex}</strong>
-        </div>
-        <div style="font-size:8pt;color:#777;margin-top:2px">Google Akademik · ${today}</div>`;
-    }
-
-    await saveToCloud();
-    showSyncBadge(`🎓 Scholar güncellendi: ${data.citations} atıf, h:${data.hindex}`, '#6ee7b7');
-    setTimeout(() => showSyncBadge('☁️ Senkronize', '#6b7280'), 4000);
-
-  } catch(err) {
-    // Fallback to manual modal if function not available
-    openScholarModal();
-  } finally {
-    btn.textContent = '🎓 Scholar';
-    btn.disabled = false;
-  }
-}
+document.getElementById('scholarModal').addEventListener('click',function(e){if(e.target===this)closeScholarModal();});
+document.getElementById('aiModal').addEventListener('click',function(e){if(e.target===this)closeAIModal();});
 </script>
 </body>
 </html>
