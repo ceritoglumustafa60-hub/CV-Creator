@@ -324,7 +324,40 @@
   }
   .cv-pub-item::before { content: '•'; position:absolute; left:0; color: var(--gold); font-weight:700; }
 
-  .tpl-menu-item {
+  .profile-menu-item {
+    display:block; width:100%; padding:10px 20px;
+    background:transparent; border:none; text-align:left;
+    font-family:'Source Sans 3',sans-serif; font-size:.88rem;
+    color:#333; cursor:pointer; transition:background .15s;
+  }
+  .profile-menu-item:hover { background:#f3f4f6; }
+
+  .profile-tab-btn {
+    padding:8px 16px; border:none; background:transparent;
+    border-bottom:2px solid transparent; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; font-size:.88rem;
+    font-weight:600; color:#888; transition:all .2s;
+  }
+  .profile-tab-btn.active { color:var(--navy); border-bottom-color:var(--gold); }
+
+  .profile-input {
+    width:100%; padding:10px 12px;
+    border:1.5px solid var(--border); border-radius:8px;
+    font-family:'Source Sans 3',sans-serif; font-size:.9rem;
+    color:#333; background:var(--cream); margin-bottom:12px;
+    transition:border .2s;
+  }
+  .profile-input:focus { outline:none; border-color:var(--gold); background:#fff; }
+
+  .profile-save-btn {
+    width:100%; padding:11px;
+    background:var(--gold); color:var(--navy);
+    border:none; border-radius:8px; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; font-size:.95rem;
+    font-weight:700; transition:all .2s; margin-top:4px;
+  }
+  .profile-save-btn:hover { background:var(--gold-light); }
+  .profile-save-btn:disabled { opacity:.6; cursor:not-allowed; }
     display:block; width:100%; padding:11px 18px;
     background:transparent; border:none; text-align:left;
     font-family:'Source Sans 3',sans-serif; font-size:.88rem;
@@ -404,7 +437,7 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <h1>Academi<span style="color:var(--gold-light)">CV</span></h1>
+  <h1>📄 CV Düzenleyici &nbsp;<span>Mustafa Ceritoğlu</span></h1>
   <div class="topbar-actions">
     <span id="saveBadge" style="font-size:.72rem;color:#aaa;display:none">💾 Kaydedildi</span>
     <label class="btn btn-outline" style="cursor:pointer" title="Güncellenmiş .docx CV yükle">
@@ -1064,38 +1097,264 @@ window.onload = async () => {
   // CV_ID = kullanıcının kendi user_id'si
   CV_ID = session.user.id;
 
-  // Topbar'a kullanıcı adı + çıkış butonu ekle
+  // Topbar'a profil dropdown ekle
   const user = session.user;
   const displayName = user.user_metadata?.full_name || user.email;
   const bar = document.querySelector('.topbar-actions');
   if (bar) {
-    const userInfo = document.createElement('span');
-    userInfo.style.cssText = 'font-size:.78rem;color:#8899bb;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
-    userInfo.textContent = '👤 ' + displayName;
-    bar.insertBefore(userInfo, bar.firstChild);
-
-    const logoutBtn = document.createElement('button');
-    logoutBtn.className = 'btn btn-outline';
-    logoutBtn.innerHTML = '🚪 Çıkış';
-    logoutBtn.onclick = async () => { await sb.auth.signOut(); window.location.href = 'landing.html'; };
-    bar.appendChild(logoutBtn);
+    const profileWrap = document.createElement('div');
+    profileWrap.style.cssText = 'position:relative';
+    profileWrap.innerHTML = `
+      <button id="profileBtn" onclick="toggleProfileMenu()" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);border-radius:8px;padding:7px 14px;cursor:pointer;color:#fff;font-family:inherit;font-size:.82rem;font-weight:600;transition:all .2s">
+        <span style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem">${displayName.charAt(0).toUpperCase()}</span>
+        <span id="topbar-username" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${displayName}</span>
+        <span style="font-size:.65rem;opacity:.7">▾</span>
+      </button>
+      <div id="profileMenu" style="display:none;position:absolute;top:48px;left:0;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.25);overflow:hidden;z-index:300;min-width:260px;border:1px solid #e5e7eb">
+        <div style="padding:16px 20px;background:#f7f4ef;border-bottom:1px solid #e5e7eb">
+          <div style="font-weight:700;color:var(--navy);font-size:.95rem">${displayName}</div>
+          <div style="font-size:.78rem;color:#888;margin-top:2px">${user.email}</div>
+        </div>
+        <div style="padding:6px 0">
+          <button onclick="openProfileModal('info')" class="profile-menu-item">👤 Profil Bilgileri</button>
+          <button onclick="openProfileModal('password')" class="profile-menu-item">🔒 Şifre Değiştir</button>
+          <button onclick="openProfileModal('publiccv')" class="profile-menu-item">🌐 Public CV Linki</button>
+          <button onclick="openProfileModal('stats')" class="profile-menu-item">📊 İstatistikler</button>
+          <div style="height:1px;background:#e5e7eb;margin:6px 0"></div>
+          <button onclick="openProfileModal('delete')" class="profile-menu-item" style="color:#dc2626">🗑️ Hesabı Sil</button>
+          <div style="height:1px;background:#e5e7eb;margin:6px 0"></div>
+          <button onclick="doLogout()" class="profile-menu-item">🚪 Çıkış Yap</button>
+        </div>
+      </div>
+    `;
+    bar.insertBefore(profileWrap, bar.firstChild);
   }
 
-  // Eski mustafa_ceritoglu verisini bu kullanıcıya taşı (ilk girişte)
-  await migrateOldData();
   await loadFromCloud();
 };
 
-async function migrateOldData() {
+function toggleProfileMenu() {
+  const menu = document.getElementById('profileMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#profileMenu') && !e.target.closest('#profileBtn')) {
+    const menu = document.getElementById('profileMenu');
+    if (menu) menu.style.display = 'none';
+  }
+  if (!e.target.closest('#templateMenu') && !e.target.closest('#templateBtn')) {
+    const menu = document.getElementById('templateMenu');
+    if (menu) menu.style.display = 'none';
+  }
+});
+
+async function doLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'landing.html';
+}
+
+function openProfileModal(tab) {
+  document.getElementById('profileMenu').style.display = 'none';
+  document.getElementById('profileModal').style.display = 'flex';
+  switchProfileTab(tab);
+}
+
+function closeProfileModal() {
+  document.getElementById('profileModal').style.display = 'none';
+}
+
+function switchProfileTab(tab) {
+  document.querySelectorAll('.profile-tab-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.profile-tab-btn').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('ptab-' + tab);
+  if (el) el.style.display = 'block';
+  const btn = document.querySelector(`[data-tab="${tab}"]`);
+  if (btn) btn.classList.add('active');
+  if (tab === 'stats') loadStats();
+  if (tab === 'publiccv') loadPublicLink();
+  if (tab === 'info') loadProfileInfo();
+}
+
+async function loadProfileInfo() {
+  const { data: { user } } = await sb.auth.getUser();
+  document.getElementById('profile-name').value = user.user_metadata?.full_name || '';
+  document.getElementById('profile-uni').value = user.user_metadata?.university || '';
+  document.getElementById('profile-unvan').value = user.user_metadata?.title || '';
+  document.getElementById('profile-backup-email').value = user.user_metadata?.backup_email || '';
+}
+
+async function saveProfileInfo() {
+  const fullName = document.getElementById('profile-name').value.trim();
+  const uni = document.getElementById('profile-uni').value.trim();
+  const unvan = document.getElementById('profile-unvan').value.trim();
+  const backupEmail = document.getElementById('profile-backup-email').value.trim();
+  const btn = document.getElementById('save-profile-btn');
+  btn.textContent = '⏳ Kaydediliyor...'; btn.disabled = true;
   try {
-    const { data: existing } = await sb.from('cv_data').select('id').eq('id', CV_ID).single();
-    if (existing) return;
-    const { data: oldData } = await sb.from('cv_data').select('data').eq('id', 'mustafa_ceritoglu').single();
-    if (!oldData) return;
-    await sb.from('cv_data').upsert({ id: CV_ID, data: oldData.data, updated_at: new Date().toISOString() });
-  } catch(e) { /* sessizce geç */ }
+    await sb.auth.updateUser({ data: { full_name: fullName, university: uni, title: unvan, backup_email: backupEmail } });
+    const usernameEl = document.getElementById('topbar-username');
+    if (usernameEl && fullName) usernameEl.textContent = fullName;
+    btn.textContent = '✅ Kaydedildi!';
+    setTimeout(() => { btn.textContent = 'Kaydet'; btn.disabled = false; }, 2000);
+  } catch(e) { btn.textContent = '❌ Hata'; btn.disabled = false; }
+}
+
+async function changePassword() {
+  const newPass = document.getElementById('new-password').value;
+  const confirm = document.getElementById('confirm-password').value;
+  const result = document.getElementById('password-result');
+  if (newPass.length < 6) { result.style.color='#dc2626'; result.textContent='❌ Şifre en az 6 karakter olmalı.'; return; }
+  if (newPass !== confirm) { result.style.color='#dc2626'; result.textContent='❌ Şifreler eşleşmiyor.'; return; }
+  const btn = document.getElementById('change-pass-btn');
+  btn.disabled = true; btn.textContent = '⏳ Değiştiriliyor...';
+  const { error } = await sb.auth.updateUser({ password: newPass });
+  if (error) { result.style.color='#dc2626'; result.textContent='❌ '+error.message; }
+  else { result.style.color='#059669'; result.textContent='✅ Şifre başarıyla değiştirildi!'; }
+  btn.disabled = false; btn.textContent = 'Şifreyi Değiştir';
+}
+
+function loadPublicLink() {
+  const link = `${window.location.origin}/public.html?id=${CV_ID}`;
+  document.getElementById('public-link-val').value = link;
+}
+
+function copyPublicLink() {
+  navigator.clipboard.writeText(document.getElementById('public-link-val').value);
+  const btn = document.getElementById('copy-link-btn');
+  btn.textContent = '✅ Kopyalandı!';
+  setTimeout(() => btn.textContent = '📋 Kopyala', 2000);
+}
+
+function loadStats() {
+  const sciCount = pubs.filter(p => p.cat === 'SCI / SCI-Expanded Makaleler').length;
+  const otherCount = pubs.filter(p => p.cat === 'Uluslararası Diğer İndeksli Makaleler').length;
+  const bildiriCount = pubs.filter(p => p.cat === 'Uluslararası Bildiriler').length;
+  const kitapCount = pubs.filter(p => p.cat === 'Kitap / Kitap Bölümü').length;
+  const projeCount = pubs.filter(p => p.cat === 'Projeler').length;
+  const tezCount = pubs.filter(p => p.cat === 'Tezler').length;
+  const citations = document.getElementById('citCount')?.textContent || '—';
+  const hindex = document.getElementById('hIndex')?.textContent || '—';
+  document.getElementById('stats-content').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="background:#f7f4ef;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:1.6rem;font-weight:700;color:var(--navy)">${citations}</div>
+        <div style="font-size:.78rem;color:#888;margin-top:2px">Toplam Atıf</div>
+      </div>
+      <div style="background:#f7f4ef;border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:1.6rem;font-weight:700;color:var(--navy)">${hindex}</div>
+        <div style="font-size:.78rem;color:#888;margin-top:2px">h-index</div>
+      </div>
+    </div>
+    <div style="font-weight:700;color:var(--navy);margin-bottom:10px">Yayın Dağılımı</div>
+    ${[['SCI / SCI-Expanded', sciCount],['Diğer İndeksli', otherCount],['Bildiriler', bildiriCount],['Kitap / Bölüm', kitapCount],['Projeler', projeCount],['Tezler', tezCount]].map(([l,c]) => `
+      <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0ece3">
+        <span style="font-size:.88rem;color:#444">${l}</span>
+        <span style="font-weight:700;color:var(--navy);background:#f0ede6;padding:2px 10px;border-radius:12px;font-size:.85rem">${c}</span>
+      </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;padding:8px 0;margin-top:4px">
+      <span style="font-weight:700;color:var(--navy)">Toplam Yayın</span>
+      <span style="font-weight:700;color:var(--gold);background:#fdf9f0;padding:3px 12px;border-radius:12px">${pubs.length}</span>
+    </div>`;
+}
+
+async function deleteAccount() {
+  const btn = document.getElementById('delete-account-btn');
+  btn.disabled = true; btn.textContent = '⏳ Gönderiliyor...';
+  const { data: { user } } = await sb.auth.getUser();
+  const { error } = await sb.auth.resetPasswordForEmail(user.email, {
+    redirectTo: window.location.origin + '/landing.html'
+  });
+  const result = document.getElementById('delete-result');
+  if (error) { result.style.color='#dc2626'; result.textContent='❌ '+error.message; }
+  else { result.style.color='#059669'; result.textContent=`✅ ${user.email} adresine onay maili gönderildi.`; }
+  btn.disabled = false; btn.textContent = '🗑️ Hesabı Sil';
 }
 </script>
+
+<!-- Profil Modal -->
+<div id="profileModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;width:90%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden">
+    <!-- Modal Header -->
+    <div style="background:var(--navy);padding:20px 24px;display:flex;justify-content:space-between;align-items:center">
+      <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem">Profil Ayarları</h3>
+      <button onclick="closeProfileModal()" style="background:transparent;border:none;color:#8899bb;font-size:1.4rem;cursor:pointer;line-height:1">×</button>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;border-bottom:1px solid #e5e7eb;padding:0 8px;background:#fafafa">
+      <button class="profile-tab-btn active" data-tab="info" onclick="switchProfileTab('info')">👤 Profil</button>
+      <button class="profile-tab-btn" data-tab="password" onclick="switchProfileTab('password')">🔒 Şifre</button>
+      <button class="profile-tab-btn" data-tab="publiccv" onclick="switchProfileTab('publiccv')">🌐 Public CV</button>
+      <button class="profile-tab-btn" data-tab="stats" onclick="switchProfileTab('stats')">📊 İstatistik</button>
+      <button class="profile-tab-btn" data-tab="delete" onclick="switchProfileTab('delete')" style="color:#dc2626">🗑️ Sil</button>
+    </div>
+    <!-- Tab Contents -->
+    <div style="padding:24px;max-height:420px;overflow-y:auto">
+
+      <!-- Profil Bilgileri -->
+      <div id="ptab-info" class="profile-tab-content">
+        <div style="font-size:.8rem;color:#888;margin-bottom:16px">Profil bilgilerinizi güncelleyin.</div>
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Ad Soyad</label>
+        <input id="profile-name" class="profile-input" placeholder="Dr. Ad Soyad" style="margin-top:4px">
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Üniversite / Kurum</label>
+        <input id="profile-uni" class="profile-input" placeholder="Üniversite adı" style="margin-top:4px">
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Unvan</label>
+        <input id="profile-unvan" class="profile-input" placeholder="Dr. Öğretim Üyesi" style="margin-top:4px">
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Yedek E-posta</label>
+        <input id="profile-backup-email" class="profile-input" type="email" placeholder="yedek@email.com" style="margin-top:4px">
+        <button id="save-profile-btn" class="profile-save-btn" onclick="saveProfileInfo()">Kaydet</button>
+      </div>
+
+      <!-- Şifre Değiştir -->
+      <div id="ptab-password" class="profile-tab-content" style="display:none">
+        <div style="font-size:.8rem;color:#888;margin-bottom:16px">Yeni şifrenizi belirleyin.</div>
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Yeni Şifre</label>
+        <input id="new-password" class="profile-input" type="password" placeholder="En az 6 karakter" style="margin-top:4px">
+        <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Şifre Tekrar</label>
+        <input id="confirm-password" class="profile-input" type="password" placeholder="Şifreyi tekrar girin" style="margin-top:4px">
+        <button id="change-pass-btn" class="profile-save-btn" onclick="changePassword()">Şifreyi Değiştir</button>
+        <div id="password-result" style="margin-top:10px;font-size:.85rem"></div>
+      </div>
+
+      <!-- Public CV -->
+      <div id="ptab-publiccv" class="profile-tab-content" style="display:none">
+        <div style="font-size:.8rem;color:#888;margin-bottom:16px">Bu linki paylaşarak CV'nize herkesin erişmesini sağlayabilirsiniz.</div>
+        <div style="display:flex;gap:8px">
+          <input id="public-link-val" class="profile-input" readonly style="margin-bottom:0;flex:1;background:#f3f4f6;font-size:.8rem">
+          <button id="copy-link-btn" onclick="copyPublicLink()" style="padding:10px 16px;background:var(--navy);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;white-space:nowrap">📋 Kopyala</button>
+        </div>
+        <div style="margin-top:14px;padding:12px;background:#fdf9f0;border-radius:8px;border-left:3px solid var(--gold)">
+          <div style="font-size:.82rem;color:#666;line-height:1.6">
+            ⚠️ Public CV özelliği yakında aktif olacak. Şu an link hazır ancak sayfa henüz yayında değil.
+          </div>
+        </div>
+      </div>
+
+      <!-- İstatistikler -->
+      <div id="ptab-stats" class="profile-tab-content" style="display:none">
+        <div id="stats-content">
+          <div style="text-align:center;color:#888;padding:20px">Yükleniyor...</div>
+        </div>
+      </div>
+
+      <!-- Hesabı Sil -->
+      <div id="ptab-delete" class="profile-tab-content" style="display:none">
+        <div style="background:#fee2e2;border-radius:10px;padding:16px;margin-bottom:20px">
+          <div style="font-weight:700;color:#dc2626;margin-bottom:6px">⚠️ Dikkat!</div>
+          <div style="font-size:.85rem;color:#b91c1c;line-height:1.6">Hesabınızı silmek geri alınamaz. Tüm CV verileriniz kalıcı olarak silinecektir.</div>
+        </div>
+        <div style="font-size:.88rem;color:#555;line-height:1.7;margin-bottom:20px">
+          Hesabınızı silmek için <strong>onay butonu</strong>na basın. E-posta adresinize bir onay maili gönderilecektir.
+        </div>
+        <button id="delete-account-btn" onclick="deleteAccount()" style="width:100%;padding:12px;background:#dc2626;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:700;transition:all .2s">
+          🗑️ Hesabı Sil — Onay Maili Gönder
+        </button>
+        <div id="delete-result" style="margin-top:12px;font-size:.85rem"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- AI Modal -->
 <div id="aiModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
