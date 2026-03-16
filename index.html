@@ -1077,7 +1077,7 @@ window.onload = async () => {
     const logoutBtn = document.createElement('button');
     logoutBtn.className = 'btn btn-outline';
     logoutBtn.innerHTML = '🚪 Çıkış';
-    logoutBtn.onclick = async () => { await sb.auth.signOut(); window.location.href = 'auth.html'; };
+    logoutBtn.onclick = async () => { await sb.auth.signOut(); window.location.href = 'landing.html'; };
     bar.appendChild(logoutBtn);
   }
 
