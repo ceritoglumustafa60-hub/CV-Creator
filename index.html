@@ -471,7 +471,7 @@
       <button class="btn btn-gold" onclick="togglePDFMenu()" id="pdfMenuBtn">⬇ PDF ▾</button>
       <div id="pdfMenu" style="display:none;position:absolute;top:44px;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.25);overflow:hidden;z-index:200;min-width:160px">
         <button onclick="downloadPDF();document.getElementById('pdfMenu').style.display='none'" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">⬇ İndir</button>
-        <button onclick="previewPDF()" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">👁 Önizle (Yeni Sekme)</button>
+        <button onclick="previewPDF()" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">👁 Önizle</button>
       </div>
     </div>
   </div>
@@ -597,8 +597,8 @@
           <div id="cv-exp-list"></div>
           <div class="cv-section-title">ATİF / CITATIONS</div>
           <div id="citationBox" style="background:#f0ede6;border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:12px">
-            <div style="font-size:9pt;color:#333">Toplam Atıf: <strong style="color:var(--navy)" id="citCount">475</strong> &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)" id="hIndex">13</strong></div>
-            <div style="font-size:8pt;color:#777;margin-top:2px" id="citDate">Google Akademik · Şubat 2026</div>
+            <div style="font-size:9pt;color:#333">Toplam Atıf: <strong style="color:var(--navy)" id="citCount">—</strong> &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)" id="hIndex">—</strong></div>
+            <div style="font-size:8pt;color:#777;margin-top:2px" id="citDate">Google Akademik</div>
           </div>
           <div class="cv-section-title" id="lbl-pub">YAYINLAR / PUBLICATIONS</div>
           <div id="cv-pub-list"></div>
@@ -1127,6 +1127,11 @@ function applyData(d) {
   if(d.skills&&d.skills.length) skills=d.skills;
   if(d.pubs&&d.pubs.length) pubs=d.pubs;
   if(d.template) { currentTemplate=d.template; setTemplate(d.template); }
+  if(d.citations) {
+    document.getElementById('citCount').textContent = d.citations;
+    document.getElementById('hIndex').textContent = d.hindex || '—';
+    document.getElementById('citDate').textContent = 'Google Akademik · Son güncelleme: ' + (d.citDate || '');
+  }
   if(d.photoData){
     photoData=d.photoData;
     document.getElementById('photoPreviewEditor').src=photoData;
@@ -1531,8 +1536,14 @@ function parseScholarHTML() {
   if(!citations&&!hindex){ result.style.display='block'; result.style.color='#dc2626'; result.innerHTML='❌ Atıf bilgisi bulunamadı.<br><small>Sayfayı doğru kopyaladığınızdan emin olun.</small>'; return; }
   if(citations) document.getElementById('citCount').textContent=citations;
   if(hindex) document.getElementById('hIndex').textContent=hindex;
-  const today=new Date().toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
-  document.getElementById('citDate').textContent='Google Akademik · '+today;
+  const today=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('citDate').textContent='Google Akademik · Son güncelleme: '+today;
+  // Atıf verisini kaydet
+  const d = getFormData();
+  d.citations = citations || '—';
+  d.hindex = hindex || '—';
+  d.citDate = today;
+  await sb.from('cv_data').upsert({ id: CV_ID, data: d, updated_at: new Date().toISOString() });
   triggerCloudSave();
   result.style.display='block'; result.style.color='#059669';
   result.innerHTML=`✅ Güncellendi! Atıf: <strong>${citations||'?'}</strong> · h-index: <strong>${hindex||'?'}</strong>`;
