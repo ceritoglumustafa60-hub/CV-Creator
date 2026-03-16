@@ -1,5 +1,13 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/landing.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
   ]
 }
