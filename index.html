@@ -1045,20 +1045,9 @@ window.onload = async () => {
     bar.appendChild(logoutBtn);
   }
 
-  // Eski mustafa_ceritoglu verisini bu kullanıcıya taşı (ilk girişte)
-  await migrateOldData();
   await loadFromCloud();
 };
 
-async function migrateOldData() {
-  try {
-    const { data: existing } = await sb.from('cv_data').select('id').eq('id', CV_ID).single();
-    if (existing) return;
-    const { data: oldData } = await sb.from('cv_data').select('data').eq('id', 'mustafa_ceritoglu').single();
-    if (!oldData) return;
-    await sb.from('cv_data').upsert({ id: CV_ID, data: oldData.data, updated_at: new Date().toISOString() });
-  } catch(e) { /* sessizce geç */ }
-}
 </script>
 
 <!-- AI Modal -->
