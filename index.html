@@ -73,10 +73,12 @@
 
   .workspace {
     display: grid;
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 1fr;
     gap: 0;
     min-height: calc(100vh - 54px);
   }
+
+  .preview-panel { display: none !important; }
 
   .editor-panel {
     background: var(--white);
@@ -458,8 +460,20 @@
       <button class="active" onclick="setLang('tr')">TR</button>
       <button onclick="setLang('en')">EN</button>
     </div>
-    <button class="btn btn-outline" onclick="downloadWord()">⬇ Word</button>
-    <button class="btn btn-gold" onclick="downloadPDF()">⬇ PDF</button>
+    <div style="position:relative">
+      <button class="btn btn-outline" onclick="toggleWordMenu()" id="wordMenuBtn">⬇ Word ▾</button>
+      <div id="wordMenu" style="display:none;position:absolute;top:44px;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.25);overflow:hidden;z-index:200;min-width:160px">
+        <button onclick="downloadWord();document.getElementById('wordMenu').style.display='none'" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">⬇ İndir</button>
+        <button onclick="previewWord();document.getElementById('wordMenu').style.display='none'" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">👁 Önizle</button>
+      </div>
+    </div>
+    <div style="position:relative">
+      <button class="btn btn-gold" onclick="togglePDFMenu()" id="pdfMenuBtn">⬇ PDF ▾</button>
+      <div id="pdfMenu" style="display:none;position:absolute;top:44px;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.25);overflow:hidden;z-index:200;min-width:160px">
+        <button onclick="downloadPDF();document.getElementById('pdfMenu').style.display='none'" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">⬇ İndir</button>
+        <button onclick="previewPDF()" style="display:block;width:100%;padding:11px 18px;background:transparent;border:none;text-align:left;font-family:inherit;font-size:.88rem;color:#333;cursor:pointer" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='transparent'">👁 Önizle (Yeni Sekme)</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -888,7 +902,71 @@ function similarity(a, b) {
   return inter / union;
 }
 
-// ─── PDF ──────────────────────────────────────────────
+// ─── WORD/PDF MENU TOGGLES ────────────────────────────
+function toggleWordMenu() {
+  const m = document.getElementById('wordMenu');
+  document.getElementById('pdfMenu').style.display = 'none';
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+}
+function togglePDFMenu() {
+  const m = document.getElementById('pdfMenu');
+  document.getElementById('wordMenu').style.display = 'none';
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+}
+
+// PDF önizleme — yeni sekmede aç
+async function previewPDF() {
+  document.getElementById('pdfMenu').style.display = 'none';
+  const el = document.getElementById('cvDocument');
+  // Geçici olarak görünür yap
+  const panel = document.querySelector('.preview-panel');
+  const wasHidden = panel.style.display === 'none' || getComputedStyle(panel).display === 'none';
+  if (wasHidden) { panel.style.cssText = 'display:flex!important'; }
+  
+  try {
+    const blob = await html2pdf().set({
+      margin: [8,8,8,8],
+      image: { type:'jpeg', quality:0.95 },
+      html2canvas: { scale:2, useCORS:true, logging:false, scrollY:0 },
+      jsPDF: { unit:'mm', format:'a4', orientation:'portrait' },
+    }).from(el).outputPdf('blob');
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  } catch(err) { alert('PDF önizleme hatası: ' + err.message); }
+  
+  if (wasHidden) { panel.style.cssText = ''; }
+}
+
+// Word önizleme — yeni sekmede HTML olarak aç
+function previewWord() {
+  document.getElementById('wordMenu').style.display = 'none';
+  const v = id => document.getElementById(id)?.value || '';
+  const name=v('name'), title=v('title'), phone=v('phone'), email=v('email'), city=v('city'), birth=v('birthdate'), summary=v('summary');
+  let html = `<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+    body{font-family:Calibri,sans-serif;font-size:11pt;margin:2cm;max-width:800px}
+    h1{font-size:20pt;color:#1a2744;margin-bottom:2pt}
+    h2{font-size:13pt;color:#b8860b;border-bottom:1pt solid #b8860b;padding-bottom:3pt;margin-top:14pt}
+    .contact{color:#444;font-size:10pt;margin:4pt 0 14pt}
+    .summary-box{background:#f7f4ef;border-left:3pt solid #b8860b;padding:8pt;margin-bottom:12pt}
+  </style></head><body>
+  <h1>${name}</h1><p style='color:#888'>${title}</p>
+  <p class='contact'>📍 ${city} &nbsp;|&nbsp; 📞 ${phone} &nbsp;|&nbsp; ✉ ${email}</p>
+  <div class='summary-box'>${summary}</div>`;
+  
+  if (edus.length) {
+    html += `<h2>EĞİTİM</h2>`;
+    edus.forEach(e => html += `<p><strong>${e.degree}</strong> — ${e.school} (${e.year})</p>`);
+  }
+  if (exps.length) {
+    html += `<h2>DENEYİM</h2>`;
+    exps.forEach(e => html += `<p><strong>${e.title}</strong> — ${e.company} (${e.date})<br><span style='color:#555'>${e.desc}</span></p>`);
+  }
+  html += `</body></html>`;
+  
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
 function downloadPDF() {
   const el = document.getElementById('cvDocument');
   const name = document.getElementById('name')?.value || 'cv';
@@ -1147,6 +1225,14 @@ document.addEventListener('click', (e) => {
     const menu = document.getElementById('templateMenu');
     if (menu) menu.style.display = 'none';
   }
+  if (!e.target.closest('#wordMenu') && !e.target.closest('#wordMenuBtn')) {
+    const menu = document.getElementById('wordMenu');
+    if (menu) menu.style.display = 'none';
+  }
+  if (!e.target.closest('#pdfMenu') && !e.target.closest('#pdfMenuBtn')) {
+    const menu = document.getElementById('pdfMenu');
+    if (menu) menu.style.display = 'none';
+  }
 });
 
 async function doLogout() {
@@ -1195,8 +1281,17 @@ async function saveProfileInfo() {
     await sb.auth.updateUser({ data: { full_name: fullName, university: uni, title: unvan, backup_email: backupEmail } });
     const usernameEl = document.getElementById('topbar-username');
     if (usernameEl && fullName) usernameEl.textContent = fullName;
-    btn.textContent = '✅ Kaydedildi!';
-    setTimeout(() => { btn.textContent = 'Kaydet'; btn.disabled = false; }, 2000);
+    
+    // Yedek e-posta varsa onay maili gönder
+    if (backupEmail) {
+      await sb.auth.resetPasswordForEmail(backupEmail, {
+        redirectTo: window.location.origin + '/index.html'
+      });
+      btn.textContent = '✅ Kaydedildi! Yedek e-postaya onay maili gönderildi.';
+    } else {
+      btn.textContent = '✅ Kaydedildi!';
+    }
+    setTimeout(() => { btn.textContent = 'Kaydet'; btn.disabled = false; }, 3000);
   } catch(e) { btn.textContent = '❌ Hata'; btn.disabled = false; }
 }
 
