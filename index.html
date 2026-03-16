@@ -947,7 +947,7 @@ function getFormData() {
 }
 
 function saveToLocalStorage() {
-  try { localStorage.setItem('cv_data', JSON.stringify(getFormData())); } catch(e) {}
+  try { localStorage.setItem('cv_data_' + CV_ID, JSON.stringify(d)); } catch(e) {}
 }
 
 function triggerCloudSave() {
@@ -1008,7 +1008,7 @@ async function loadFromCloud() {
     setTimeout(()=>showSyncBadge('☁️ Senkronize','#6b7280'), 4000);
   } catch(e) {
     try {
-      const raw = localStorage.getItem('cv_data');
+      const raw = localStorage.getItem('cv_data_' + CV_ID);
       if (raw) { applyData(JSON.parse(raw)); renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update(); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); }
       else showSyncBadge('⚠️ Bağlantı hatası','#fca5a5');
     } catch(e2) { showSyncBadge('⚠️ Bağlantı hatası','#fca5a5'); }
