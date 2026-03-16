@@ -973,6 +973,11 @@ function downloadPDF() {
   const btn = event.target;
   btn.textContent = '⏳ Hazırlanıyor...';
   btn.disabled = true;
+
+  // Önizleme panelini geçici göster
+  const panel = document.querySelector('.preview-panel');
+  panel.style.cssText = 'display:flex!important;position:fixed;top:-9999px;left:-9999px;width:210mm';
+
   html2pdf().set({
     margin: [8,8,8,8],
     filename: name.replace(/\s+/g,'_') + '_CV.pdf',
@@ -980,8 +985,14 @@ function downloadPDF() {
     html2canvas: { scale:2, useCORS:true, logging:false, scrollY:0 },
     jsPDF: { unit:'mm', format:'a4', orientation:'portrait' },
     pagebreak: { mode: ['avoid-all','css','legacy'] }
-  }).from(el).save().then(()=>{ btn.textContent='⬇ PDF'; btn.disabled=false; })
-  .catch(err=>{ alert('PDF hatası: '+err.message); btn.textContent='⬇ PDF'; btn.disabled=false; });
+  }).from(el).save().then(()=>{
+    panel.style.cssText = '';
+    btn.textContent='⬇ PDF ▾'; btn.disabled=false;
+  }).catch(err=>{
+    panel.style.cssText = '';
+    alert('PDF hatası: '+err.message);
+    btn.textContent='⬇ PDF ▾'; btn.disabled=false;
+  });
 }
 
 // ─── WORD ─────────────────────────────────────────────
@@ -1530,7 +1541,6 @@ function parseScholarHTML() {
   const result = document.getElementById('scholarResult');
   if (!html||html.length<100) { result.style.display='block'; result.style.color='#dc2626'; result.textContent='❌ Lütfen Scholar sayfa kaynağını yapıştırın.'; return; }
   let citations=null, hindex=null;
-  const citPatterns=[/gsc_rsb_std[^>]*>(\d+)/g];
   const nums=[...html.matchAll(/gsc_rsb_std[^>]*>(\d+)/g)].map(m=>parseInt(m[1]));
   if(nums.length>=2){ citations=nums[0]; hindex=nums[2]; }
   if(!citations&&!hindex){ result.style.display='block'; result.style.color='#dc2626'; result.innerHTML='❌ Atıf bilgisi bulunamadı.<br><small>Sayfayı doğru kopyaladığınızdan emin olun.</small>'; return; }
@@ -1538,16 +1548,14 @@ function parseScholarHTML() {
   if(hindex) document.getElementById('hIndex').textContent=hindex;
   const today=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('citDate').textContent='Google Akademik · Son güncelleme: '+today;
-  // Atıf verisini kaydet
-  const d = getFormData();
-  d.citations = citations || '—';
-  d.hindex = hindex || '—';
-  d.citDate = today;
-  await sb.from('cv_data').upsert({ id: CV_ID, data: d, updated_at: new Date().toISOString() });
   triggerCloudSave();
   result.style.display='block'; result.style.color='#059669';
   result.innerHTML=`✅ Güncellendi! Atıf: <strong>${citations||'?'}</strong> · h-index: <strong>${hindex||'?'}</strong>`;
   setTimeout(closeScholarModal,2000);
 }
 
-document.getElementById
+document.getElementById('scholarModal').addEventListener('click',function(e){if(e.target===this)closeScholarModal();});
+document.getElementById('aiModal').addEventListener('click',function(e){if(e.target===this)closeAIModal();});
+</script>
+</body>
+</html>
