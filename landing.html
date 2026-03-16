@@ -361,7 +361,7 @@ footer {
 }
 
 .reveal {
-  opacity: 1; transform: translateY(0);
+  opacity: 0; transform: translateY(32px);
   transition: opacity .7s ease, transform .7s ease;
 }
 .reveal.visible { opacity: 1; transform: none; }
@@ -543,55 +543,51 @@ footer {
 
     <!-- Modern -->
     <div class="template-card reveal" onclick="window.location.href='auth.html'">
-      <div class="template-preview">
-        <div class="template-preview-inner">
-          <div class="tpl-modern">
-            <div class="tpl-modern-header">
-              <div class="tpl-modern-name">Dr. Ad Soyad</div>
-              <div class="tpl-modern-title">Dr. Öğretim Üyesi · Fen Bilimleri</div>
-              <div class="tpl-modern-bar"></div>
-              <div style="display:flex;gap:12px;font-size:6pt;color:#8899bb">
-                <span>📍 Şehir</span><span>✉ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553038343c3915203b3c7b3031207b2127">[email&#160;protected]</a></span>
-              </div>
+      <div class="template-preview" style="background:#fff;padding:0;overflow:hidden">
+        <div style="background:#1a2744;padding:14px 16px 12px">
+          <div style="font-family:'Playfair Display',serif;font-size:14pt;color:#fff;font-weight:700">Dr. Ad Soyad</div>
+          <div style="color:#d4a017;font-size:7pt;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Dr. Öğretim Üyesi · Fen Bilimleri</div>
+          <div style="height:2px;background:linear-gradient(90deg,#b8860b,#d4a017);margin-bottom:8px"></div>
+          <div style="display:flex;gap:12px;font-size:6.5pt;color:#8899bb">
+            <span>📍 Şehir</span><span>✉ ornek@uni.edu.tr</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr">
+          <div style="background:#f7f4ef;padding:10px 8px">
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Eğitim</div>
+            <div style="margin-bottom:5px">
+              <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Doktora</div>
+              <div style="font-size:6pt;color:#555">Üniversite</div>
+              <div style="font-size:5.5pt;color:#b8860b;font-weight:600">2024</div>
             </div>
-            <div class="tpl-modern-body">
-              <div class="tpl-modern-sidebar">
-                <div class="tpl-section">Eğitim</div>
-                <div style="margin-bottom:5px">
-                  <div style="font-size:6pt;font-weight:700;color:#1a2744">Doktora</div>
-                  <div style="font-size:5.5pt;color:#555">Üniversite Adı</div>
-                  <div style="font-size:5pt;color:#b8860b;font-weight:600">2024</div>
-                </div>
-                <div style="margin-bottom:5px">
-                  <div style="font-size:6pt;font-weight:700;color:#1a2744">Y. Lisans</div>
-                  <div style="font-size:5.5pt;color:#555">Üniversite Adı</div>
-                  <div style="font-size:5pt;color:#b8860b;font-weight:600">2019</div>
-                </div>
-                <div class="tpl-section">Beceriler</div>
-                <div style="margin-bottom:3px">
-                  <div style="font-size:5.5pt;color:#333;margin-bottom:1px">Araştırma</div>
-                  <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-                </div>
-                <div>
-                  <div style="font-size:5.5pt;color:#333;margin-bottom:1px">İngilizce</div>
-                  <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
-                </div>
-              </div>
-              <div style="padding:8px 12px">
-                <div class="tpl-section">Hakkımda</div>
-                <div class="tpl-line"></div><div class="tpl-line short"></div>
-                <div class="tpl-section">Deneyim</div>
-                <div style="margin-bottom:5px">
-                  <div style="display:flex;justify-content:space-between">
-                    <div style="font-size:6pt;font-weight:700;color:#1a2744">Dr. Öğr. Üyesi</div>
-                    <div style="font-size:5.5pt;color:#b8860b">2024–</div>
-                  </div>
-                  <div style="font-size:5.5pt;color:#555">Üniversite Ziraat Fakültesi</div>
-                </div>
-                <div class="tpl-section">Yayınlar</div>
-                <div class="tpl-line"></div><div class="tpl-line short"></div><div class="tpl-line"></div>
-              </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Y. Lisans</div>
+              <div style="font-size:6pt;color:#555">Üniversite</div>
+              <div style="font-size:5.5pt;color:#b8860b;font-weight:600">2019</div>
             </div>
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Beceriler</div>
+            <div style="margin-bottom:4px">
+              <div style="font-size:6pt;color:#333;margin-bottom:2px">Araştırma</div>
+              <div style="height:3px;background:#ddd;border-radius:2px"><div style="width:85%;height:100%;background:linear-gradient(90deg,#1a2744,#b8860b);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="font-size:6pt;color:#333;margin-bottom:2px">İngilizce</div>
+              <div style="height:3px;background:#ddd;border-radius:2px"><div style="width:70%;height:100%;background:linear-gradient(90deg,#1a2744,#b8860b);border-radius:2px"></div></div>
+            </div>
+          </div>
+          <div style="padding:10px 12px">
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Deneyim</div>
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between">
+                <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Dr. Öğr. Üyesi</div>
+                <div style="font-size:6pt;color:#b8860b">2024–</div>
+              </div>
+              <div style="font-size:6pt;color:#555">Üniversite Fakültesi</div>
+            </div>
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Yayınlar</div>
+            <div style="height:5px;background:#eee;border-radius:2px;margin-bottom:3px"></div>
+            <div style="height:5px;background:#eee;border-radius:2px;width:80%;margin-bottom:3px"></div>
+            <div style="height:5px;background:#eee;border-radius:2px;width:60%"></div>
           </div>
         </div>
       </div>
@@ -607,7 +603,7 @@ footer {
       <div class="template-preview" style="background:#fff;padding:16px;overflow:hidden">
         <div style="font-family:'Playfair Display',serif;font-size:14pt;color:#2c3e50;text-align:center;font-weight:700">Dr. Ad Soyad</div>
         <div style="font-size:7pt;color:#666;letter-spacing:1px;text-align:center;margin-top:3px">DR. ÖĞRETİM ÜYESİ · FEN BİLİMLERİ</div>
-        <div style="font-size:6pt;color:#999;text-align:center;margin-top:4px">Şehir · ornek@uni.edu.tr</div>
+        <div style="font-size:6pt;color:#999;text-align:center;margin-top:4px">Şehir · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a6bba7aca289bca7a0e7acadbce7bdbb">[email&#160;protected]</a></div>
         <div style="height:2px;background:#2c3e50;margin:10px 0"></div>
         <div style="font-size:7pt;font-weight:700;color:#2c3e50;text-transform:uppercase;border-left:3px solid #2c3e50;padding-left:7px;margin-bottom:6px">Eğitim</div>
         <div style="display:flex;gap:8px;margin-bottom:4px">
@@ -641,7 +637,7 @@ footer {
         <div style="font-family:'Playfair Display',serif;font-size:16pt;color:#111;letter-spacing:-0.5px;margin-bottom:2px">Dr. Ad Soyad</div>
         <div style="font-size:7pt;color:#aaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Dr. Öğretim Üyesi · Fen Bilimleri</div>
         <div style="display:flex;gap:14px;font-size:6.5pt;color:#bbb;padding-bottom:10px;border-bottom:1px solid #eee;margin-bottom:12px">
-          <span>Şehir</span><span>ornek@uni.edu.tr</span>
+          <span>Şehir</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543b263a313f14213a3d7a3130217a2026">[email&#160;protected]</a></span>
         </div>
         <div style="font-size:6.5pt;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">Eğitim</div>
         <div style="display:flex;justify-content:space-between;margin-bottom:5px">
@@ -676,10 +672,4 @@ footer {
 <section class="cta-section">
   <div class="cta-box reveal">
     <div class="section-label">// Hemen başlayın</div>
-    <div class="section-title">Akademik CV'nizi bugün oluşturun</div>
-    <p>Ücretsiz hesap oluşturun, dakikalar içinde profesyonel CV'nizi hazırlayın.</p>
-    <a href="auth.html" class="btn-primary" style="display:inline-flex;margin:0 auto">
-      Ücretsiz Kayıt Ol →
-    </a>
-  </div>
-</secti
+    <div class="section-title">Akademik CV'nizi bugün oluşturun</
