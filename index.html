@@ -324,7 +324,69 @@
   }
   .cv-pub-item::before { content: '•'; position:absolute; left:0; color: var(--gold); font-weight:700; }
 
-  @media (max-width:900px) {
+  .tpl-menu-item {
+    display:block; width:100%; padding:11px 18px;
+    background:transparent; border:none; text-align:left;
+    font-family:'Source Sans 3',sans-serif; font-size:.88rem;
+    color:#333; cursor:pointer; transition:background .15s;
+  }
+  .tpl-menu-item:hover { background:#f3f4f6; }
+  .tpl-menu-item.active { background:#faf8f3; color:var(--navy); font-weight:700; }
+
+  /* Klasik şablon stilleri */
+  #cvDocument.klasik .cv-header {
+    background: #fff;
+    color: #2c3e50;
+    text-align: center;
+    padding: 28px 32px 20px;
+    border-bottom: 2px solid #2c3e50;
+  }
+  #cvDocument.klasik .cv-name { color: #2c3e50; font-size: 20pt; }
+  #cvDocument.klasik .cv-title { color: #555; letter-spacing: 1px; }
+  #cvDocument.klasik .cv-contact-item { color: #666; }
+  #cvDocument.klasik .cv-contact-item span { color: #444; }
+  #cvDocument.klasik .cv-gold-bar { background: #2c3e50; height: 1px; }
+  #cvDocument.klasik .cv-body { display: block; }
+  #cvDocument.klasik .cv-sidebar {
+    display: none;
+  }
+  #cvDocument.klasik .cv-main { padding: 22px 32px; }
+  #cvDocument.klasik .cv-section-title {
+    border-left: 3px solid #2c3e50;
+    border-bottom: none;
+    padding-left: 10px;
+    padding-bottom: 0;
+    color: #2c3e50;
+  }
+  #cvDocument.klasik .cv-summary { border-left-color: #2c3e50; background: #f8f9fa; }
+  #cvDocument.klasik .cv-pub-item::before { color: #2c3e50; }
+
+  /* Minimal şablon stilleri */
+  #cvDocument.minimal .cv-header {
+    background: #fff;
+    color: #111;
+    padding: 32px 32px 24px;
+    border-bottom: 1px solid #eee;
+  }
+  #cvDocument.minimal .cv-name { color: #111; font-size: 22pt; letter-spacing: -0.5px; }
+  #cvDocument.minimal .cv-title { color: #999; font-size: 9pt; letter-spacing: 2px; }
+  #cvDocument.minimal .cv-contact-item { color: #bbb; }
+  #cvDocument.minimal .cv-contact-item span { color: #666; }
+  #cvDocument.minimal .cv-gold-bar { display: none; }
+  #cvDocument.minimal .cv-body { display: block; }
+  #cvDocument.minimal .cv-sidebar { display: none; }
+  #cvDocument.minimal .cv-main { padding: 24px 32px; }
+  #cvDocument.minimal .cv-section-title {
+    border-bottom: 1px solid #eee;
+    color: #999;
+    font-size: 8pt;
+    letter-spacing: 2px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+  }
+  #cvDocument.minimal .cv-summary { background: #fff; border-left-color: #ddd; }
+  #cvDocument.minimal .cv-exp-title { color: #111; }
+  #cvDocument.minimal .cv-pub-item::before { color: #ccc; }
     .workspace { grid-template-columns:1fr; }
     .editor-panel { max-height:none; }
     .preview-panel { max-height:none; }
@@ -349,6 +411,14 @@
       📂 CV Yükle
       <input type="file" id="docxImport" accept=".docx" style="display:none" onchange="importDocx(event)">
     </label>
+    <div style="position:relative">
+      <button class="btn btn-outline" onclick="toggleTemplateMenu()" id="templateBtn" title="Şablon seç">🎨 Şablon ▾</button>
+      <div id="templateMenu" style="display:none;position:absolute;top:44px;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.25);overflow:hidden;z-index:200;min-width:160px">
+        <button onclick="setTemplate('modern')" class="tpl-menu-item active" id="tpl-modern">📋 Modern</button>
+        <button onclick="setTemplate('klasik')" class="tpl-menu-item" id="tpl-klasik">📄 Klasik</button>
+        <button onclick="setTemplate('minimal')" class="tpl-menu-item" id="tpl-minimal">🪶 Minimal</button>
+      </div>
+    </div>
     <button class="btn btn-outline" onclick="openScholarModal()" id="scholarBtn" title="Google Scholar atıf güncelle">🎓 Scholar</button>
     <button class="btn btn-green" onclick="openAIModal()" title="AI ile yayın ekle">🤖 AI Ekle</button>
     <div class="lang-toggle">
@@ -535,7 +605,77 @@ function showSyncBadge(msg, color) {
   badge.style.color = color;
 }
 
-// ─── LANG ─────────────────────────────────────────────
+// ─── TEMPLATE ────────────────────────────────────────
+let currentTemplate = 'modern';
+
+function toggleTemplateMenu() {
+  const menu = document.getElementById('templateMenu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#templateMenu') && !e.target.closest('#templateBtn')) {
+    const menu = document.getElementById('templateMenu');
+    if (menu) menu.style.display = 'none';
+  }
+});
+
+function setTemplate(tpl) {
+  currentTemplate = tpl;
+  const doc = document.getElementById('cvDocument');
+  doc.className = tpl === 'modern' ? '' : tpl;
+
+  // Menü butonlarını güncelle
+  ['modern','klasik','minimal'].forEach(t => {
+    const btn = document.getElementById('tpl-' + t);
+    if (btn) btn.classList.toggle('active', t === tpl);
+  });
+
+  // Klasik ve Minimal için sidebar verilerini main'e ekle
+  renderClassicMinimalExtras(tpl);
+
+  document.getElementById('templateMenu').style.display = 'none';
+  triggerCloudSave();
+}
+
+function renderClassicMinimalExtras(tpl) {
+  // Klasik ve Minimal'de sidebar gizli — eğitim ve becerileri main'e ekle
+  let extraEl = document.getElementById('cv-sidebar-extras');
+  if (!extraEl) {
+    extraEl = document.createElement('div');
+    extraEl.id = 'cv-sidebar-extras';
+    const expList = document.getElementById('cv-exp-list');
+    expList.parentNode.insertBefore(extraEl, expList.parentNode.firstChild);
+  }
+
+  if (tpl === 'modern') {
+    extraEl.innerHTML = '';
+    return;
+  }
+
+  // Eğitim ve beceriler için HTML
+  let html = '';
+  if (edus.length > 0) {
+    html += `<div class="cv-section-title" style="margin-top:0">${labels[lang].edu}</div>`;
+    edus.forEach(e => {
+      html += `<div class="cv-edu-item" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div><div class="cv-edu-degree">${e.degree}</div><div class="cv-edu-school">${e.school}</div></div>
+        <div class="cv-edu-year" style="white-space:nowrap;margin-left:8px">${e.year}</div>
+      </div>`;
+    });
+  }
+  if (skills.length > 0) {
+    html += `<div class="cv-section-title">${labels[lang].skills}</div>`;
+    const lvlLabel = l => l<=30?'Başlangıç':l<=50?'Orta':l<=65?'İyi':l<=80?'İleri':'Uzman';
+    skills.forEach(s => {
+      html += `<div class="cv-skill-item" style="display:flex;justify-content:space-between">
+        <span style="font-size:8.5pt;color:#444">${s.name}</span>
+        <span style="font-size:8pt;color:#888">${lvlLabel(s.level)}</span>
+      </div>`;
+    });
+  }
+  extraEl.innerHTML = html;
+}
 function setLang(l) {
   lang = l;
   document.querySelectorAll('.lang-toggle button').forEach((b,i)=>{
@@ -591,6 +731,7 @@ function update() {
   if (web) { ww.style.display='flex'; setText('cv-web', web); }
   else ww.style.display='none';
   renderEduCV(); renderExpCV(); renderSkillsCV(); renderPubCV();
+  if (currentTemplate !== 'modern') renderClassicMinimalExtras(currentTemplate);
 }
 
 function setText(id, val) {
@@ -835,7 +976,8 @@ function getFormData() {
     email: document.getElementById('email')?.value||'',
     web: document.getElementById('web')?.value||'',
     summary: document.getElementById('summary')?.value||'',
-    edus, exps, skills, pubs, photoData
+    edus, exps, skills, pubs, photoData,
+    template: currentTemplate
   };
 }
 
@@ -873,6 +1015,7 @@ function applyData(d) {
   if(d.exps&&d.exps.length) exps=d.exps;
   if(d.skills&&d.skills.length) skills=d.skills;
   if(d.pubs&&d.pubs.length) pubs=d.pubs;
+  if(d.template) { currentTemplate=d.template; setTemplate(d.template); }
   if(d.photoData){
     photoData=d.photoData;
     document.getElementById('photoPreviewEditor').src=photoData;
