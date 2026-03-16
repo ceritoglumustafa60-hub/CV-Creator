@@ -8,30 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(async () => {
-  const _sb = supabase.createClient(
-    "https://igrljwxyuwqagtnbhnmw.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8"
-  );
-  const { data: { session } } = await _sb.auth.getSession();
-  if (!session) window.location.href = 'auth.html';
-  else {
-    const user = session.user;
-    document.addEventListener('DOMContentLoaded', () => {
-      const bar = document.querySelector('.topbar-actions');
-      if (bar) {
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-outline';
-        btn.innerHTML = '🚪 Çıkış';
-        btn.onclick = async () => { await _sb.auth.signOut(); window.location.href = 'auth.html'; };
-        bar.appendChild(btn);
-      }
-    });
-  }
-})();
-</script>
-  <style>
+<style>
   :root {
     --navy: #1a2744;
     --gold: #b8860b;
@@ -473,7 +450,7 @@
           <div class="cv-contact-row">
             <div class="cv-contact-item">📍 <span id="cv-city">Tokat / Siirt</span></div>
             <div class="cv-contact-item">📞 <span id="cv-phone">+90 532 789 33 14</span></div>
-            <div class="cv-contact-item">✉ <span id="cv-email">ceritoglu@siirt.edu.tr</span></div>
+            <div class="cv-contact-item">✉ <span id="cv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f2f4e3f8e5fef6fde4d1e2f8f8e3e5bff4f5e4bfe5e3">[email&#160;protected]</a></span></div>
             <div class="cv-contact-item" id="cv-web-wrap" style="display:none">🌐 <span id="cv-web"></span></div>
           </div>
         </div>
@@ -516,7 +493,7 @@
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ─── DATA ───────────────────────────────────────────────
 let lang = 'tr';
 
@@ -653,8 +630,8 @@ let activePubCat = pubCategories[0];
 // ─── SUPABASE ────────────────────────────────────────
 const SUPABASE_URL = "https://igrljwxyuwqagtnbhnmw.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8";
-const CV_ID = 'mustafa_ceritoglu';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let CV_ID = 'mustafa_ceritoglu'; // geçici, oturum açınca user_id ile değişir
 let cloudSyncTimer = null;
 let isSyncing = false;
 
@@ -1043,7 +1020,45 @@ async function loadFromCloud() {
 document.addEventListener('input', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
 document.addEventListener('change', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
 
-window.onload = async () => { await loadFromCloud(); };
+window.onload = async () => {
+  // Auth kontrolü
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'auth.html'; return; }
+
+  // CV_ID = kullanıcının kendi user_id'si
+  CV_ID = session.user.id;
+
+  // Topbar'a kullanıcı adı + çıkış butonu ekle
+  const user = session.user;
+  const displayName = user.user_metadata?.full_name || user.email;
+  const bar = document.querySelector('.topbar-actions');
+  if (bar) {
+    const userInfo = document.createElement('span');
+    userInfo.style.cssText = 'font-size:.78rem;color:#8899bb;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
+    userInfo.textContent = '👤 ' + displayName;
+    bar.insertBefore(userInfo, bar.firstChild);
+
+    const logoutBtn = document.createElement('button');
+    logoutBtn.className = 'btn btn-outline';
+    logoutBtn.innerHTML = '🚪 Çıkış';
+    logoutBtn.onclick = async () => { await sb.auth.signOut(); window.location.href = 'auth.html'; };
+    bar.appendChild(logoutBtn);
+  }
+
+  // Eski mustafa_ceritoglu verisini bu kullanıcıya taşı (ilk girişte)
+  await migrateOldData();
+  await loadFromCloud();
+};
+
+async function migrateOldData() {
+  try {
+    const { data: existing } = await sb.from('cv_data').select('id').eq('id', CV_ID).single();
+    if (existing) return;
+    const { data: oldData } = await sb.from('cv_data').select('data').eq('id', 'mustafa_ceritoglu').single();
+    if (!oldData) return;
+    await sb.from('cv_data').upsert({ id: CV_ID, data: oldData.data, updated_at: new Date().toISOString() });
+  } catch(e) { /* sessizce geç */ }
+}
 </script>
 
 <!-- AI Modal -->
@@ -1134,8 +1149,4 @@ function parseScholarHTML() {
   setTimeout(closeScholarModal,2000);
 }
 
-document.getElementById('scholarModal').addEventListener('click',function(e){if(e.target===this)closeScholarModal();});
-document.getElementById('aiModal').addEventListener('click',function(e){if(e.target===this)closeAIModal();});
-</script>
-</body>
-</html>
+document.getElementById
