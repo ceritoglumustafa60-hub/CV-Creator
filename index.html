@@ -988,8 +988,8 @@ function applyData(d) {
 async function loadFromCloud() {
   showSyncBadge('☁️ Yükleniyor...', '#fcd34d');
   try {
-    const { data: row, error } = await sb.from('cv_data').select('data,updated_at').eq('id',CV_ID).single();
-    if (error) throw error;
+    const { data: row, error } = await sb.from('cv_data').select('data,updated_at').eq('id',CV_ID).maybeSingle();
+if (error) throw error;
     if (!row||!row.data||Object.keys(row.data).length===0) {
       showSyncBadge('☁️ Yeni hesap','#6b7280');
       renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update();
