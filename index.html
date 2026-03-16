@@ -996,9 +996,8 @@ async function loadFromCloud() {
     const { data: row, error } = await sb.from('cv_data').select('data,updated_at').eq('id',CV_ID).single();
     if (error) throw error;
     if (!row||!row.data||Object.keys(row.data).length===0) {
-      const raw = localStorage.getItem('cv_data');
-      if (raw) { applyData(JSON.parse(raw)); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); await saveToCloud(); }
-      else showSyncBadge('☁️ Senkronize','#6b7280');
+      showSyncBadge('☁️ Yeni hesap','#6b7280');
+      renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update();
       return;
     }
     applyData(row.data);
