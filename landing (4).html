@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademiCV – Akademisyenler için CV Platformu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-light: #243159;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --gold-pale: #f5e6c0;
+  --cream: #faf8f3;
+  --cream-dark: #f0ece3;
+  --text: #2c2c2c;
+  --gray: #6b7280;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(26,39,68,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,134,11,.2);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: #fff; text-decoration: none;
+}
+.nav-logo span { color: var(--gold-light); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  color: #8899bb; text-decoration: none; font-size: .88rem;
+  font-weight: 600; letter-spacing: .5px; transition: color .2s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-cta {
+  padding: 9px 22px; background: var(--gold);
+  color: var(--navy) !important; border-radius: 6px;
+  font-weight: 700 !important; transition: background .2s !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 120px 48px 80px;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 50%, rgba(184,134,11,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 80% at 10% 80%, rgba(36,49,89,.8) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; opacity: .04;
+  background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 640px;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(184,134,11,.15); border: 1px solid rgba(184,134,11,.3);
+  color: var(--gold-light); padding: 6px 16px; border-radius: 100px;
+  font-size: .78rem; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeUp .6s ease both;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: #fff; line-height: 1.15;
+  margin-bottom: 20px;
+  animation: fadeUp .6s .1s ease both;
+}
+.hero h1 em { color: var(--gold-light); font-style: italic; }
+
+.hero p {
+  font-size: 1.05rem; color: #8899bb; line-height: 1.75;
+  margin-bottom: 36px; max-width: 500px;
+  animation: fadeUp .6s .2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: fadeUp .6s .3s ease both;
+}
+
+.btn-primary {
+  padding: 14px 32px; background: var(--gold);
+  color: var(--navy); border: none; border-radius: 8px;
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all .2s; box-shadow: 0 4px 20px rgba(184,134,11,.3);
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(184,134,11,.4); }
+
+.btn-secondary {
+  padding: 14px 28px; background: transparent;
+  color: #fff; border: 1.5px solid rgba(255,255,255,.25);
+  border-radius: 8px; font-family: inherit; font-size: 1rem;
+  font-weight: 600; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.06); }
+
+.hero-stats {
+  position: absolute; right: 48px; bottom: 60px; z-index: 2;
+  display: flex; gap: 40px;
+  animation: fadeUp .6s .4s ease both;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; color: var(--gold-light); display: block;
+}
+.stat-label { font-size: .75rem; color: #6677aa; letter-spacing: .8px; text-transform: uppercase; }
+
+/* CV Preview Float */
+.hero-preview {
+  position: absolute; right: 48px; top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  animation: float 6s ease-in-out infinite, fadeUp .8s .2s ease both;
+  z-index: 2;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(-50%) translateY(0); }
+  50% { transform: translateY(-50%) translateY(-12px); }
+}
+
+.cv-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.3);
+  overflow: hidden;
+  font-size: 7pt;
+}
+.cv-card-header {
+  background: var(--navy);
+  padding: 16px 20px 12px;
+}
+.cv-card-name { font-family:'Playfair Display',serif; color:#fff; font-size:13pt; margin-bottom:2px; }
+.cv-card-title { color:var(--gold-light); font-size:7pt; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+.cv-card-contacts { display:flex; gap:12px; }
+.cv-card-contact { color:#8899bb; font-size:6.5pt; }
+.cv-gold-bar { height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-light),transparent); }
+.cv-card-body { display:grid; grid-template-columns:90px 1fr; }
+.cv-card-sidebar { background:#f7f4ef; padding:12px 10px; }
+.cv-card-main { padding:12px 14px; }
+.cv-card-section { font-size:6.5pt; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:.8px; border-bottom:1.5px solid var(--gold); padding-bottom:2px; margin-bottom:6px; margin-top:10px; }
+.cv-card-section:first-child { margin-top:0; }
+.cv-card-item { margin-bottom:5px; }
+.cv-card-item-title { font-size:6.5pt; font-weight:700; color:var(--navy); }
+.cv-card-item-sub { font-size:6pt; color:#666; }
+.cv-card-item-date { font-size:5.5pt; color:var(--gold); font-weight:600; }
+.skill-bar { height:3px; background:#ddd; border-radius:2px; margin-top:2px; }
+.skill-fill { height:100%; background:linear-gradient(90deg,var(--navy),var(--gold)); border-radius:2px; }
+
+/* ── GOLD LINE ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 48px;
+}
+
+/* ── FEATURES ── */
+.features {
+  padding: 100px 48px;
+  background: var(--cream);
+}
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem; color: var(--gold);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--navy); margin-bottom: 16px; line-height: 1.2;
+}
+.section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 480px; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 60px;
+}
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 12px; padding: 28px;
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); border-color: var(--gold-pale); }
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-icon { font-size: 2rem; margin-bottom: 16px; }
+.feature-title { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--navy); margin-bottom:8px; }
+.feature-desc { font-size:.88rem; color:var(--gray); line-height:1.65; }
+
+/* ── TEMPLATES ── */
+.templates {
+  padding: 100px 48px;
+  background: var(--navy);
+  position: relative; overflow: hidden;
+}
+.templates::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(184,134,11,.06) 0%, transparent 60%);
+}
+.templates .section-label { color: var(--gold-light); }
+.templates .section-title { color: #fff; }
+.templates .section-sub { color: #8899bb; }
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px; margin-top: 60px;
+  position: relative; z-index: 1;
+}
+
+.template-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px; overflow: hidden;
+  transition: all .3s; cursor: pointer;
+}
+.template-card:hover { transform: translateY(-6px); border-color: rgba(184,134,11,.4); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+
+.template-preview {
+  height: 260px; overflow: hidden; position: relative;
+}
+.template-preview-inner {
+  transform: scale(.45) translateY(-55%) translateX(-55%);
+  transform-origin: top left;
+  width: 220%;
+  pointer-events: none;
+}
+
+/* Modern Template Preview */
+.tpl-modern { background:#fff; padding:16px; font-size:8pt; }
+.tpl-modern-header { background:#1a2744; color:#fff; padding:14px 16px; margin:-16px -16px 12px; }
+.tpl-modern-name { font-family:'Playfair Display',serif; font-size:16pt; margin-bottom:2px; }
+.tpl-modern-title { color:#d4a017; font-size:7pt; letter-spacing:1px; text-transform:uppercase; }
+.tpl-modern-bar { height:3px; background:linear-gradient(90deg,#b8860b,#d4a017); margin:8px -16px; }
+.tpl-modern-body { display:grid; grid-template-columns:80px 1fr; gap:10px; }
+.tpl-modern-sidebar { background:#f7f4ef; padding:8px; margin-left:-16px; padding-left:16px; }
+.tpl-section { font-size:6pt; font-weight:700; color:#1a2744; text-transform:uppercase; border-bottom:1.5px solid #b8860b; padding-bottom:2px; margin-bottom:5px; margin-top:8px; }
+.tpl-section:first-child { margin-top:0; }
+.tpl-line { height:4px; background:#eee; border-radius:2px; margin-bottom:3px; }
+.tpl-line.short { width:60%; }
+.tpl-line.gold { background:linear-gradient(90deg,#1a2744,#b8860b); width:70%; }
+
+/* Klasik Template Preview */
+.tpl-classic { background:#fff; padding:16px; font-size:8pt; }
+.tpl-classic-header { text-align:center; border-bottom:2px solid #2c3e50; padding-bottom:12px; margin-bottom:12px; }
+.tpl-classic-name { font-family:'Playfair Display',serif; font-size:18pt; color:#2c3e50; }
+.tpl-classic-title { color:#666; font-size:7pt; letter-spacing:1px; margin-top:2px; }
+.tpl-classic-section { font-size:6pt; font-weight:700; color:#2c3e50; text-transform:uppercase; border-left:3px solid #2c3e50; padding-left:8px; margin-bottom:6px; margin-top:10px; }
+.tpl-classic-section:first-child { margin-top:0; }
+
+/* Minimal Template Preview */
+.tpl-minimal { background:#fff; padding:20px; font-size:8pt; }
+.tpl-minimal-name { font-family:'Playfair Display',serif; font-size:20pt; color:#111; letter-spacing:-1px; margin-bottom:2px; }
+.tpl-minimal-title { color:#999; font-size:7pt; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid #eee; }
+.tpl-minimal-section { font-size:6pt; font-weight:700; color:#999; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; margin-top:12px; }
+.tpl-minimal-section:first-child { margin-top:0; }
+
+.template-info {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.template-name {
+  font-family: 'Playfair Display', serif;
+  color: #fff; font-size: 1rem; margin-bottom: 4px;
+}
+.template-desc { font-size: .78rem; color: #6677aa; }
+.template-badge {
+  display: inline-block; margin-top: 8px;
+  padding: 3px 10px; background: rgba(184,134,11,.15);
+  border: 1px solid rgba(184,134,11,.3); color: var(--gold-light);
+  border-radius: 100px; font-size: .68rem; font-weight: 700; letter-spacing: .8px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding: 100px 48px;
+  background: var(--cream);
+  text-align: center;
+}
+.cta-box {
+  max-width: 600px; margin: 0 auto;
+  background: var(--navy);
+  border-radius: 20px; padding: 60px 48px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 24px 80px rgba(26,39,68,.3);
+}
+.cta-box::before {
+  content: ''; position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(184,134,11,.15), transparent);
+  border-radius: 50%;
+}
+.cta-box .section-label { color: var(--gold-light); }
+.cta-box .section-title { color: #fff; margin-bottom: 12px; }
+.cta-box p { color: #8899bb; margin-bottom: 32px; line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer {
+  background: #111a2e;
+  padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.footer-logo { font-family:'Playfair Display',serif; color:#fff; font-size:1.1rem; }
+.footer-logo span { color:var(--gold-light); }
+.footer-copy { font-size:.78rem; color:#445; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .hero { padding: 120px 24px 80px; }
+  .hero-preview { display: none; }
+  .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; }
+  .features, .templates, .cta-section { padding: 60px 24px; }
+  .templates-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+  .section-divider { margin: 0 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="landing.html" class="nav-logo">Academi<span>CV</span></a>
+  <div class="nav-links">
+    <a href="#features">Özellikler</a>
+    <a href="#templates">Şablonlar</a>
+    <a href="auth.html" class="nav-cta">Başla →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Akademisyenler için</div>
+    <h1>
+      Akademik CV'nizi<br>
+      <em>profesyonelce</em><br>
+      oluşturun
+    </h1>
+    <p>
+      Yayınlarınızı, projelerinizi ve akademik başarılarınızı tek platformda yönetin.
+      Bulut senkronizasyonu, çoklu şablon ve PDF export ile dakikalar içinde hazır.
+    </p>
+    <div class="hero-actions">
+      <a href="auth.html" class="btn-primary">Ücretsiz Başla →</a>
+      <a href="#templates" class="btn-secondary">Şablonları Gör</a>
+    </div>
+  </div>
+
+  <!-- Floating CV Preview -->
+  <div class="hero-preview">
+    <div class="cv-card">
+      <div class="cv-card-header">
+        <div class="cv-card-name">Dr. Akademisyen</div>
+        <div class="cv-card-title">Doç. Dr. · Fen Bilimleri</div>
+        <div class="cv-card-contacts">
+          <span class="cv-card-contact">📍 İstanbul</span>
+          <span class="cv-card-contact">✉ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6e0f050f0a0b03072e1b0007400b0a1b401a1c">[email&#160;protected]</a></span>
+        </div>
+      </div>
+      <div class="cv-gold-bar"></div>
+      <div class="cv-card-body">
+        <div class="cv-card-sidebar">
+          <div class="cv-card-section">Eğitim</div>
+          <div class="cv-card-item">
+            <div class="cv-card-item-title">Doktora</div>
+            <div class="cv-card-item-sub">İTÜ – Fen Bil.</div>
+            <div class="cv-card-item-date">2020</div>
+          </div>
+          <div class="cv-card-item">
+            <div class="cv-card-item-title">Y. Lisans</div>
+            <div class="cv-card-item-sub">ODTÜ</div>
+            <div class="cv-card-item-date">2016</div>
+          </div>
+          <div class="cv-card-section">Beceriler</div>
+          <div style="margin-bottom:4px">
+            <div style="font-size:5.5pt;color:#444;margin-bottom:1px">Araştırma</div>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
+          <div>
+            <div style="font-size:5.5pt;color:#444;margin-bottom:1px">İngilizce</div>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+        <div class="cv-card-main">
+          <div class="cv-card-section">Deneyim</div>
+          <div class="cv-card-item">
+            <div class="cv-card-item-title">Doç. Dr.</div>
+            <div class="cv-card-item-sub">İTÜ Fen Fak.</div>
+            <div class="cv-card-item-date">2022 – Günümüz</div>
+          </div>
+          <div class="cv-card-section">Yayınlar</div>
+          <div style="font-size:5.5pt;color:#555;line-height:1.5;margin-bottom:4px">
+            Smith, J., Doe, A., 2024. Advanced research in applied sciences. Nature, 12(3): 45-67.
+          </div>
+          <div style="font-size:5.5pt;color:#555;line-height:1.5">
+            Doe, A., et al., 2023. Novel approaches in computational biology. Science, 8(2): 123-135.
+          </div>
+          <div class="cv-card-section">Atıf</div>
+          <div style="font-size:6pt;color:#333">Toplam: <strong>247</strong> · h-index: <strong>8</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Şablon</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Yayın</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">☁️</span>
+      <span class="stat-label">Bulut Sync</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="reveal">
+    <div class="section-label">// Özellikler</div>
+    <div class="section-title">Akademik kariyerinizi<br>tek platformda yönetin</div>
+    <div class="section-sub">SCI makalelerden kitap bölümlerine, projelerden tezlere kadar tüm akademik üretimleriniz organize ve erişilebilir.</div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">☁️</div>
+      <div class="feature-title">Bulut Senkronizasyonu</div>
+      <div class="feature-desc">Verileriniz otomatik olarak buluta kaydedilir. Her cihazdan, her zaman erişin. Hiçbir şey kaybolmaz.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📚</div>
+      <div class="feature-title">Yayın Yönetimi</div>
+      <div class="feature-desc">SCI, ulusal dergiler, bildiriler, kitap bölümleri, projeler ve tezlerinizi kategorize ederek yönetin.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎨</div>
+      <div class="feature-title">3 Profesyonel Şablon</div>
+      <div class="feature-desc">Modern, Klasik ve Minimal olmak üzere 3 farklı tasarım arasından tercih yapın. Tek tıkla geçiş yapın.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">⬇️</div>
+      <div class="feature-title">PDF & Word Export</div>
+      <div class="feature-desc">Profesyonel kalitede PDF ve Word formatında CV'nizi indirin. Akademik başvurulara hazır format.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎓</div>
+      <div class="feature-title">Scholar Entegrasyonu</div>
+      <div class="feature-desc">Google Scholar'dan atıf ve h-index bilgilerinizi tek tıkla güncelleyin.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Güvenli & Kişisel</div>
+      <div class="feature-desc">Her kullanıcının verisi tamamen ayrıdır. Şifreli oturum, güvenli bulut altyapısı.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TEMPLATES -->
+<section class="templates" id="templates">
+  <div class="reveal">
+    <div class="section-label">// Şablonlar</div>
+    <div class="section-title">Tarzınıza uygun tasarım</div>
+    <div class="section-sub">Her şablon akademik CV standartlarını karşılayacak şekilde tasarlanmıştır.</div>
+  </div>
+
+  <div class="templates-grid">
+
+    <!-- Modern -->
+    <div class="template-card reveal" onclick="window.location.href='auth.html'">
+      <div class="template-preview" style="background:#fff;padding:0;overflow:hidden">
+        <div style="background:#1a2744;padding:14px 16px 12px">
+          <div style="font-family:'Playfair Display',serif;font-size:14pt;color:#fff;font-weight:700">Dr. Ad Soyad</div>
+          <div style="color:#d4a017;font-size:7pt;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Dr. Öğretim Üyesi · Fen Bilimleri</div>
+          <div style="height:2px;background:linear-gradient(90deg,#b8860b,#d4a017);margin-bottom:8px"></div>
+          <div style="display:flex;gap:12px;font-size:6.5pt;color:#8899bb">
+            <span>📍 Şehir</span><span>✉ ornek@uni.edu.tr</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr">
+          <div style="background:#f7f4ef;padding:10px 8px">
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Eğitim</div>
+            <div style="margin-bottom:5px">
+              <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Doktora</div>
+              <div style="font-size:6pt;color:#555">Üniversite</div>
+              <div style="font-size:5.5pt;color:#b8860b;font-weight:600">2024</div>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Y. Lisans</div>
+              <div style="font-size:6pt;color:#555">Üniversite</div>
+              <div style="font-size:5.5pt;color:#b8860b;font-weight:600">2019</div>
+            </div>
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Beceriler</div>
+            <div style="margin-bottom:4px">
+              <div style="font-size:6pt;color:#333;margin-bottom:2px">Araştırma</div>
+              <div style="height:3px;background:#ddd;border-radius:2px"><div style="width:85%;height:100%;background:linear-gradient(90deg,#1a2744,#b8860b);border-radius:2px"></div></div>
+            </div>
+            <div>
+              <div style="font-size:6pt;color:#333;margin-bottom:2px">İngilizce</div>
+              <div style="height:3px;background:#ddd;border-radius:2px"><div style="width:70%;height:100%;background:linear-gradient(90deg,#1a2744,#b8860b);border-radius:2px"></div></div>
+            </div>
+          </div>
+          <div style="padding:10px 12px">
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Deneyim</div>
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between">
+                <div style="font-size:6.5pt;font-weight:700;color:#1a2744">Dr. Öğr. Üyesi</div>
+                <div style="font-size:6pt;color:#b8860b">2024–</div>
+              </div>
+              <div style="font-size:6pt;color:#555">Üniversite Fakültesi</div>
+            </div>
+            <div style="font-size:6.5pt;font-weight:700;color:#1a2744;text-transform:uppercase;border-bottom:1.5px solid #b8860b;padding-bottom:2px;margin-bottom:6px">Yayınlar</div>
+            <div style="height:5px;background:#eee;border-radius:2px;margin-bottom:3px"></div>
+            <div style="height:5px;background:#eee;border-radius:2px;width:80%;margin-bottom:3px"></div>
+            <div style="height:5px;background:#eee;border-radius:2px;width:60%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Modern</div>
+        <div class="template-desc">İki sütunlu, altın aksanlı profesyonel tasarım</div>
+        <div class="template-badge">Mevcut</div>
+      </div>
+    </div>
+
+    <!-- Klasik -->
+    <div class="template-card reveal" onclick="window.location.href='auth.html'">
+      <div class="template-preview" style="background:#fff;padding:16px;overflow:hidden">
+        <div style="font-family:'Playfair Display',serif;font-size:14pt;color:#2c3e50;text-align:center;font-weight:700">Dr. Ad Soyad</div>
+        <div style="font-size:7pt;color:#666;letter-spacing:1px;text-align:center;margin-top:3px">DR. ÖĞRETİM ÜYESİ · FEN BİLİMLERİ</div>
+        <div style="font-size:6pt;color:#999;text-align:center;margin-top:4px">Şehir · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a6bba7aca289bca7a0e7acadbce7bdbb">[email&#160;protected]</a></div>
+        <div style="height:2px;background:#2c3e50;margin:10px 0"></div>
+        <div style="font-size:7pt;font-weight:700;color:#2c3e50;text-transform:uppercase;border-left:3px solid #2c3e50;padding-left:7px;margin-bottom:6px">Eğitim</div>
+        <div style="display:flex;gap:8px;margin-bottom:4px">
+          <div style="font-size:6pt;color:#2c3e50;font-weight:700;min-width:24pt">2024</div>
+          <div><div style="font-size:7pt;font-weight:700;color:#2c3e50">Doktora / Ph.D.</div><div style="font-size:6pt;color:#666">Üniversite – Fen Bilimleri</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <div style="font-size:6pt;color:#2c3e50;font-weight:700;min-width:24pt">2019</div>
+          <div><div style="font-size:7pt;font-weight:700;color:#2c3e50">Y. Lisans / M.Sc.</div><div style="font-size:6pt;color:#666">Üniversite – Fen Bilimleri</div></div>
+        </div>
+        <div style="font-size:7pt;font-weight:700;color:#2c3e50;text-transform:uppercase;border-left:3px solid #2c3e50;padding-left:7px;margin-bottom:6px">Deneyim</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <div style="font-size:6pt;color:#2c3e50;font-weight:700;min-width:24pt">2024–</div>
+          <div><div style="font-size:7pt;font-weight:700;color:#2c3e50">Dr. Öğr. Üyesi</div><div style="font-size:6pt;color:#666">Üniversite Fakültesi</div></div>
+        </div>
+        <div style="font-size:7pt;font-weight:700;color:#2c3e50;text-transform:uppercase;border-left:3px solid #2c3e50;padding-left:7px;margin-bottom:6px">Yayınlar</div>
+        <div style="height:5px;background:#eee;border-radius:2px;margin-bottom:3px"></div>
+        <div style="height:5px;background:#eee;border-radius:2px;width:75%;margin-bottom:3px"></div>
+        <div style="height:5px;background:#eee;border-radius:2px;width:55%"></div>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Klasik</div>
+        <div class="template-desc">Geleneksel tek sütun, zaman ölçütlü düzen</div>
+        <div class="template-badge" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#8899bb">Yakında</div>
+      </div>
+    </div>
+
+    <!-- Minimal -->
+    <div class="template-card reveal" onclick="window.location.href='auth.html'">
+      <div class="template-preview" style="background:#fff;padding:20px;overflow:hidden">
+        <div style="font-family:'Playfair Display',serif;font-size:16pt;color:#111;letter-spacing:-0.5px;margin-bottom:2px">Dr. Ad Soyad</div>
+        <div style="font-size:7pt;color:#aaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Dr. Öğretim Üyesi · Fen Bilimleri</div>
+        <div style="display:flex;gap:14px;font-size:6.5pt;color:#bbb;padding-bottom:10px;border-bottom:1px solid #eee;margin-bottom:12px">
+          <span>Şehir</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543b263a313f14213a3d7a3130217a2026">[email&#160;protected]</a></span>
+        </div>
+        <div style="font-size:6.5pt;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">Eğitim</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <div><div style="font-size:7.5pt;font-weight:600;color:#111">Doktora / Ph.D.</div><div style="font-size:6pt;color:#999">Üniversite</div></div>
+          <div style="font-size:6pt;color:#ccc">2024</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+          <div><div style="font-size:7.5pt;font-weight:600;color:#111">Y. Lisans / M.Sc.</div><div style="font-size:6pt;color:#999">Üniversite</div></div>
+          <div style="font-size:6pt;color:#ccc">2019</div>
+        </div>
+        <div style="font-size:6.5pt;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">Deneyim</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+          <div><div style="font-size:7.5pt;font-weight:600;color:#111">Dr. Öğr. Üyesi</div><div style="font-size:6pt;color:#999">Üniversite Fakültesi</div></div>
+          <div style="font-size:6pt;color:#ccc">2024–</div>
+        </div>
+        <div style="font-size:6.5pt;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">Yayınlar</div>
+        <div style="height:5px;background:#f0f0f0;border-radius:2px;margin-bottom:3px"></div>
+        <div style="height:5px;background:#f0f0f0;border-radius:2px;width:75%;margin-bottom:3px"></div>
+        <div style="height:5px;background:#f0f0f0;border-radius:2px;width:55%"></div>
+      </div>
+      <div class="template-info">
+        <div class="template-name">Minimal</div>
+        <div class="template-desc">Sade, beyaz alan odaklı çağdaş tasarım</div>
+        <div class="template-badge" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#8899bb">Yakında</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box reveal">
+    <div class="section-label">// Hemen başlayın</div>
+    <div class="section-title">Akademik CV'nizi bugün oluşturun</
