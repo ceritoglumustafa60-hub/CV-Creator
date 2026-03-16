@@ -1030,6 +1030,7 @@ window.onload = async () => {
     const userInfo = document.createElement('span');
     userInfo.style.cssText = 'font-size:.78rem;color:#8899bb;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
     userInfo.textContent = '👤 ' + displayName;
+    document.getElementById('topbar-name').textContent = displayName;
     bar.insertBefore(userInfo, bar.firstChild);
 
     const logoutBtn = document.createElement('button');
