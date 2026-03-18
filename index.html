@@ -585,19 +585,19 @@
       👤 Kişisel Bilgiler <span class="toggle-icon">▾</span>
     </div>
     <div class="section-body">
-      <div class="form-group"><label>Ad Soyad</label>
+      <div class="form-group"><label id="lbl-f-name">Ad Soyad</label>
         <input type="text" id="name" value="Mustafa Ceritoğlu" oninput="update()"></div>
-      <div class="form-group"><label>Unvan / Pozisyon</label>
+      <div class="form-group"><label id="lbl-f-title">Unvan / Pozisyon</label>
         <input type="text" id="title" value="Dr. Öğretim Üyesi" oninput="update()"></div>
-      <div class="form-group"><label>Doğum Tarihi</label>
+      <div class="form-group"><label id="lbl-f-birth">Doğum Tarihi</label>
         <input type="text" id="birthdate" value="20.09.1988" oninput="update()"></div>
-      <div class="form-group"><label>Şehir</label>
+      <div class="form-group"><label id="lbl-f-city">Şehir</label>
         <input type="text" id="city" value="Tokat / Siirt" oninput="update()"></div>
-      <div class="form-group"><label>Telefon</label>
+      <div class="form-group"><label id="lbl-f-phone">Telefon</label>
         <input type="text" id="phone" value="+90 532 789 33 14" oninput="update()"></div>
-      <div class="form-group"><label>E-posta</label>
+      <div class="form-group"><label id="lbl-f-email">E-posta</label>
         <input type="text" id="email" value="ceritoglu@siirt.edu.tr" oninput="update()"></div>
-      <div class="form-group"><label>Web / ORCID</label>
+      <div class="form-group"><label id="lbl-f-web">Web / ORCID</label>
         <input type="text" id="web" value="" placeholder="orcid.org/xxxx" oninput="update()"></div>
     </div>
 
@@ -615,7 +615,7 @@
     </div>
     <div class="section-body">
       <div id="eduList"></div>
-      <button class="add-item-btn" onclick="addEdu()">+ Eğitim Ekle</button>
+      <button class="add-item-btn" id="btn-addEdu" onclick="addEdu()">+ Eğitim Ekle</button>
     </div>
 
     <div class="section-header" onclick="toggleSection(this)">
@@ -623,7 +623,7 @@
     </div>
     <div class="section-body">
       <div id="expList"></div>
-      <button class="add-item-btn" onclick="addExp()">+ Deneyim Ekle</button>
+      <button class="add-item-btn" id="btn-addExp" onclick="addExp()">+ Deneyim Ekle</button>
     </div>
 
     <div class="section-header" onclick="toggleSection(this)">
@@ -631,7 +631,7 @@
     </div>
     <div class="section-body">
       <div id="skillList"></div>
-      <button class="add-item-btn" onclick="addSkill()">+ Beceri Ekle</button>
+      <button class="add-item-btn" id="btn-addSkill" onclick="addSkill()">+ Beceri Ekle</button>
     </div>
 
     <div class="section-header" onclick="toggleSection(this)">
@@ -639,7 +639,7 @@
     </div>
     <div class="section-body">
       <div id="pubList"></div>
-      <button class="add-item-btn" onclick="addPub()">+ Yayın Ekle</button>
+      <button class="add-item-btn" id="btn-addPub" onclick="addPub()">+ Yayın Ekle</button>
     </div>
 
   </div>
@@ -705,8 +705,36 @@
 let lang = 'tr';
 
 const labels = {
-  tr: { personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir', edu:'EĞİTİM', skills:'BECERİLER', summary:'HAKKIMDA', exp:'İŞ DENEYİMİ', pub:'YAYINLAR', citations:'ATİF METRİKLERİ' },
-  en: { personal:'PERSONAL INFO', birth:'Born', city:'City', edu:'EDUCATION', skills:'SKILLS', summary:'ABOUT ME', exp:'WORK EXPERIENCE', pub:'PUBLICATIONS', citations:'CITATION METRICS' }
+  tr: {
+    personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir', edu:'EĞİTİM',
+    skills:'BECERİLER', summary:'HAKKIMDA', exp:'İŞ DENEYİMİ', pub:'YAYINLAR', citations:'ATİF METRİKLERİ',
+    sec_photo:'📷 Fotoğraf', sec_personal:'👤 Kişisel Bilgiler', sec_summary:'📝 Kısa Özet',
+    sec_edu:'🎓 Eğitim', sec_exp:'💼 İş Deneyimi', sec_skills:'🛠 Beceriler', sec_pub:'📚 Yayınlar / Projeler',
+    f_name:'Ad Soyad', f_title:'Unvan / Pozisyon', f_birth:'Doğum Tarihi', f_city:'Şehir',
+    f_phone:'Telefon', f_email:'E-posta', f_web:'Web / ORCID',
+    f_degree:'Derece', f_school:'Okul / Bölüm', f_year:'Yıl',
+    f_position:'Pozisyon', f_company:'Kurum', f_date:'Tarih', f_desc:'Açıklama',
+    f_skillname:'Beceri adı',
+    btn_addEdu:'+ Eğitim Ekle', btn_addExp:'+ Deneyim Ekle', btn_addSkill:'+ Beceri Ekle', btn_addPub:'+ Yayın Ekle',
+    sk_beg:'Başlangıç', sk_mid:'Orta', sk_good:'İyi', sk_adv:'İleri', sk_exp:'Uzman',
+    pubCats:['SCI / SCI-Expanded Makaleler','Uluslararası Diğer İndeksli Makaleler','Uluslararası Bildiriler','Kitap / Kitap Bölümü','Projeler','Tezler'],
+    no_pub:'Bu kategoride yayın yok.'
+  },
+  en: {
+    personal:'PERSONAL INFO', birth:'Born', city:'City', edu:'EDUCATION',
+    skills:'SKILLS', summary:'ABOUT ME', exp:'WORK EXPERIENCE', pub:'PUBLICATIONS', citations:'CITATION METRICS',
+    sec_photo:'📷 Photo', sec_personal:'👤 Personal Info', sec_summary:'📝 Summary',
+    sec_edu:'🎓 Education', sec_exp:'💼 Work Experience', sec_skills:'🛠 Skills', sec_pub:'📚 Publications / Projects',
+    f_name:'Full Name', f_title:'Title / Position', f_birth:'Date of Birth', f_city:'City',
+    f_phone:'Phone', f_email:'E-mail', f_web:'Web / ORCID',
+    f_degree:'Degree', f_school:'School / Department', f_year:'Year',
+    f_position:'Position', f_company:'Institution', f_date:'Date', f_desc:'Description',
+    f_skillname:'Skill name',
+    btn_addEdu:'+ Add Education', btn_addExp:'+ Add Experience', btn_addSkill:'+ Add Skill', btn_addPub:'+ Add Publication',
+    sk_beg:'Beginner', sk_mid:'Intermediate', sk_good:'Good', sk_adv:'Advanced', sk_exp:'Expert',
+    pubCats:['SCI / SCI-Expanded Articles','Other Internationally Indexed Articles','International Proceedings','Book / Book Chapter','Projects','Theses'],
+    no_pub:'No publications in this category.'
+  }
 };
 
 let edus = [];
@@ -791,7 +819,7 @@ function renderClassicMinimalExtras(tpl) {
   }
   if (skills.length > 0) {
     html += `<div class="cv-section-title">${labels[lang].skills}</div>`;
-    const lvlLabel = l => l<=30?'Başlangıç':l<=50?'Orta':l<=65?'İyi':l<=80?'İleri':'Uzman';
+    const lb2 = labels[lang]; const lvlLabel = l => l<=30?lb2.sk_beg:l<=50?lb2.sk_mid:l<=65?lb2.sk_good:l<=80?lb2.sk_adv:lb2.sk_exp;
     skills.forEach(s => {
       html += `<div class="cv-skill-item" style="display:flex;justify-content:space-between">
         <span style="font-size:8.5pt;color:#444">${s.name}</span>
@@ -808,6 +836,8 @@ function setLang(l) {
     b.classList.toggle('active', (i===0&&l==='tr')||(i===1&&l==='en'));
   });
   const lb = labels[l];
+
+  // CV bölüm başlıkları
   document.getElementById('lbl-personal').textContent = lb.personal;
   document.getElementById('lbl-birth').textContent = lb.birth;
   document.getElementById('lbl-city2').textContent = lb.city;
@@ -817,6 +847,58 @@ function setLang(l) {
   document.getElementById('lbl-exp').textContent = lb.exp;
   document.getElementById('lbl-pub').textContent = lb.pub;
   document.getElementById('lbl-citations').textContent = lb.citations;
+
+  // Editor panel bölüm başlıkları
+  const secHeaders = document.querySelectorAll('.section-header');
+  const secKeys = ['sec_photo','sec_personal','sec_summary','sec_edu','sec_exp','sec_skills','sec_pub'];
+  secHeaders.forEach((h, i) => {
+    if (secKeys[i]) {
+      const icon = h.querySelector('.toggle-icon');
+      h.childNodes[0].textContent = lb[secKeys[i]] + ' ';
+      if (icon) h.appendChild(icon);
+    }
+  });
+
+  // Form label'ları
+  const fmap = {
+    'lbl-f-name': 'f_name', 'lbl-f-title': 'f_title', 'lbl-f-birth': 'f_birth',
+    'lbl-f-city': 'f_city', 'lbl-f-phone': 'f_phone', 'lbl-f-email': 'f_email',
+    'lbl-f-web': 'f_web'
+  };
+  Object.entries(fmap).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = lb[key];
+  });
+
+  // Ekle butonları
+  const btnMap = {
+    'btn-addEdu': 'btn_addEdu', 'btn-addExp': 'btn_addExp',
+    'btn-addSkill': 'btn_addSkill', 'btn-addPub': 'btn_addPub'
+  };
+  Object.entries(btnMap).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = lb[key];
+  });
+
+  // Yayın kategorilerini güncelle
+  if (l === 'en') {
+    pubs.forEach(p => {
+      const idx = labels.tr.pubCats.indexOf(p.cat);
+      if (idx >= 0) p.cat = labels.en.pubCats[idx];
+    });
+    activePubCat = labels.en.pubCats[labels.tr.pubCats.indexOf(activePubCat)] || labels.en.pubCats[0];
+  } else {
+    pubs.forEach(p => {
+      const idx = labels.en.pubCats.indexOf(p.cat);
+      if (idx >= 0) p.cat = labels.tr.pubCats[idx];
+    });
+    activePubCat = labels.tr.pubCats[labels.en.pubCats.indexOf(activePubCat)] || labels.tr.pubCats[0];
+  }
+
+  // Editor'leri yeniden render et
+  renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor();
+  renderSkillsCV(); renderPubCV();
+  if (currentTemplate !== 'modern') renderClassicMinimalExtras(currentTemplate);
 }
 
 function toggleSection(header) {
@@ -868,12 +950,13 @@ function setText(id, val) {
 
 // ─── EDU ──────────────────────────────────────────────
 function renderEduEditor() {
+  const lb = labels[lang];
   document.getElementById('eduList').innerHTML = edus.map((e,i) => `
     <div class="item-card">
       <button class="remove-btn" onclick="removeEdu(${i})">✕</button>
-      <div class="form-group"><label>Derece</label><input value="${e.degree}" oninput="edus[${i}].degree=this.value;renderEduCV()"></div>
-      <div class="form-group"><label>Okul / Bölüm</label><input value="${e.school}" oninput="edus[${i}].school=this.value;renderEduCV()"></div>
-      <div class="form-group"><label>Yıl</label><input value="${e.year}" oninput="edus[${i}].year=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>${lb.f_degree}</label><input value="${e.degree}" oninput="edus[${i}].degree=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>${lb.f_school}</label><input value="${e.school}" oninput="edus[${i}].school=this.value;renderEduCV()"></div>
+      <div class="form-group"><label>${lb.f_year}</label><input value="${e.year}" oninput="edus[${i}].year=this.value;renderEduCV()"></div>
     </div>`).join('');
 }
 function addEdu() { edus.push({degree:'',school:'',year:''}); renderEduEditor(); renderEduCV(); triggerCloudSave(); }
@@ -889,13 +972,14 @@ function renderEduCV() {
 
 // ─── EXP ──────────────────────────────────────────────
 function renderExpEditor() {
+  const lb = labels[lang];
   document.getElementById('expList').innerHTML = exps.map((e,i)=>`
     <div class="item-card">
       <button class="remove-btn" onclick="removeExp(${i})">✕</button>
-      <div class="form-group"><label>Pozisyon</label><input value="${e.title}" oninput="exps[${i}].title=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Kurum</label><input value="${e.company}" oninput="exps[${i}].company=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Tarih</label><input value="${e.date}" oninput="exps[${i}].date=this.value;renderExpCV()"></div>
-      <div class="form-group"><label>Açıklama</label><textarea rows="2" oninput="exps[${i}].desc=this.value;renderExpCV()">${e.desc}</textarea></div>
+      <div class="form-group"><label>${lb.f_position}</label><input value="${e.title}" oninput="exps[${i}].title=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>${lb.f_company}</label><input value="${e.company}" oninput="exps[${i}].company=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>${lb.f_date}</label><input value="${e.date}" oninput="exps[${i}].date=this.value;renderExpCV()"></div>
+      <div class="form-group"><label>${lb.f_desc}</label><textarea rows="2" oninput="exps[${i}].desc=this.value;renderExpCV()">${e.desc}</textarea></div>
     </div>`).join('');
 }
 function addExp() { exps.push({title:'',company:'',date:'',desc:''}); renderExpEditor(); renderExpCV(); triggerCloudSave(); }
@@ -911,17 +995,18 @@ function renderExpCV() {
 
 // ─── SKILLS ───────────────────────────────────────────
 function renderSkillEditor() {
+  const lb = labels[lang];
   document.getElementById('skillList').innerHTML = skills.map((s,i)=>`
     <div class="item-card">
       <button class="remove-btn" onclick="removeSkill(${i})">✕</button>
       <div class="skill-row">
-        <input value="${s.name}" placeholder="Beceri adı" oninput="skills[${i}].name=this.value;renderSkillsCV()">
+        <input value="${s.name}" placeholder="${lb.f_skillname}" oninput="skills[${i}].name=this.value;renderSkillsCV()">
         <select onchange="skills[${i}].level=parseInt(this.value);renderSkillsCV();triggerCloudSave()">
-          <option value="30" ${s.level==30?'selected':''}>Başlangıç</option>
-          <option value="50" ${s.level==50?'selected':''}>Orta</option>
-          <option value="65" ${s.level==65?'selected':''}>İyi</option>
-          <option value="80" ${s.level==80?'selected':''}>İleri</option>
-          <option value="95" ${s.level==95?'selected':''}>Uzman</option>
+          <option value="30" ${s.level==30?'selected':''}>${lb.sk_beg}</option>
+          <option value="50" ${s.level==50?'selected':''}>${lb.sk_mid}</option>
+          <option value="65" ${s.level==65?'selected':''}>${lb.sk_good}</option>
+          <option value="80" ${s.level==80?'selected':''}>${lb.sk_adv}</option>
+          <option value="95" ${s.level==95?'selected':''}>${lb.sk_exp}</option>
         </select>
       </div>
     </div>`).join('');
@@ -929,7 +1014,8 @@ function renderSkillEditor() {
 function addSkill() { skills.push({name:'',level:65}); renderSkillEditor(); renderSkillsCV(); triggerCloudSave(); }
 function removeSkill(i) { skills.splice(i,1); renderSkillEditor(); renderSkillsCV(); triggerCloudSave(); }
 function renderSkillsCV() {
-  const lvlLabel = l => l<=30?'Başlangıç':l<=50?'Orta':l<=65?'İyi':l<=80?'İleri':'Uzman';
+  const lb = labels[lang];
+  const lvlLabel = l => l<=30?lb.sk_beg:l<=50?lb.sk_mid:l<=65?lb.sk_good:l<=80?lb.sk_adv:lb.sk_exp;
   document.getElementById('cv-skills-list').innerHTML = skills.map(s=>`
     <div class="cv-skill-item">
       <div class="cv-skill-name"><span>${s.name}</span><span style="color:var(--gold);font-size:7.5pt">${lvlLabel(s.level)}</span></div>
@@ -940,7 +1026,9 @@ function renderSkillsCV() {
 // ─── PUBS ─────────────────────────────────────────────
 function renderPubEditor() {
   const el = document.getElementById('pubList');
-  const tabs = pubCategories.map(c=>`
+  const lb = labels[lang];
+  const cats = lb.pubCats;
+  const tabs = cats.map(c=>`
     <button onclick="activePubCat='${c}';renderPubEditor()"
       style="padding:5px 10px;margin:2px;border-radius:5px;border:1.5px solid var(--gold);
       background:${activePubCat===c?'var(--gold)':'transparent'};
@@ -949,7 +1037,7 @@ function renderPubEditor() {
   `).join('');
   const catPubs = pubs.map((p,i)=>({...p,i})).filter(p=>p.cat===activePubCat);
   el.innerHTML = `<div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:2px">${tabs}</div>` +
-    (catPubs.length===0 ? '<p style="font-size:.8rem;color:#999;margin-bottom:8px">Bu kategoride yayın yok.</p>'
+    (catPubs.length===0 ? `<p style="font-size:.8rem;color:#999;margin-bottom:8px">${lb.no_pub}</p>`
     : catPubs.map(p=>`
       <div class="item-card">
         <button class="remove-btn" onclick="removePub(${p.i})">✕</button>
