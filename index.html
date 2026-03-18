@@ -1836,15 +1836,6 @@ async function deleteAccount() {
         <button class="btn-parse scholar" onclick="parseScholar()">🔄 Otomatik Güncelle</button>
         <div id="scholarParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
 
-        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
-        <div class="cit-manual-inputs">
-          <div><label>Toplam Atıf</label><input type="number" id="scholar-man-cit" placeholder="örn. 145" min="0"></div>
-          <div><label>h-index</label><input type="number" id="scholar-man-h" placeholder="örn. 8" min="0"></div>
-          <div><label>i10-index</label><input type="number" id="scholar-man-i10" placeholder="örn. 5" min="0"></div>
-        </div>
-        <button class="btn-parse scholar" style="margin-top:8px" onclick="applyScholarManual()">✅ Manuel Kaydet</button>
-        <div id="scholarManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
       </div>
 
       <!-- ══ WOS ══ -->
@@ -1861,17 +1852,6 @@ async function deleteAccount() {
         <button class="btn-parse wos" onclick="parseWoS()">🔄 Otomatik Güncelle</button>
         <div id="wosParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
 
-        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--wos-blue);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
-        <div style="background:#e6f0f8;border-radius:7px;padding:10px 12px;margin-bottom:10px;font-size:.78rem;color:#0057a8;line-height:1.5">
-          💡 <strong>WoS Researcher Profile</strong> sayfanızda sağ panelde "Citation Metrics" kutusunda Atıf ve h-index değerlerini görebilirsiniz.
-        </div>
-        <div class="cit-manual-inputs">
-          <div><label>Toplam Atıf</label><input type="number" id="wos-man-cit" placeholder="örn. 87" min="0" style="border-color:#b3cde3"></div>
-          <div><label>h-index</label><input type="number" id="wos-man-h" placeholder="örn. 6" min="0" style="border-color:#b3cde3"></div>
-        </div>
-        <button class="btn-parse wos" style="margin-top:8px" onclick="applyWosManual()">✅ Manuel Kaydet</button>
-        <div id="wosManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
       </div>
 
       <!-- ══ SCOPUS ══ -->
@@ -1888,17 +1868,6 @@ async function deleteAccount() {
         <button class="btn-parse scopus" onclick="parseScopus()">🔄 Otomatik Güncelle</button>
         <div id="scopusParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
 
-        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--scopus-orange);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
-        <div style="background:#fef2e8;border-radius:7px;padding:10px 12px;margin-bottom:10px;font-size:.78rem;color:#c05a00;line-height:1.5">
-          💡 Scopus Author Profile sayfasında sol üstte <strong>"h-index"</strong> ve <strong>"Cited by"</strong> değerleri doğrudan görünür.
-        </div>
-        <div class="cit-manual-inputs">
-          <div><label>Toplam Atıf</label><input type="number" id="scopus-man-cit" placeholder="örn. 112" min="0" style="border-color:#f5c49a"></div>
-          <div><label>h-index</label><input type="number" id="scopus-man-h" placeholder="örn. 7" min="0" style="border-color:#f5c49a"></div>
-        </div>
-        <button class="btn-parse scopus" style="margin-top:8px" onclick="applyScopusManual()">✅ Manuel Kaydet</button>
-        <div id="scopusManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
       </div>
 
     </div>
