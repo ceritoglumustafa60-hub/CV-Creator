@@ -18,6 +18,8 @@
     --light: #f3f4f6;
     --border: #d1c9b8;
     --white: #ffffff;
+    --wos-blue: #0057a8;
+    --scopus-orange: #e87722;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -326,6 +328,106 @@
   }
   .cv-pub-item::before { content: '•'; position:absolute; left:0; color: var(--gold); font-weight:700; }
 
+  /* Citation metrics box on CV */
+  .cv-metrics-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .cv-metric-card {
+    background: #f7f4ef;
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    border-left: 3px solid var(--gold);
+  }
+  .cv-metric-card.wos  { border-left-color: var(--wos-blue); }
+  .cv-metric-card.scopus { border-left-color: var(--scopus-orange); }
+  .cv-metric-val { font-size: 13pt; font-weight: 700; color: var(--navy); line-height: 1.1; }
+  .cv-metric-lbl { font-size: 7pt; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+  .cv-metric-src { font-size: 7pt; font-weight: 700; margin-top: 1px; }
+  .cv-metric-src.scholar { color: #4285f4; }
+  .cv-metric-src.wos { color: var(--wos-blue); }
+  .cv-metric-src.scopus { color: var(--scopus-orange); }
+
+  /* Citation modal styles */
+  .cit-source-tabs { display:flex; border-bottom:2px solid #f0ece3; margin-bottom:18px; }
+  .cit-tab-btn {
+    padding:10px 18px; border:none; background:transparent;
+    cursor:pointer; font-family:'Source Sans 3',sans-serif; font-size:.88rem;
+    font-weight:600; color:#aaa; border-bottom:2px solid transparent;
+    margin-bottom:-2px; transition:all .2s; display:flex; align-items:center; gap:6px;
+  }
+  .cit-tab-btn.active { color:var(--navy); border-bottom-color:var(--gold); }
+  .cit-tab-btn.wos.active { color:var(--wos-blue); border-bottom-color:var(--wos-blue); }
+  .cit-tab-btn.scopus.active { color:var(--scopus-orange); border-bottom-color:var(--scopus-orange); }
+
+  .cit-tab-content { display:none; }
+  .cit-tab-content.active { display:block; }
+
+  .source-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:700;
+    margin-bottom:12px;
+  }
+  .source-badge.scholar { background:#e8f0fe; color:#1967d2; }
+  .source-badge.wos { background:#e6f0f8; color:var(--wos-blue); }
+  .source-badge.scopus { background:#fef2e8; color:#c05a00; }
+
+  .cit-step {
+    display:flex; gap:10px; margin-bottom:8px; font-size:.83rem; color:#555; line-height:1.5;
+  }
+  .cit-step-num {
+    width:20px; height:20px; border-radius:50%; background:var(--navy); color:#fff;
+    font-size:.7rem; font-weight:700; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; margin-top:1px;
+  }
+  .cit-step-num.wos { background:var(--wos-blue); }
+  .cit-step-num.scopus { background:var(--scopus-orange); }
+
+  .cit-manual-inputs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .cit-manual-inputs label { font-size:.72rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:.4px; display:block; margin-bottom:3px; }
+  .cit-manual-inputs input {
+    width:100%; padding:8px 10px; border:1.5px solid var(--border);
+    border-radius:6px; font-family:'Source Sans 3',sans-serif; font-size:.9rem;
+    color:#333; background:var(--cream); transition:border .2s;
+  }
+  .cit-manual-inputs input:focus { outline:none; border-color:var(--gold); background:#fff; }
+
+  .btn-parse {
+    width:100%; margin-top:12px; padding:10px;
+    border:none; border-radius:7px; cursor:pointer;
+    font-family:'Source Sans 3',sans-serif; font-size:.9rem; font-weight:700;
+    transition:all .2s;
+  }
+  .btn-parse.scholar { background:var(--navy); color:#fff; }
+  .btn-parse.wos { background:var(--wos-blue); color:#fff; }
+  .btn-parse.scopus { background:var(--scopus-orange); color:#fff; }
+  .btn-parse:hover { opacity:.9; transform:translateY(-1px); }
+
+  .cit-result-row {
+    display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;
+  }
+  .cit-result-chip {
+    padding:5px 14px; border-radius:20px; font-size:.82rem; font-weight:700;
+    display:flex; align-items:center; gap:5px;
+  }
+  .cit-result-chip.scholar { background:#e8f0fe; color:#1967d2; }
+  .cit-result-chip.wos { background:#e6f0f8; color:var(--wos-blue); }
+  .cit-result-chip.scopus { background:#fef2e8; color:#c05a00; }
+
+  /* Current stats summary in modal */
+  .cit-current-summary {
+    background:#f7f4ef; border-radius:8px; padding:12px 14px; margin-bottom:16px;
+    border:1px solid var(--border);
+  }
+  .cit-current-summary-title { font-size:.72rem; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+  .cit-current-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+  .cit-current-item { text-align:center; }
+  .cit-current-val { font-size:1.1rem; font-weight:700; color:var(--navy); }
+  .cit-current-lbl { font-size:.68rem; color:#888; }
+
   .profile-menu-item {
     display:block; width:100%; padding:10px 20px;
     background:transparent; border:none; text-align:left;
@@ -360,6 +462,8 @@
   }
   .profile-save-btn:hover { background:var(--gold-light); }
   .profile-save-btn:disabled { opacity:.6; cursor:not-allowed; }
+
+  .tpl-menu-item {
     display:block; width:100%; padding:11px 18px;
     background:transparent; border:none; text-align:left;
     font-family:'Source Sans 3',sans-serif; font-size:.88rem;
@@ -368,13 +472,10 @@
   .tpl-menu-item:hover { background:#f3f4f6; }
   .tpl-menu-item.active { background:#faf8f3; color:var(--navy); font-weight:700; }
 
-  /* Klasik şablon stilleri */
+  /* Klasik şablon */
   #cvDocument.klasik .cv-header {
-    background: #fff;
-    color: #2c3e50;
-    text-align: center;
-    padding: 28px 32px 20px;
-    border-bottom: 2px solid #2c3e50;
+    background: #fff; color: #2c3e50; text-align: center;
+    padding: 28px 32px 20px; border-bottom: 2px solid #2c3e50;
   }
   #cvDocument.klasik .cv-name { color: #2c3e50; font-size: 20pt; }
   #cvDocument.klasik .cv-title { color: #555; letter-spacing: 1px; }
@@ -382,26 +483,15 @@
   #cvDocument.klasik .cv-contact-item span { color: #444; }
   #cvDocument.klasik .cv-gold-bar { background: #2c3e50; height: 1px; }
   #cvDocument.klasik .cv-body { display: block; }
-  #cvDocument.klasik .cv-sidebar {
-    display: none;
-  }
+  #cvDocument.klasik .cv-sidebar { display: none; }
   #cvDocument.klasik .cv-main { padding: 22px 32px; }
-  #cvDocument.klasik .cv-section-title {
-    border-left: 3px solid #2c3e50;
-    border-bottom: none;
-    padding-left: 10px;
-    padding-bottom: 0;
-    color: #2c3e50;
-  }
+  #cvDocument.klasik .cv-section-title { border-left: 3px solid #2c3e50; border-bottom: none; padding-left: 10px; padding-bottom: 0; color: #2c3e50; }
   #cvDocument.klasik .cv-summary { border-left-color: #2c3e50; background: #f8f9fa; }
   #cvDocument.klasik .cv-pub-item::before { color: #2c3e50; }
 
-  /* Minimal şablon stilleri */
+  /* Minimal şablon */
   #cvDocument.minimal .cv-header {
-    background: #fff;
-    color: #111;
-    padding: 32px 32px 24px;
-    border-bottom: 1px solid #eee;
+    background: #fff; color: #111; padding: 32px 32px 24px; border-bottom: 1px solid #eee;
   }
   #cvDocument.minimal .cv-name { color: #111; font-size: 22pt; letter-spacing: -0.5px; }
   #cvDocument.minimal .cv-title { color: #999; font-size: 9pt; letter-spacing: 2px; }
@@ -411,17 +501,12 @@
   #cvDocument.minimal .cv-body { display: block; }
   #cvDocument.minimal .cv-sidebar { display: none; }
   #cvDocument.minimal .cv-main { padding: 24px 32px; }
-  #cvDocument.minimal .cv-section-title {
-    border-bottom: 1px solid #eee;
-    color: #999;
-    font-size: 8pt;
-    letter-spacing: 2px;
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 700;
-  }
+  #cvDocument.minimal .cv-section-title { border-bottom: 1px solid #eee; color: #999; font-size: 8pt; letter-spacing: 2px; font-family: 'Source Sans 3', sans-serif; font-weight: 700; }
   #cvDocument.minimal .cv-summary { background: #fff; border-left-color: #ddd; }
   #cvDocument.minimal .cv-exp-title { color: #111; }
   #cvDocument.minimal .cv-pub-item::before { color: #ccc; }
+
+  @media (max-width:900px) {
     .workspace { grid-template-columns:1fr; }
     .editor-panel { max-height:none; }
     .preview-panel { max-height:none; }
@@ -454,7 +539,10 @@
         <button onclick="setTemplate('minimal')" class="tpl-menu-item" id="tpl-minimal">🪶 Minimal</button>
       </div>
     </div>
-    <button class="btn btn-outline" onclick="openScholarModal()" id="scholarBtn" title="Google Scholar atıf güncelle">🎓 Scholar</button>
+    <!-- YENİ: Atıf butonu (Scholar + WoS + Scopus) -->
+    <button class="btn btn-outline" onclick="openCitModal()" id="citBtn" title="Atıf ve h-index güncelle" style="border-color:rgba(255,255,255,.5)">
+      📊 Atıf/H-index ▾
+    </button>
     <button class="btn btn-green" onclick="openAIModal()" title="AI ile yayın ekle">🤖 AI Ekle</button>
     <div class="lang-toggle">
       <button class="active" onclick="setLang('tr')">TR</button>
@@ -567,7 +655,7 @@
           <div class="cv-contact-row">
             <div class="cv-contact-item">📍 <span id="cv-city">Tokat / Siirt</span></div>
             <div class="cv-contact-item">📞 <span id="cv-phone">+90 532 789 33 14</span></div>
-            <div class="cv-contact-item">✉ <span id="cv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f2f4e3f8e5fef6fde4d1e2f8f8e3e5bff4f5e4bfe5e3">[email&#160;protected]</a></span></div>
+            <div class="cv-contact-item">✉ <span id="cv-email">ceritoglu@siirt.edu.tr</span></div>
             <div class="cv-contact-item" id="cv-web-wrap" style="display:none">🌐 <span id="cv-web"></span></div>
           </div>
         </div>
@@ -595,11 +683,13 @@
           </div>
           <div class="cv-section-title" id="lbl-exp">İŞ DENEYİMİ</div>
           <div id="cv-exp-list"></div>
-          <div class="cv-section-title">ATİF / CITATIONS</div>
-          <div id="citationBox" style="background:#f0ede6;border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:12px">
-            <div style="font-size:9pt;color:#333">Toplam Atıf: <strong style="color:var(--navy)" id="citCount">—</strong> &nbsp;|&nbsp; h-index: <strong style="color:var(--navy)" id="hIndex">—</strong></div>
-            <div style="font-size:8pt;color:#777;margin-top:2px" id="citDate">Google Akademik</div>
+
+          <!-- ATİF METRİKLERİ – CV üzerinde görünür -->
+          <div class="cv-section-title" id="lbl-citations">ATİF METRİKLERİ / CITATION METRICS</div>
+          <div class="cv-metrics-box" id="cvMetricsBox">
+            <!-- JS ile doldurulur -->
           </div>
+
           <div class="cv-section-title" id="lbl-pub">YAYINLAR / PUBLICATIONS</div>
           <div id="cv-pub-list"></div>
         </div>
@@ -610,13 +700,13 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ─── DATA ───────────────────────────────────────────────
 let lang = 'tr';
 
 const labels = {
-  tr: { personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir', edu:'EĞİTİM', skills:'BECERİLER', summary:'HAKKIMDA', exp:'İŞ DENEYİMİ', pub:'YAYINLAR' },
-  en: { personal:'PERSONAL INFO', birth:'Born', city:'City', edu:'EDUCATION', skills:'SKILLS', summary:'ABOUT ME', exp:'WORK EXPERIENCE', pub:'PUBLICATIONS' }
+  tr: { personal:'KİŞİSEL BİLGİLER', birth:'Doğum', city:'Şehir', edu:'EĞİTİM', skills:'BECERİLER', summary:'HAKKIMDA', exp:'İŞ DENEYİMİ', pub:'YAYINLAR', citations:'ATİF METRİKLERİ' },
+  en: { personal:'PERSONAL INFO', birth:'Born', city:'City', edu:'EDUCATION', skills:'SKILLS', summary:'ABOUT ME', exp:'WORK EXPERIENCE', pub:'PUBLICATIONS', citations:'CITATION METRICS' }
 };
 
 let edus = [];
@@ -633,15 +723,22 @@ const pubCategories = [
 ];
 
 let pubs = [];
-
 let photoData = null;
 let activePubCat = pubCategories[0];
+
+// ─── ATİF VERİLERİ ─────────────────────────────────────
+// Her kaynak için ayrı nesne
+let citationData = {
+  scholar: { citations: null, hindex: null, i10index: null, date: null },
+  wos:     { citations: null, hindex: null, date: null },
+  scopus:  { citations: null, hindex: null, date: null }
+};
 
 // ─── SUPABASE ────────────────────────────────────────
 const SUPABASE_URL = "https://igrljwxyuwqagtnbhnmw.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlncmxqd3h5dXdxYWd0bmJobm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODU1NjAsImV4cCI6MjA4OTA2MTU2MH0.POx1bBRMZne44r_5qzmSbYNuK1bl1FeW2CJUV_D2RY8";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-let CV_ID = 'mustafa_ceritoglu'; // geçici, oturum açınca user_id ile değişir
+let CV_ID = 'mustafa_ceritoglu';
 let cloudSyncTimer = null;
 let isSyncing = false;
 
@@ -660,33 +757,20 @@ function toggleTemplateMenu() {
   menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('#templateMenu') && !e.target.closest('#templateBtn')) {
-    const menu = document.getElementById('templateMenu');
-    if (menu) menu.style.display = 'none';
-  }
-});
-
 function setTemplate(tpl) {
   currentTemplate = tpl;
   const doc = document.getElementById('cvDocument');
   doc.className = tpl === 'modern' ? '' : tpl;
-
-  // Menü butonlarını güncelle
   ['modern','klasik','minimal'].forEach(t => {
     const btn = document.getElementById('tpl-' + t);
     if (btn) btn.classList.toggle('active', t === tpl);
   });
-
-  // Klasik ve Minimal için sidebar verilerini main'e ekle
   renderClassicMinimalExtras(tpl);
-
   document.getElementById('templateMenu').style.display = 'none';
   triggerCloudSave();
 }
 
 function renderClassicMinimalExtras(tpl) {
-  // Klasik ve Minimal'de sidebar gizli — eğitim ve becerileri main'e ekle
   let extraEl = document.getElementById('cv-sidebar-extras');
   if (!extraEl) {
     extraEl = document.createElement('div');
@@ -694,13 +778,7 @@ function renderClassicMinimalExtras(tpl) {
     const expList = document.getElementById('cv-exp-list');
     expList.parentNode.insertBefore(extraEl, expList.parentNode.firstChild);
   }
-
-  if (tpl === 'modern') {
-    extraEl.innerHTML = '';
-    return;
-  }
-
-  // Eğitim ve beceriler için HTML
+  if (tpl === 'modern') { extraEl.innerHTML = ''; return; }
   let html = '';
   if (edus.length > 0) {
     html += `<div class="cv-section-title" style="margin-top:0">${labels[lang].edu}</div>`;
@@ -723,6 +801,7 @@ function renderClassicMinimalExtras(tpl) {
   }
   extraEl.innerHTML = html;
 }
+
 function setLang(l) {
   lang = l;
   document.querySelectorAll('.lang-toggle button').forEach((b,i)=>{
@@ -737,6 +816,7 @@ function setLang(l) {
   document.getElementById('lbl-summary').textContent = lb.summary;
   document.getElementById('lbl-exp').textContent = lb.exp;
   document.getElementById('lbl-pub').textContent = lb.pub;
+  document.getElementById('lbl-citations').textContent = lb.citations;
 }
 
 function toggleSection(header) {
@@ -893,6 +973,314 @@ function renderPubCV() {
   list.innerHTML = html;
 }
 
+// ─── ATİF METRİKLERİ – CV render ──────────────────────
+function renderCVMetrics() {
+  const box = document.getElementById('cvMetricsBox');
+  const lbl = document.getElementById('lbl-citations');
+  const s = citationData.scholar;
+  const w = citationData.wos;
+  const sc = citationData.scopus;
+
+  const hasAny = s.citations||s.hindex||w.citations||w.hindex||sc.citations||sc.hindex;
+  if (!hasAny) { box.innerHTML = '<div style="font-size:8.5pt;color:#aaa;font-style:italic">Atıf verisi henüz eklenmedi.</div>'; return; }
+
+  lbl.style.display = 'block';
+
+  const fmt = v => (v===null||v===undefined||v==='') ? '—' : v;
+  let cards = '';
+
+  if (s.citations!==null || s.hindex!==null) {
+    cards += `
+      <div class="cv-metric-card">
+        <div class="cv-metric-src scholar">Google Scholar</div>
+        <div style="display:flex;gap:14px;margin-top:6px;justify-content:center">
+          <div><div class="cv-metric-val">${fmt(s.citations)}</div><div class="cv-metric-lbl">Atıf</div></div>
+          <div><div class="cv-metric-val">${fmt(s.hindex)}</div><div class="cv-metric-lbl">h-index</div></div>
+          ${s.i10index!==null?`<div><div class="cv-metric-val">${fmt(s.i10index)}</div><div class="cv-metric-lbl">i10</div></div>`:''}
+        </div>
+        ${s.date?`<div style="font-size:7pt;color:#aaa;margin-top:4px">${s.date}</div>`:''}
+      </div>`;
+  }
+
+  if (w.citations!==null || w.hindex!==null) {
+    cards += `
+      <div class="cv-metric-card wos">
+        <div class="cv-metric-src wos">Web of Science</div>
+        <div style="display:flex;gap:14px;margin-top:6px;justify-content:center">
+          <div><div class="cv-metric-val">${fmt(w.citations)}</div><div class="cv-metric-lbl">Atıf</div></div>
+          <div><div class="cv-metric-val">${fmt(w.hindex)}</div><div class="cv-metric-lbl">h-index</div></div>
+        </div>
+        ${w.date?`<div style="font-size:7pt;color:#aaa;margin-top:4px">${w.date}</div>`:''}
+      </div>`;
+  }
+
+  if (sc.citations!==null || sc.hindex!==null) {
+    cards += `
+      <div class="cv-metric-card scopus">
+        <div class="cv-metric-src scopus">Scopus</div>
+        <div style="display:flex;gap:14px;margin-top:6px;justify-content:center">
+          <div><div class="cv-metric-val">${fmt(sc.citations)}</div><div class="cv-metric-lbl">Atıf</div></div>
+          <div><div class="cv-metric-val">${fmt(sc.hindex)}</div><div class="cv-metric-lbl">h-index</div></div>
+        </div>
+        ${sc.date?`<div style="font-size:7pt;color:#aaa;margin-top:4px">${sc.date}</div>`:''}
+      </div>`;
+  }
+
+  box.innerHTML = cards || '<div style="font-size:8.5pt;color:#aaa;font-style:italic">Atıf verisi henüz eklenmedi.</div>';
+}
+
+// ─── ATİF MODAL AÇMA/KAPAMA ──────────────────────────
+function openCitModal() {
+  document.getElementById('citModal').style.display = 'flex';
+  switchCitTab('scholar');
+  updateCitCurrentSummary();
+}
+function closeCitModal() {
+  document.getElementById('citModal').style.display = 'none';
+}
+
+function switchCitTab(tab) {
+  document.querySelectorAll('.cit-tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.cit-tab-btn').forEach(el => el.classList.remove('active'));
+  const content = document.getElementById('citTab-' + tab);
+  const btn = document.getElementById('citTabBtn-' + tab);
+  if (content) content.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function updateCitCurrentSummary() {
+  // Scholar
+  const s = citationData.scholar;
+  const w = citationData.wos;
+  const sc = citationData.scopus;
+  const fmt = v => (v===null||v===undefined||v==='') ? '—' : v;
+
+  ['scholar','wos','scopus'].forEach(src => {
+    const d = citationData[src];
+    const citEl = document.getElementById(`cur-${src}-cit`);
+    const hidxEl = document.getElementById(`cur-${src}-h`);
+    if (citEl) citEl.textContent = fmt(d.citations);
+    if (hidxEl) hidxEl.textContent = fmt(d.hindex);
+  });
+}
+
+// ─── SCHOLAR PARSE ────────────────────────────────────
+function parseScholar() {
+  const html = document.getElementById('scholarPasteArea').value;
+  const resultEl = document.getElementById('scholarParseResult');
+  resultEl.innerHTML = '';
+  if (!html || html.length < 100) {
+    showCitResult('scholarParseResult', '❌ Lütfen Scholar sayfa kaynağını yapıştırın.', 'error');
+    return;
+  }
+  let citations = null, hindex = null, i10index = null;
+  const nums = [...html.matchAll(/gsc_rsb_std[^>]*>(\d+)/g)].map(m => parseInt(m[1]));
+  if (nums.length >= 3) { citations = nums[0]; hindex = nums[2]; i10index = nums[4] ?? null; }
+  else if (nums.length >= 2) { citations = nums[0]; hindex = nums[2] ?? null; }
+
+  if (citations === null && hindex === null) {
+    showCitResult('scholarParseResult', '❌ Atıf bilgisi bulunamadı. Sayfa kaynağını doğru yapıştırdığınızdan emin olun.', 'error');
+    return;
+  }
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.scholar = { citations, hindex, i10index, date: today };
+  renderCVMetrics();
+  updateCitCurrentSummary();
+  triggerCloudSave();
+  document.getElementById('scholarPasteArea').value = '';
+  showCitResult('scholarParseResult',
+    `✅ Scholar güncellendi! Atıf: <strong>${citations??'?'}</strong> · h-index: <strong>${hindex??'?'}</strong>${i10index!==null?' · i10: <strong>'+i10index+'</strong>':''}`,
+    'success');
+}
+
+function applyScholarManual() {
+  const cit = parseInt(document.getElementById('scholar-man-cit').value) || null;
+  const h   = parseInt(document.getElementById('scholar-man-h').value)   || null;
+  const i10 = parseInt(document.getElementById('scholar-man-i10').value) || null;
+  if (!cit && !h) { showCitResult('scholarManResult','❌ En az bir değer girin.','error'); return; }
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.scholar = { citations: cit, hindex: h, i10index: i10, date: today };
+  renderCVMetrics(); updateCitCurrentSummary(); triggerCloudSave();
+  showCitResult('scholarManResult','✅ Scholar verileri kaydedildi.','success');
+}
+
+// ─── WOS PARSE ────────────────────────────────────────
+function parseWoS() {
+  const html = document.getElementById('wosPasteArea').value;
+  const resultEl = document.getElementById('wosParseResult');
+  resultEl.innerHTML = '';
+
+  if (!html || html.length < 50) {
+    showCitResult('wosParseResult','❌ Lütfen WoS sayfasından metin yapıştırın.','error');
+    return;
+  }
+
+  let citations = null, hindex = null;
+
+  // Yöntem 1: "Sum of Times Cited without self-citations" veya "Times Cited" sayısı
+  const citPatterns = [
+    /Times Cited[^\d]*(\d[\d,]*)/i,
+    /Sum of Times Cited[^\d]*(\d[\d,]*)/i,
+    /Total Times Cited[^\d]*(\d[\d,]*)/i,
+    /Citation Count[^\d]*(\d[\d,]*)/i,
+    /Cited by[^\d]*(\d[\d,]*)/i,
+    /(\d[\d,]+)\s*Times Cited/i,
+    /"timesCited"\s*:\s*"?(\d+)"?/i,
+    /timesCitedCount[^>]*>(\d+)/i,
+  ];
+
+  for (const pat of citPatterns) {
+    const m = html.match(pat);
+    if (m) { citations = parseInt(m[1].replace(/,/g,'')); break; }
+  }
+
+  // Yöntem 2: h-index
+  const hindexPatterns = [
+    /h-index[^\d]*(\d+)/i,
+    /h index[^\d]*(\d+)/i,
+    /"hIndex"\s*:\s*"?(\d+)"?/i,
+    /hIndex[^>]*>(\d+)/i,
+  ];
+
+  for (const pat of hindexPatterns) {
+    const m = html.match(pat);
+    if (m) { hindex = parseInt(m[1]); break; }
+  }
+
+  // Yöntem 3: JSON içinde arama (WoS API response)
+  if (!citations) {
+    try {
+      const jsonMatch = html.match(/\{[\s\S]*"metrics"[\s\S]*\}/);
+      if (jsonMatch) {
+        const data = JSON.parse(jsonMatch[0]);
+        citations = data?.metrics?.citationCount || data?.timesCited || null;
+        hindex = data?.metrics?.hIndex || data?.hIndex || null;
+      }
+    } catch(e) {}
+  }
+
+  // Yöntem 4: Genel sayı çekme (son çare)
+  if (!citations && !hindex) {
+    const allNums = [...html.matchAll(/(\d[\d,]+)/g)].map(m=>parseInt(m[1].replace(/,/g,'')));
+    if (allNums.length >= 1) {
+      citations = allNums.find(n => n > 0 && n < 100000) ?? null;
+    }
+  }
+
+  if (!citations && !hindex) {
+    showCitResult('wosParseResult',
+      '❌ Otomatik parse başarısız. <a href="#" onclick="document.getElementById(\'wos-man-cit\').focus();return false" style="color:var(--wos-blue)">Manuel girişi</a> kullanın.',
+      'error');
+    return;
+  }
+
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.wos = { citations, hindex, date: today };
+  renderCVMetrics(); updateCitCurrentSummary(); triggerCloudSave();
+  document.getElementById('wosPasteArea').value = '';
+  showCitResult('wosParseResult',
+    `✅ WoS güncellendi! Atıf: <strong>${citations??'?'}</strong>${hindex!==null?' · h-index: <strong>'+hindex+'</strong>':''}`,
+    'success');
+}
+
+function applyWosManual() {
+  const cit = parseInt(document.getElementById('wos-man-cit').value) || null;
+  const h   = parseInt(document.getElementById('wos-man-h').value)   || null;
+  if (!cit && !h) { showCitResult('wosManResult','❌ En az bir değer girin.','error'); return; }
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.wos = { citations: cit, hindex: h, date: today };
+  renderCVMetrics(); updateCitCurrentSummary(); triggerCloudSave();
+  showCitResult('wosManResult','✅ WoS verileri kaydedildi.','success');
+}
+
+// ─── SCOPUS PARSE ─────────────────────────────────────
+function parseScopus() {
+  const html = document.getElementById('scopusPasteArea').value;
+  const resultEl = document.getElementById('scopusParseResult');
+  resultEl.innerHTML = '';
+
+  if (!html || html.length < 50) {
+    showCitResult('scopusParseResult','❌ Lütfen Scopus sayfasından metin yapıştırın.','error');
+    return;
+  }
+
+  let citations = null, hindex = null;
+
+  const citPatterns = [
+    /Citations[^\d]*(\d[\d,]*)/i,
+    /Cited by[^\d]*(\d[\d,]*)/i,
+    /"citedByCount"\s*:\s*"?(\d+)"?/i,
+    /"citation_count"\s*:\s*"?(\d+)"?/i,
+    /Total citations?[^\d]*(\d[\d,]*)/i,
+    /(\d[\d,]+)\s*(?:document)?s?\s*cit/i,
+  ];
+
+  for (const pat of citPatterns) {
+    const m = html.match(pat);
+    if (m) { citations = parseInt(m[1].replace(/,/g,'')); break; }
+  }
+
+  const hindexPatterns = [
+    /h-index[^\d]*(\d+)/i,
+    /h index[^\d]*(\d+)/i,
+    /"hIndex"\s*:\s*"?(\d+)"?/i,
+    /"h_index"\s*:\s*"?(\d+)"?/i,
+    /hIndex[^>]*>(\d+)/i,
+  ];
+
+  for (const pat of hindexPatterns) {
+    const m = html.match(pat);
+    if (m) { hindex = parseInt(m[1]); break; }
+  }
+
+  // JSON içinde arama
+  if (!citations || !hindex) {
+    try {
+      const jsonMatch = html.match(/"metrics"\s*:\s*\{[^}]+\}/);
+      if (jsonMatch) {
+        const partial = '{' + jsonMatch[0] + '}';
+        const data = JSON.parse(partial);
+        citations = citations ?? data?.metrics?.citationCount ?? null;
+        hindex = hindex ?? data?.metrics?.hIndex ?? null;
+      }
+    } catch(e) {}
+  }
+
+  if (!citations && !hindex) {
+    showCitResult('scopusParseResult',
+      '❌ Otomatik parse başarısız. <a href="#" onclick="document.getElementById(\'scopus-man-cit\').focus();return false" style="color:var(--scopus-orange)">Manuel girişi</a> kullanın.',
+      'error');
+    return;
+  }
+
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.scopus = { citations, hindex, date: today };
+  renderCVMetrics(); updateCitCurrentSummary(); triggerCloudSave();
+  document.getElementById('scopusPasteArea').value = '';
+  showCitResult('scopusParseResult',
+    `✅ Scopus güncellendi! Atıf: <strong>${citations??'?'}</strong>${hindex!==null?' · h-index: <strong>'+hindex+'</strong>':''}`,
+    'success');
+}
+
+function applyScopusManual() {
+  const cit = parseInt(document.getElementById('scopus-man-cit').value) || null;
+  const h   = parseInt(document.getElementById('scopus-man-h').value)   || null;
+  if (!cit && !h) { showCitResult('scopusManResult','❌ En az bir değer girin.','error'); return; }
+  const today = new Date().toLocaleDateString('tr-TR', {day:'numeric',month:'long',year:'numeric'});
+  citationData.scopus = { citations: cit, hindex: h, date: today };
+  renderCVMetrics(); updateCitCurrentSummary(); triggerCloudSave();
+  showCitResult('scopusManResult','✅ Scopus verileri kaydedildi.','success');
+}
+
+function showCitResult(elId, msg, type) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = msg;
+  el.style.color = type === 'error' ? '#dc2626' : '#059669';
+  el.style.display = 'block';
+  if (type === 'success') setTimeout(()=>{ el.innerHTML=''; el.style.display='none'; }, 4000);
+}
+
 // ─── SIMILARITY ────────────────────────────────────────
 function similarity(a, b) {
   const wa = new Set(a.toLowerCase().split(/\s+/));
@@ -914,15 +1302,12 @@ function togglePDFMenu() {
   m.style.display = m.style.display === 'none' ? 'block' : 'none';
 }
 
-// PDF önizleme — yeni sekmede aç
 async function previewPDF() {
   document.getElementById('pdfMenu').style.display = 'none';
   const el = document.getElementById('cvDocument');
-  // Geçici olarak görünür yap
   const panel = document.querySelector('.preview-panel');
   const wasHidden = panel.style.display === 'none' || getComputedStyle(panel).display === 'none';
   if (wasHidden) { panel.style.cssText = 'display:flex!important'; }
-  
   try {
     const blob = await html2pdf().set({
       margin: [8,8,8,8],
@@ -933,15 +1318,14 @@ async function previewPDF() {
     const url = URL.createObjectURL(blob);
     window.open(url, '_blank');
   } catch(err) { alert('PDF önizleme hatası: ' + err.message); }
-  
   if (wasHidden) { panel.style.cssText = ''; }
 }
 
-// Word önizleme — yeni sekmede HTML olarak aç
 function previewWord() {
   document.getElementById('wordMenu').style.display = 'none';
   const v = id => document.getElementById(id)?.value || '';
   const name=v('name'), title=v('title'), phone=v('phone'), email=v('email'), city=v('city'), birth=v('birthdate'), summary=v('summary');
+  const s=citationData.scholar, w=citationData.wos, sc=citationData.scopus;
   let html = `<!DOCTYPE html><html><head><meta charset='utf-8'><style>
     body{font-family:Calibri,sans-serif;font-size:11pt;margin:2cm;max-width:800px}
     h1{font-size:20pt;color:#1a2744;margin-bottom:2pt}
@@ -952,32 +1336,28 @@ function previewWord() {
   <h1>${name}</h1><p style='color:#888'>${title}</p>
   <p class='contact'>📍 ${city} &nbsp;|&nbsp; 📞 ${phone} &nbsp;|&nbsp; ✉ ${email}</p>
   <div class='summary-box'>${summary}</div>`;
-  
-  if (edus.length) {
-    html += `<h2>EĞİTİM</h2>`;
-    edus.forEach(e => html += `<p><strong>${e.degree}</strong> — ${e.school} (${e.year})</p>`);
-  }
-  if (exps.length) {
-    html += `<h2>DENEYİM</h2>`;
-    exps.forEach(e => html += `<p><strong>${e.title}</strong> — ${e.company} (${e.date})<br><span style='color:#555'>${e.desc}</span></p>`);
-  }
+  if (edus.length) { html += `<h2>EĞİTİM</h2>`; edus.forEach(e => html += `<p><strong>${e.degree}</strong> — ${e.school} (${e.year})</p>`); }
+  if (exps.length) { html += `<h2>DENEYİM</h2>`; exps.forEach(e => html += `<p><strong>${e.title}</strong> — ${e.company} (${e.date})<br><span style='color:#555'>${e.desc}</span></p>`); }
+  html += `<h2>ATİF METRİKLERİ</h2><table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;width:100%;font-size:10pt'>
+    <tr style='background:#f7f4ef'><th>Kaynak</th><th>Atıf</th><th>h-index</th><th>Tarih</th></tr>
+    ${s.citations||s.hindex?`<tr><td><b>Google Scholar</b></td><td>${s.citations??'—'}</td><td>${s.hindex??'—'}</td><td>${s.date??''}</td></tr>`:''}
+    ${w.citations||w.hindex?`<tr><td><b>Web of Science</b></td><td>${w.citations??'—'}</td><td>${w.hindex??'—'}</td><td>${w.date??''}</td></tr>`:''}
+    ${sc.citations||sc.hindex?`<tr><td><b>Scopus</b></td><td>${sc.citations??'—'}</td><td>${sc.hindex??'—'}</td><td>${sc.date??''}</td></tr>`:''}
+  </table>`;
   html += `</body></html>`;
-  
   const blob = new Blob([html], {type:'text/html'});
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank');
 }
+
 function downloadPDF() {
   const el = document.getElementById('cvDocument');
   const name = document.getElementById('name')?.value || 'cv';
   const btn = event.target;
   btn.textContent = '⏳ Hazırlanıyor...';
   btn.disabled = true;
-
-  // Önizleme panelini geçici göster
   const panel = document.querySelector('.preview-panel');
   panel.style.cssText = 'display:flex!important;position:fixed;top:-9999px;left:-9999px;width:210mm';
-
   html2pdf().set({
     margin: [8,8,8,8],
     filename: name.replace(/\s+/g,'_') + '_CV.pdf',
@@ -999,6 +1379,7 @@ function downloadPDF() {
 function downloadWord() {
   const v = id => document.getElementById(id)?.value || '';
   const name=v('name'), title=v('title'), phone=v('phone'), email=v('email'), city=v('city'), birth=v('birthdate'), summary=v('summary');
+  const s=citationData.scholar, w=citationData.wos, sc=citationData.scopus;
   let html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
   <head><meta charset='utf-8'><style>
     body{font-family:Calibri,sans-serif;font-size:11pt;margin:2cm}
@@ -1018,9 +1399,15 @@ function downloadWord() {
   exps.forEach(e=>{ html+=`<tr><td class='year'>${e.date}</td><td><span class='bold'>${e.title}</span><br>${e.company}<br><span style='color:#555;font-size:10pt'>${e.desc}</span></td></tr>`; });
   html+=`</table><h2>BECERİLER / SKILLS</h2><ul>`;
   skills.forEach(s=>{ const lvl=s.level<=30?'Başlangıç':s.level<=50?'Orta':s.level<=65?'İyi':s.level<=80?'İleri':'Uzman'; html+=`<li>${s.name} – ${lvl}</li>`; });
-  html+=`</ul>`;
+  html+=`</ul><h2>ATİF METRİKLERİ / CITATION METRICS</h2>
+  <table border='1' cellpadding='5' style='border-collapse:collapse'>
+    <tr style='background:#f7f4ef'><th>Kaynak</th><th>Atıf</th><th>h-index</th><th>Güncelleme</th></tr>
+    ${s.citations||s.hindex?`<tr><td><b>Google Scholar</b></td><td>${s.citations??'—'}</td><td>${s.hindex??'—'}${s.i10index!==null?' (i10:'+s.i10index+')':''}</td><td>${s.date??''}</td></tr>`:''}
+    ${w.citations||w.hindex?`<tr><td><b>Web of Science</b></td><td>${w.citations??'—'}</td><td>${w.hindex??'—'}</td><td>${w.date??''}</td></tr>`:''}
+    ${sc.citations||sc.hindex?`<tr><td><b>Scopus</b></td><td>${sc.citations??'—'}</td><td>${sc.hindex??'—'}</td><td>${sc.date??''}</td></tr>`:''}
+  </table>`;
   if(pubs.length>0){
-    html+=`<h2>YAYINLAR / PUBLICATIONS</h2><p><strong>Toplam Atıf: ${document.getElementById('citCount').textContent} &nbsp;|&nbsp; h-index: ${document.getElementById('hIndex').textContent}</strong> (Google Akademik)</p>`;
+    html+=`<h2>YAYINLAR / PUBLICATIONS</h2>`;
     pubCategories.forEach(cat=>{
       const cp=pubs.filter(p=>p.cat===cat); if(!cp.length) return;
       html+=`<h3 style='font-size:11pt;color:#1a2744;margin:10pt 0 4pt;border-bottom:1pt solid #d4a017'>${cat} (${cp.length})</h3><ol>`;
@@ -1099,7 +1486,8 @@ function getFormData() {
     web: document.getElementById('web')?.value||'',
     summary: document.getElementById('summary')?.value||'',
     edus, exps, skills, pubs, photoData,
-    template: currentTemplate
+    template: currentTemplate,
+    citationData  // ← üç kaynak da kaydediliyor
   };
 }
 
@@ -1138,11 +1526,18 @@ function applyData(d) {
   if(d.skills&&d.skills.length) skills=d.skills;
   if(d.pubs&&d.pubs.length) pubs=d.pubs;
   if(d.template) { currentTemplate=d.template; setTemplate(d.template); }
-  if(d.citations) {
-    document.getElementById('citCount').textContent = d.citations;
-    document.getElementById('hIndex').textContent = d.hindex || '—';
-    document.getElementById('citDate').textContent = 'Google Akademik · Son güncelleme: ' + (d.citDate || '');
+
+  // Yeni format: citationData objesi
+  if(d.citationData) {
+    citationData = { ...citationData, ...d.citationData };
   }
+  // Eski format geriye dönük uyumluluk: scholar alanlarını dönüştür
+  else if(d.citations) {
+    citationData.scholar.citations = parseInt(d.citations) || null;
+    citationData.scholar.hindex = parseInt(d.hindex) || null;
+    citationData.scholar.date = d.citDate || null;
+  }
+
   if(d.photoData){
     photoData=d.photoData;
     document.getElementById('photoPreviewEditor').src=photoData;
@@ -1167,31 +1562,27 @@ async function loadFromCloud() {
     applyData(row.data);
     localStorage.setItem('cv_data', JSON.stringify(row.data));
     renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update();
+    renderCVMetrics();
     const updated = new Date(row.updated_at).toLocaleString('tr-TR');
     showSyncBadge(`☁️ Senkronize · ${updated}`, '#6ee7b7');
     setTimeout(()=>showSyncBadge('☁️ Senkronize','#6b7280'), 4000);
   } catch(e) {
     try {
       const raw = localStorage.getItem('cv_data');
-      if (raw) { applyData(JSON.parse(raw)); renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update(); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); }
+      if (raw) { applyData(JSON.parse(raw)); renderEduEditor(); renderExpEditor(); renderSkillEditor(); renderPubEditor(); update(); renderCVMetrics(); showSyncBadge('💾 Yerel veri yüklendi','#6ee7b7'); }
       else showSyncBadge('⚠️ Bağlantı hatası','#fca5a5');
     } catch(e2) { showSyncBadge('⚠️ Bağlantı hatası','#fca5a5'); }
   }
 }
 
-// Auto-save on input
 document.addEventListener('input', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
 document.addEventListener('change', ()=>{ clearTimeout(cloudSyncTimer); cloudSyncTimer=setTimeout(saveToCloud,1500); });
 
 window.onload = async () => {
-  // Auth kontrolü
   const { data: { session } } = await sb.auth.getSession();
   if (!session) { window.location.href = 'auth.html'; return; }
-
-  // CV_ID = kullanıcının kendi user_id'si
   CV_ID = session.user.id;
 
-  // Topbar'a profil dropdown ekle
   const user = session.user;
   const displayName = user.user_metadata?.full_name || user.email;
   const bar = document.querySelector('.topbar-actions');
@@ -1249,6 +1640,9 @@ document.addEventListener('click', (e) => {
     const menu = document.getElementById('pdfMenu');
     if (menu) menu.style.display = 'none';
   }
+  if (!e.target.closest('#citModal') && !e.target.closest('#citBtn')) {
+    // Modal dışına tık kapatmasın (büyük form) — sadece X ile kapanır
+  }
 });
 
 async function doLogout() {
@@ -1261,10 +1655,7 @@ function openProfileModal(tab) {
   document.getElementById('profileModal').style.display = 'flex';
   switchProfileTab(tab);
 }
-
-function closeProfileModal() {
-  document.getElementById('profileModal').style.display = 'none';
-}
+function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
 
 function switchProfileTab(tab) {
   document.querySelectorAll('.profile-tab-content').forEach(el => el.style.display = 'none');
@@ -1297,16 +1688,10 @@ async function saveProfileInfo() {
     await sb.auth.updateUser({ data: { full_name: fullName, university: uni, title: unvan, backup_email: backupEmail } });
     const usernameEl = document.getElementById('topbar-username');
     if (usernameEl && fullName) usernameEl.textContent = fullName;
-    
-    // Yedek e-posta varsa onay maili gönder
     if (backupEmail) {
-      await sb.auth.resetPasswordForEmail(backupEmail, {
-        redirectTo: window.location.origin + '/index.html'
-      });
+      await sb.auth.resetPasswordForEmail(backupEmail, { redirectTo: window.location.origin + '/index.html' });
       btn.textContent = '✅ Kaydedildi! Yedek e-postaya onay maili gönderildi.';
-    } else {
-      btn.textContent = '✅ Kaydedildi!';
-    }
+    } else { btn.textContent = '✅ Kaydedildi!'; }
     setTimeout(() => { btn.textContent = 'Kaydet'; btn.disabled = false; }, 3000);
   } catch(e) { btn.textContent = '❌ Hata'; btn.disabled = false; }
 }
@@ -1344,20 +1729,23 @@ function loadStats() {
   const kitapCount = pubs.filter(p => p.cat === 'Kitap / Kitap Bölümü').length;
   const projeCount = pubs.filter(p => p.cat === 'Projeler').length;
   const tezCount = pubs.filter(p => p.cat === 'Tezler').length;
-  const citations = document.getElementById('citCount')?.textContent || '—';
-  const hindex = document.getElementById('hIndex')?.textContent || '—';
+  const s = citationData.scholar, w = citationData.wos, sc = citationData.scopus;
+  const fmt = v => (v===null||v===undefined) ? '—' : v;
   document.getElementById('stats-content').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-      <div style="background:#f7f4ef;border-radius:8px;padding:14px;text-align:center">
-        <div style="font-size:1.6rem;font-weight:700;color:var(--navy)">${citations}</div>
-        <div style="font-size:.78rem;color:#888;margin-top:2px">Toplam Atıf</div>
-      </div>
-      <div style="background:#f7f4ef;border-radius:8px;padding:14px;text-align:center">
-        <div style="font-size:1.6rem;font-weight:700;color:var(--navy)">${hindex}</div>
-        <div style="font-size:.78rem;color:#888;margin-top:2px">h-index</div>
-      </div>
+    <div style="font-weight:700;color:var(--navy);margin-bottom:10px;font-size:.88rem">Atıf Metrikleri</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
+      ${[['Google Scholar','#4285f4',s.citations,s.hindex],['Web of Science','#0057a8',w.citations,w.hindex],['Scopus','#e87722',sc.citations,sc.hindex]]
+        .filter(([,, c, h]) => c!==null||h!==null)
+        .map(([name,color,cit,h]) => `
+          <div style="background:#f7f4ef;border-radius:8px;padding:12px;text-align:center;border-top:3px solid ${color}">
+            <div style="font-size:.65rem;font-weight:700;color:${color};margin-bottom:6px">${name}</div>
+            <div style="display:flex;justify-content:center;gap:10px">
+              <div><div style="font-size:1.2rem;font-weight:700;color:var(--navy)">${fmt(cit)}</div><div style="font-size:.65rem;color:#888">Atıf</div></div>
+              <div><div style="font-size:1.2rem;font-weight:700;color:var(--navy)">${fmt(h)}</div><div style="font-size:.65rem;color:#888">h-index</div></div>
+            </div>
+          </div>`).join('') || '<div style="grid-column:span 3;text-align:center;color:#aaa;font-size:.82rem;padding:10px">Atıf verisi girilmemiş</div>'}
     </div>
-    <div style="font-weight:700;color:var(--navy);margin-bottom:10px">Yayın Dağılımı</div>
+    <div style="font-weight:700;color:var(--navy);margin-bottom:10px;font-size:.88rem">Yayın Dağılımı</div>
     ${[['SCI / SCI-Expanded', sciCount],['Diğer İndeksli', otherCount],['Bildiriler', bildiriCount],['Kitap / Bölüm', kitapCount],['Projeler', projeCount],['Tezler', tezCount]].map(([l,c]) => `
       <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0ece3">
         <span style="font-size:.88rem;color:#444">${l}</span>
@@ -1373,9 +1761,7 @@ async function deleteAccount() {
   const btn = document.getElementById('delete-account-btn');
   btn.disabled = true; btn.textContent = '⏳ Gönderiliyor...';
   const { data: { user } } = await sb.auth.getUser();
-  const { error } = await sb.auth.resetPasswordForEmail(user.email, {
-    redirectTo: window.location.origin + '/landing.html'
-  });
+  const { error } = await sb.auth.resetPasswordForEmail(user.email, { redirectTo: window.location.origin + '/landing.html' });
   const result = document.getElementById('delete-result');
   if (error) { result.style.color='#dc2626'; result.textContent='❌ '+error.message; }
   else { result.style.color='#059669'; result.textContent=`✅ ${user.email} adresine onay maili gönderildi.`; }
@@ -1383,15 +1769,149 @@ async function deleteAccount() {
 }
 </script>
 
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ATİF / H-INDEX MODAL — Scholar + WoS + Scopus          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="citModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;width:92%;max-width:620px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;max-height:92vh;display:flex;flex-direction:column">
+
+    <!-- Header -->
+    <div style="background:var(--navy);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;margin-bottom:2px">📊 Atıf & H-index Güncelle</h3>
+        <div style="font-size:.72rem;color:#8899bb">Google Scholar · Web of Science · Scopus</div>
+      </div>
+      <button onclick="closeCitModal()" style="background:transparent;border:none;color:#8899bb;font-size:1.5rem;cursor:pointer;line-height:1;padding:4px">×</button>
+    </div>
+
+    <!-- Mevcut durum özeti -->
+    <div style="padding:12px 20px;background:#f7f4ef;border-bottom:1px solid var(--border);flex-shrink:0">
+      <div style="font-size:.68rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Mevcut Kayıtlı Değerler</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div style="text-align:center">
+          <div style="font-size:.65rem;font-weight:700;color:#4285f4;margin-bottom:3px">Google Scholar</div>
+          <div style="display:flex;justify-content:center;gap:12px">
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-scholar-cit">—</div><div style="font-size:.62rem;color:#888">Atıf</div></div>
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-scholar-h">—</div><div style="font-size:.62rem;color:#888">h-index</div></div>
+          </div>
+        </div>
+        <div style="text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border)">
+          <div style="font-size:.65rem;font-weight:700;color:var(--wos-blue);margin-bottom:3px">Web of Science</div>
+          <div style="display:flex;justify-content:center;gap:12px">
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-wos-cit">—</div><div style="font-size:.62rem;color:#888">Atıf</div></div>
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-wos-h">—</div><div style="font-size:.62rem;color:#888">h-index</div></div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:.65rem;font-weight:700;color:var(--scopus-orange);margin-bottom:3px">Scopus</div>
+          <div style="display:flex;justify-content:center;gap:12px">
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-scopus-cit">—</div><div style="font-size:.62rem;color:#888">Atıf</div></div>
+            <div><div style="font-size:1rem;font-weight:700;color:var(--navy)" id="cur-scopus-h">—</div><div style="font-size:.62rem;color:#888">h-index</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sekmeler -->
+    <div class="cit-source-tabs" style="padding:0 20px;flex-shrink:0">
+      <button id="citTabBtn-scholar" class="cit-tab-btn active" onclick="switchCitTab('scholar')">🎓 Google Scholar</button>
+      <button id="citTabBtn-wos"     class="cit-tab-btn wos"    onclick="switchCitTab('wos')">🔬 Web of Science</button>
+      <button id="citTabBtn-scopus"  class="cit-tab-btn scopus" onclick="switchCitTab('scopus')">🟠 Scopus</button>
+    </div>
+
+    <!-- İçerik -->
+    <div style="padding:20px 24px;overflow-y:auto;flex:1">
+
+      <!-- ══ SCHOLAR ══ -->
+      <div id="citTab-scholar" class="cit-tab-content active">
+        <div class="source-badge scholar">🎓 Google Scholar</div>
+
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:8px">Yöntem 1 — Sayfa kaynağından otomatik çek</div>
+        <div class="cit-step"><div class="cit-step-num">1</div><div><a href="https://scholar.google.com/citations?user=4owbEXYAAAAJ&hl=tr" target="_blank" style="color:var(--gold)">Scholar profilinizi</a> açın</div></div>
+        <div class="cit-step"><div class="cit-step-num">2</div><div>Sağ tıklayın → <strong>Sayfa kaynağını görüntüle</strong></div></div>
+        <div class="cit-step"><div class="cit-step-num">3</div><div>Tümünü seçin (Ctrl+A) → Kopyalayın (Ctrl+C)</div></div>
+        <div class="cit-step"><div class="cit-step-num">4</div><div>Aşağıya yapıştırıp <strong>Güncelle</strong>'ye basın</div></div>
+        <textarea id="scholarPasteArea" rows="4" placeholder="Scholar sayfa kaynağını buraya yapıştırın..."
+          style="width:100%;margin-top:10px;padding:9px;border:1.5px solid var(--border);border-radius:7px;font-size:.75rem;font-family:monospace;background:var(--cream);resize:vertical"></textarea>
+        <button class="btn-parse scholar" onclick="parseScholar()">🔄 Otomatik Güncelle</button>
+        <div id="scholarParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+
+        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
+        <div class="cit-manual-inputs">
+          <div><label>Toplam Atıf</label><input type="number" id="scholar-man-cit" placeholder="örn. 145" min="0"></div>
+          <div><label>h-index</label><input type="number" id="scholar-man-h" placeholder="örn. 8" min="0"></div>
+          <div><label>i10-index</label><input type="number" id="scholar-man-i10" placeholder="örn. 5" min="0"></div>
+        </div>
+        <button class="btn-parse scholar" style="margin-top:8px" onclick="applyScholarManual()">✅ Manuel Kaydet</button>
+        <div id="scholarManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+      </div>
+
+      <!-- ══ WOS ══ -->
+      <div id="citTab-wos" class="cit-tab-content">
+        <div class="source-badge wos">🔬 Web of Science</div>
+
+        <div style="font-size:.82rem;font-weight:700;color:var(--wos-blue);margin-bottom:8px">Yöntem 1 — Sayfa içeriğinden otomatik çek</div>
+        <div class="cit-step"><div class="cit-step-num wos">1</div><div><a href="https://www.webofscience.com/wos/author/search" target="_blank" style="color:var(--wos-blue)">WoS Yazar Profili</a>'ni açın → adınızı aratın → profilinize girin</div></div>
+        <div class="cit-step"><div class="cit-step-num wos">2</div><div><strong>Citation Metrics</strong> veya <strong>Analyze Results</strong> bölümüne gidin</div></div>
+        <div class="cit-step"><div class="cit-step-num wos">3</div><div>Sayfayı seçin (Ctrl+A) → Kopyalayın (Ctrl+C) — <em>ya da</em> F12 → Network → JSON yanıtını kopyalayın</div></div>
+        <div class="cit-step"><div class="cit-step-num wos">4</div><div>Aşağıya yapıştırıp <strong>Güncelle</strong>'ye basın</div></div>
+        <textarea id="wosPasteArea" rows="4" placeholder="WoS sayfası içeriği veya JSON yanıtını buraya yapıştırın...&#10;Örn: Times Cited: 87   h-index: 6"
+          style="width:100%;margin-top:10px;padding:9px;border:1.5px solid #b3cde3;border-radius:7px;font-size:.75rem;font-family:monospace;background:#f5f9fd;resize:vertical"></textarea>
+        <button class="btn-parse wos" onclick="parseWoS()">🔄 Otomatik Güncelle</button>
+        <div id="wosParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+
+        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--wos-blue);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
+        <div style="background:#e6f0f8;border-radius:7px;padding:10px 12px;margin-bottom:10px;font-size:.78rem;color:#0057a8;line-height:1.5">
+          💡 <strong>WoS Researcher Profile</strong> sayfanızda sağ panelde "Citation Metrics" kutusunda Atıf ve h-index değerlerini görebilirsiniz.
+        </div>
+        <div class="cit-manual-inputs">
+          <div><label>Toplam Atıf</label><input type="number" id="wos-man-cit" placeholder="örn. 87" min="0" style="border-color:#b3cde3"></div>
+          <div><label>h-index</label><input type="number" id="wos-man-h" placeholder="örn. 6" min="0" style="border-color:#b3cde3"></div>
+        </div>
+        <button class="btn-parse wos" style="margin-top:8px" onclick="applyWosManual()">✅ Manuel Kaydet</button>
+        <div id="wosManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+      </div>
+
+      <!-- ══ SCOPUS ══ -->
+      <div id="citTab-scopus" class="cit-tab-content">
+        <div class="source-badge scopus">🟠 Scopus</div>
+
+        <div style="font-size:.82rem;font-weight:700;color:var(--scopus-orange);margin-bottom:8px">Yöntem 1 — Sayfa içeriğinden otomatik çek</div>
+        <div class="cit-step"><div class="cit-step-num scopus">1</div><div><a href="https://www.scopus.com/freelookup/form/author.uri" target="_blank" style="color:var(--scopus-orange)">Scopus Yazar Arama</a>'ya gidin → profilinizi açın</div></div>
+        <div class="cit-step"><div class="cit-step-num scopus">2</div><div><strong>Cited by</strong> ve <strong>h-index</strong> değerlerinin bulunduğu bölümü görmek için sayfayı aşağı kaydırın</div></div>
+        <div class="cit-step"><div class="cit-step-num scopus">3</div><div>Sayfayı seçin (Ctrl+A) → Kopyalayın (Ctrl+C)</div></div>
+        <div class="cit-step"><div class="cit-step-num scopus">4</div><div>Aşağıya yapıştırıp <strong>Güncelle</strong>'ye basın</div></div>
+        <textarea id="scopusPasteArea" rows="4" placeholder="Scopus sayfası içeriğini buraya yapıştırın...&#10;Örn: Citations 112   h-index 7   Documents 23"
+          style="width:100%;margin-top:10px;padding:9px;border:1.5px solid #f5c49a;border-radius:7px;font-size:.75rem;font-family:monospace;background:#fff8f2;resize:vertical"></textarea>
+        <button class="btn-parse scopus" onclick="parseScopus()">🔄 Otomatik Güncelle</button>
+        <div id="scopusParseResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+
+        <div style="height:1px;background:#f0ece3;margin:18px 0"></div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--scopus-orange);margin-bottom:8px">Yöntem 2 — Manuel giriş</div>
+        <div style="background:#fef2e8;border-radius:7px;padding:10px 12px;margin-bottom:10px;font-size:.78rem;color:#c05a00;line-height:1.5">
+          💡 Scopus Author Profile sayfasında sol üstte <strong>"h-index"</strong> ve <strong>"Cited by"</strong> değerleri doğrudan görünür.
+        </div>
+        <div class="cit-manual-inputs">
+          <div><label>Toplam Atıf</label><input type="number" id="scopus-man-cit" placeholder="örn. 112" min="0" style="border-color:#f5c49a"></div>
+          <div><label>h-index</label><input type="number" id="scopus-man-h" placeholder="örn. 7" min="0" style="border-color:#f5c49a"></div>
+        </div>
+        <button class="btn-parse scopus" style="margin-top:8px" onclick="applyScopusManual()">✅ Manuel Kaydet</button>
+        <div id="scopusManResult" style="display:none;margin-top:8px;font-size:.83rem"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- Profil Modal -->
 <div id="profileModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
   <div style="background:#fff;border-radius:16px;width:90%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden">
-    <!-- Modal Header -->
     <div style="background:var(--navy);padding:20px 24px;display:flex;justify-content:space-between;align-items:center">
       <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem">Profil Ayarları</h3>
       <button onclick="closeProfileModal()" style="background:transparent;border:none;color:#8899bb;font-size:1.4rem;cursor:pointer;line-height:1">×</button>
     </div>
-    <!-- Tabs -->
     <div style="display:flex;border-bottom:1px solid #e5e7eb;padding:0 8px;background:#fafafa">
       <button class="profile-tab-btn active" data-tab="info" onclick="switchProfileTab('info')">👤 Profil</button>
       <button class="profile-tab-btn" data-tab="password" onclick="switchProfileTab('password')">🔒 Şifre</button>
@@ -1399,10 +1919,7 @@ async function deleteAccount() {
       <button class="profile-tab-btn" data-tab="stats" onclick="switchProfileTab('stats')">📊 İstatistik</button>
       <button class="profile-tab-btn" data-tab="delete" onclick="switchProfileTab('delete')" style="color:#dc2626">🗑️ Sil</button>
     </div>
-    <!-- Tab Contents -->
     <div style="padding:24px;max-height:420px;overflow-y:auto">
-
-      <!-- Profil Bilgileri -->
       <div id="ptab-info" class="profile-tab-content">
         <div style="font-size:.8rem;color:#888;margin-bottom:16px">Profil bilgilerinizi güncelleyin.</div>
         <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Ad Soyad</label>
@@ -1415,8 +1932,6 @@ async function deleteAccount() {
         <input id="profile-backup-email" class="profile-input" type="email" placeholder="yedek@email.com" style="margin-top:4px">
         <button id="save-profile-btn" class="profile-save-btn" onclick="saveProfileInfo()">Kaydet</button>
       </div>
-
-      <!-- Şifre Değiştir -->
       <div id="ptab-password" class="profile-tab-content" style="display:none">
         <div style="font-size:.8rem;color:#888;margin-bottom:16px">Yeni şifrenizi belirleyin.</div>
         <label style="font-size:.75rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px">Yeni Şifre</label>
@@ -1426,8 +1941,6 @@ async function deleteAccount() {
         <button id="change-pass-btn" class="profile-save-btn" onclick="changePassword()">Şifreyi Değiştir</button>
         <div id="password-result" style="margin-top:10px;font-size:.85rem"></div>
       </div>
-
-      <!-- Public CV -->
       <div id="ptab-publiccv" class="profile-tab-content" style="display:none">
         <div style="font-size:.8rem;color:#888;margin-bottom:16px">Bu linki paylaşarak CV'nize herkesin erişmesini sağlayabilirsiniz.</div>
         <div style="display:flex;gap:8px">
@@ -1435,34 +1948,20 @@ async function deleteAccount() {
           <button id="copy-link-btn" onclick="copyPublicLink()" style="padding:10px 16px;background:var(--navy);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;white-space:nowrap">📋 Kopyala</button>
         </div>
         <div style="margin-top:14px;padding:12px;background:#fdf9f0;border-radius:8px;border-left:3px solid var(--gold)">
-          <div style="font-size:.82rem;color:#666;line-height:1.6">
-            ⚠️ Public CV özelliği yakında aktif olacak. Şu an link hazır ancak sayfa henüz yayında değil.
-          </div>
+          <div style="font-size:.82rem;color:#666;line-height:1.6">⚠️ Public CV özelliği yakında aktif olacak.</div>
         </div>
       </div>
-
-      <!-- İstatistikler -->
       <div id="ptab-stats" class="profile-tab-content" style="display:none">
-        <div id="stats-content">
-          <div style="text-align:center;color:#888;padding:20px">Yükleniyor...</div>
-        </div>
+        <div id="stats-content"><div style="text-align:center;color:#888;padding:20px">Yükleniyor...</div></div>
       </div>
-
-      <!-- Hesabı Sil -->
       <div id="ptab-delete" class="profile-tab-content" style="display:none">
         <div style="background:#fee2e2;border-radius:10px;padding:16px;margin-bottom:20px">
           <div style="font-weight:700;color:#dc2626;margin-bottom:6px">⚠️ Dikkat!</div>
           <div style="font-size:.85rem;color:#b91c1c;line-height:1.6">Hesabınızı silmek geri alınamaz. Tüm CV verileriniz kalıcı olarak silinecektir.</div>
         </div>
-        <div style="font-size:.88rem;color:#555;line-height:1.7;margin-bottom:20px">
-          Hesabınızı silmek için <strong>onay butonu</strong>na basın. E-posta adresinize bir onay maili gönderilecektir.
-        </div>
-        <button id="delete-account-btn" onclick="deleteAccount()" style="width:100%;padding:12px;background:#dc2626;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:700;transition:all .2s">
-          🗑️ Hesabı Sil — Onay Maili Gönder
-        </button>
+        <button id="delete-account-btn" onclick="deleteAccount()" style="width:100%;padding:12px;background:#dc2626;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:700">🗑️ Hesabı Sil — Onay Maili Gönder</button>
         <div id="delete-result" style="margin-top:12px;font-size:.85rem"></div>
       </div>
-
     </div>
   </div>
 </div>
@@ -1496,27 +1995,6 @@ async function deleteAccount() {
   </div>
 </div>
 
-<!-- Scholar Modal -->
-<div id="scholarModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:12px;padding:28px;max-width:560px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.3)">
-    <h3 style="font-family:'Playfair Display',serif;color:#1a2744;margin-bottom:8px">🎓 Google Scholar Güncelle</h3>
-    <p style="font-size:.85rem;color:#666;margin-bottom:16px;line-height:1.6">
-      <strong>Nasıl yapılır:</strong><br>
-      1. <a href="https://scholar.google.com/citations?user=4owbEXYAAAAJ&hl=tr" target="_blank" style="color:#b8860b">Google Scholar profilinizi</a> açın<br>
-      2. Sayfada sağ tıklayın → <strong>"Sayfa kaynağını görüntüle"</strong><br>
-      3. Tüm metni seçin (Ctrl+A) → kopyalayın (Ctrl+C)<br>
-      4. Aşağıya yapıştırın ve <strong>"Güncelle"</strong> butonuna basın
-    </p>
-    <textarea id="scholarHTML" rows="6" placeholder="Scholar sayfa kaynağını buraya yapıştırın..."
-      style="width:100%;padding:10px;border:1.5px solid #d1c9b8;border-radius:6px;font-size:.8rem;resize:vertical;font-family:monospace;background:#faf8f3"></textarea>
-    <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
-      <button onclick="closeScholarModal()" style="padding:8px 18px;border:1.5px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit">İptal</button>
-      <button onclick="parseScholarHTML()" style="padding:8px 18px;background:#1a2744;color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Güncelle</button>
-    </div>
-    <div id="scholarResult" style="margin-top:12px;font-size:.85rem;display:none"></div>
-  </div>
-</div>
-
 <script>
 function openAIModal() { document.getElementById('aiModal').style.display='flex'; document.getElementById('aiInput').value=''; }
 function closeAIModal() { document.getElementById('aiModal').style.display='none'; }
@@ -1533,29 +2011,7 @@ function manualAddPub() {
   closeAIModal();
 }
 
-function openScholarModal() { document.getElementById('scholarModal').style.display='flex'; document.getElementById('scholarHTML').value=''; document.getElementById('scholarResult').style.display='none'; }
-function closeScholarModal() { document.getElementById('scholarModal').style.display='none'; }
-
-function parseScholarHTML() {
-  const html = document.getElementById('scholarHTML').value;
-  const result = document.getElementById('scholarResult');
-  if (!html||html.length<100) { result.style.display='block'; result.style.color='#dc2626'; result.textContent='❌ Lütfen Scholar sayfa kaynağını yapıştırın.'; return; }
-  let citations=null, hindex=null;
-  const nums=[...html.matchAll(/gsc_rsb_std[^>]*>(\d+)/g)].map(m=>parseInt(m[1]));
-  if(nums.length>=2){ citations=nums[0]; hindex=nums[2]; }
-  if(!citations&&!hindex){ result.style.display='block'; result.style.color='#dc2626'; result.innerHTML='❌ Atıf bilgisi bulunamadı.<br><small>Sayfayı doğru kopyaladığınızdan emin olun.</small>'; return; }
-  if(citations) document.getElementById('citCount').textContent=citations;
-  if(hindex) document.getElementById('hIndex').textContent=hindex;
-  const today=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('citDate').textContent='Google Akademik · Son güncelleme: '+today;
-  triggerCloudSave();
-  result.style.display='block'; result.style.color='#059669';
-  result.innerHTML=`✅ Güncellendi! Atıf: <strong>${citations||'?'}</strong> · h-index: <strong>${hindex||'?'}</strong>`;
-  setTimeout(closeScholarModal,2000);
-}
-
-document.getElementById('scholarModal').addEventListener('click',function(e){if(e.target===this)closeScholarModal();});
-document.getElementById('aiModal').addEventListener('click',function(e){if(e.target===this)closeAIModal();});
+document.getElementById('aiModal').addEventListener('click', function(e){ if(e.target===this) closeAIModal(); });
 </script>
 </body>
 </html>
